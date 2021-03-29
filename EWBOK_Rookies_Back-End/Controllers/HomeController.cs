@@ -1,11 +1,7 @@
-﻿using EWBOK_Rookies_Back_End.Models;
+﻿using EWBOK_Rookies_Back_End.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {

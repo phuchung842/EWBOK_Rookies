@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using EWBOK_Rookies_Back_End.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -12,5 +13,6 @@ namespace EWBOK_Rookies_Back_End.Data
             : base(options)
         {
         }
+        public DbSet<Product> Products { get; set; }
     }
 }

@@ -1,6 +1,4 @@
-using System;
-
-namespace EWBOK_Rookies_Back_End.Models
+namespace EWBOK_Rookies_Back_End.ViewModels
 {
     public class ErrorViewModel
     {
