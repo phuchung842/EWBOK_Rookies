@@ -11,6 +11,7 @@ namespace EWBOK_Rookies.Controllers
         public IActionResult Index()
         {
             string test = "";
+            int a = 0;
             return View();
         }
     }
