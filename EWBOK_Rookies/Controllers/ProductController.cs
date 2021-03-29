@@ -10,6 +10,7 @@ namespace EWBOK_Rookies.Controllers
     {
         public IActionResult Index()
         {
+            string test = "";
             return View();
         }
     }
