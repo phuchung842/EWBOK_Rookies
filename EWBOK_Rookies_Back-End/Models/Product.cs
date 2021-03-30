@@ -76,9 +76,9 @@ namespace EWBOK_Rookies_Back_End.Models
 
         public int? PublishYear { get; set; }
 
-        public long? BrandID { get; set; }
+        public short? BrandID { get; set; }
 
-        public long? CategoryID { get; set; }
+        public short? ProductCategoryID { get; set; }
 
         public short? MaterialID { get; set; }
 

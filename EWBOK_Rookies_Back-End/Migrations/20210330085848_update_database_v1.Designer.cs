@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EWBOK_Rookies_Back_End.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210330073747_update_database_v1")]
+    [Migration("20210330085848_update_database_v1")]
     partial class update_database_v1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -209,8 +209,9 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     b.Property<DateTime?>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("CustomerID")
-                        .HasColumnType("bigint");
+                    b.Property<string>("CustomerID")
+                        .HasMaxLength(450)
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool?>("IsPay")
                         .HasColumnType("bit");
@@ -290,14 +291,8 @@ namespace EWBOK_Rookies_Back_End.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long?>("BrandID")
-                        .HasColumnType("bigint");
-
-                    b.Property<short?>("BrandID1")
+                    b.Property<short?>("BrandID")
                         .HasColumnType("smallint");
-
-                    b.Property<long?>("CategoryID")
-                        .HasColumnType("bigint");
 
                     b.Property<string>("Code")
                         .HasMaxLength(100)
@@ -438,7 +433,7 @@ namespace EWBOK_Rookies_Back_End.Migrations
 
                     b.HasKey("ID");
 
-                    b.HasIndex("BrandID1");
+                    b.HasIndex("BrandID");
 
                     b.HasIndex("MaterialID");
 
@@ -872,7 +867,7 @@ namespace EWBOK_Rookies_Back_End.Migrations
                 {
                     b.HasOne("EWBOK_Rookies_Back_End.Models.Brand", "Brand")
                         .WithMany("Products")
-                        .HasForeignKey("BrandID1");
+                        .HasForeignKey("BrandID");
 
                     b.HasOne("EWBOK_Rookies_Back_End.Models.Material", "Material")
                         .WithMany("Products")

@@ -168,8 +168,8 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     IncludeVAT = table.Column<bool>(type: "bit", nullable: true),
                     Quantity = table.Column<int>(type: "int", nullable: false),
                     PublishYear = table.Column<int>(type: "int", nullable: true),
-                    BrandID = table.Column<long>(type: "bigint", nullable: true),
-                    CategoryID = table.Column<long>(type: "bigint", nullable: true),
+                    BrandID = table.Column<short>(type: "smallint", nullable: true),
+                    ProductCategoryID = table.Column<short>(type: "smallint", nullable: true),
                     MaterialID = table.Column<short>(type: "smallint", nullable: true),
                     Detail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Warranty = table.Column<int>(type: "int", nullable: true),
@@ -184,16 +184,14 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     SellerCount = table.Column<long>(type: "bigint", nullable: true),
                     WishCount = table.Column<long>(type: "bigint", nullable: true),
                     ProductStatus = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
-                    StarRating = table.Column<int>(type: "int", nullable: true),
-                    BrandID1 = table.Column<short>(type: "smallint", nullable: true),
-                    ProductCategoryID = table.Column<short>(type: "smallint", nullable: true)
+                    StarRating = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Products", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_Products_Brands_BrandID1",
-                        column: x => x.BrandID1,
+                        name: "FK_Products_Brands_BrandID",
+                        column: x => x.BrandID,
                         principalTable: "Brands",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Restrict);
@@ -239,7 +237,7 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     ID = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CustomerID = table.Column<long>(type: "bigint", nullable: true),
+                    CustomerID = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
                     PctDiscount = table.Column<short>(type: "smallint", nullable: true),
                     Total = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     TotalDiscount = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
@@ -563,9 +561,9 @@ namespace EWBOK_Rookies_Back_End.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_BrandID1",
+                name: "IX_Products_BrandID",
                 table: "Products",
-                column: "BrandID1");
+                column: "BrandID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Products_MaterialID",

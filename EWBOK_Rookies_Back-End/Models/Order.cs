@@ -17,7 +17,8 @@ namespace EWBOK_Rookies_Back_End.Models
 
         public DateTime? CreateDate { get; set; }
 
-        public long? CustomerID { get; set; }
+        [StringLength(450)]
+        public string CustomerID { get; set; }
 
         public short? PctDiscount { get; set; }
 
