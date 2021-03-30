@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EWBOK_Rookies_Back_End.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210329104933_ChangeNameIdentity")]
-    partial class ChangeNameIdentity
+    [Migration("20210330043612_changeNameIdentity")]
+    partial class changeNameIdentity
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

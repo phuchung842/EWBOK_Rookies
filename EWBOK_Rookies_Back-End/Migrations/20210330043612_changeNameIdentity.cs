@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EWBOK_Rookies_Back_End.Migrations
 {
-    public partial class ChangeNameIdentity : Migration
+    public partial class changeNameIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
