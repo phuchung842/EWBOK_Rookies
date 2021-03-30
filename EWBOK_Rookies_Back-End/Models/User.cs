@@ -10,6 +10,9 @@ namespace EWBOK_Rookies_Back_End.Models
     {
         public User() : base()
         {
+            Comments = new HashSet<Comment>();
+            Wishes = new HashSet<Wish>();
+            Ratings = new HashSet<Rating>();
         }
 
         public User(string userName) : base(userName)
@@ -18,5 +21,9 @@ namespace EWBOK_Rookies_Back_End.Models
 
         [PersonalData]
         public string FullName { get; set; }
+
+        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+        public ICollection<Wish> Wishes { get; set; }
     }
 }

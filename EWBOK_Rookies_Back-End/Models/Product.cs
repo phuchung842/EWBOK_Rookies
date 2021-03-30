@@ -11,6 +11,15 @@ namespace EWBOK_Rookies_Back_End.Models
 {
     public class Product
     {
+        public Product()
+        {
+            Colors = new HashSet<Color>();
+            Comments = new HashSet<Comment>();
+            Wishes = new HashSet<Wish>();
+            Ratings = new HashSet<Rating>();
+            ProductSizes = new HashSet<ProductSize>();
+            DiscountDetails = new HashSet<DiscountDetail>();
+        }
         [Key]
         public int ID { get; set; }
         [StringLength(250)]
@@ -77,7 +86,7 @@ namespace EWBOK_Rookies_Back_End.Models
 
         public int? Warranty { get; set; }
 
-        public DateTime? CreateDate { get; set; }
+        public DateTime? CreatedDate { get; set; }
 
         [StringLength(50)]
         public string CreatedBy { get; set; }
@@ -104,5 +113,18 @@ namespace EWBOK_Rookies_Back_End.Models
         public decimal? ProductStatus { get; set; }
 
         public int? StarRating { get; set; }
+
+        public Brand Brand { get; set; }
+        public ProductCategory ProductCategory { get; set; }
+        public Material Material { get; set; }
+
+        public ICollection<Color> Colors { get; set; }
+        public ICollection<Comment> Comments { get; set; }
+        public ICollection<DiscountDetail> DiscountDetails { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
+        public ICollection<Rating> Ratings { get; set; }
+        public ICollection<Wish> Wishes { get; set; }
+        public ICollection<ProductSize> ProductSizes { get; set; }
+
     }
 }

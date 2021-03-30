@@ -40,6 +40,17 @@ namespace EWBOK_Rookies_Back_End.Data
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("UserClaims");
             modelBuilder.Entity<IdentityUserToken<string>>().ToTable("UserTokens");
             modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("UserLogins");
+
+            modelBuilder.Entity<DiscountDetail>()
+               .HasKey(o => new { o.DiscountID, o.ProductID });
+            modelBuilder.Entity<OrderDetail>()
+               .HasKey(o => new { o.OrderID, o.ProductID });
+            modelBuilder.Entity<ProductSize>()
+               .HasKey(o => new { o.SizeID, o.ProductID });
+            modelBuilder.Entity<Rating>()
+               .HasKey(o => new { o.UserID, o.ProductID });
+            modelBuilder.Entity<Wish>()
+               .HasKey(o => new { o.UserID, o.ProductID });
         }
     }
 }
