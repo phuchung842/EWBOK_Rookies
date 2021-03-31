@@ -62,11 +62,11 @@ namespace SharedVm
 
         public int? PublishYear { get; set; }
 
-        public short? BrandID { get; set; }
+        public string BrandName { get; set; }
 
-        public short? ProductCategoryID { get; set; }
+        public string ProductCategoryName { get; set; }
 
-        public short? MaterialID { get; set; }
+        public string MaterialName { get; set; }
 
         public string Detail { get; set; }
 

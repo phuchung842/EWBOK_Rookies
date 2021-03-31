@@ -19,7 +19,7 @@ namespace EWBOK_Rookies_Back_End.IdentityServer
         public static IEnumerable<ApiScope> ApiScopes =>
              new ApiScope[]
              {
-                  new ApiScope("rookieshop.api", "Rookie Shop API")
+                  new ApiScope("ewbokrookies.api", "Rookie Shop API")
              };
 
         public static IEnumerable<Client> Clients =>
@@ -33,7 +33,7 @@ namespace EWBOK_Rookies_Back_End.IdentityServer
 
                     AllowedGrantTypes = GrantTypes.ClientCredentials,
                     // scopes that client has access to
-                    AllowedScopes = { "rookieshop.api" }
+                    AllowedScopes = { "ewbokrookies.api" }
                 },
 
                 // interactive ASP.NET Core MVC client
@@ -52,7 +52,7 @@ namespace EWBOK_Rookies_Back_End.IdentityServer
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "rookieshop.api"
+                        "ewbokrookies.api"
                     }
                 },
 
@@ -73,7 +73,7 @@ namespace EWBOK_Rookies_Back_End.IdentityServer
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "rookieshop.api"
+                        "ewbokrookies.api"
                     }
                 },
             };

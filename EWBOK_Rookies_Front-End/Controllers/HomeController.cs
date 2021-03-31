@@ -1,4 +1,5 @@
 ﻿using EWBOK_Rookies_Front_End.Models;
+using EWBOK_Rookies_Front_End.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -12,15 +13,18 @@ namespace EWBOK_Rookies_Front_End.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IProductClient _productClient;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IProductClient productClient)
         {
             _logger = logger;
+            _productClient = productClient;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var products = await _productClient.GetProducts();
+            return View(products);
         }
 
         public IActionResult Privacy()
