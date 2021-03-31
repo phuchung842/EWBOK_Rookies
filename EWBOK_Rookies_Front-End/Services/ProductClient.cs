@@ -19,7 +19,7 @@ namespace EWBOK_Rookies_Front_End.Services
         public async Task<IList<ProductVm>> GetProducts()
         {
             var client = _httpClientFactory.CreateClient();
-            var response = await client.GetAsync("https://localhost:44363/Products");
+            var response = await client.GetAsync("https://localhost:44363/api/Products");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<ProductVm>>();
         }
