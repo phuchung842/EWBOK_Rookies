@@ -55,11 +55,11 @@ namespace EWBOK_Rookies_Back_End
                .AddProfileService<CustomProfileService>()
                .AddDeveloperSigningCredential(); // not recommended for production - you need to store your key material somewhere secure
 
-            services.AddAuthentication()
-                .AddLocalApi("Bearer", option =>
-                {
-                    option.ExpectedScope = "ewbokrookies.api";
-                });
+            //services.AddAuthentication()
+            //    .AddLocalApi("Bearer", option =>
+            //    {
+            //        option.ExpectedScope = "ewbokrookies.api";
+            //    });
 
             services.AddAuthorization(options =>
             {
