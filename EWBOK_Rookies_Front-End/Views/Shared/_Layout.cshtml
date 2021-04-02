@@ -1,49 +1,110 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="~/customer/img/ewbok_logo.png" />
     <title>@ViewData["Title"] - EWBOK_Rookies_Front_End</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Font awesome -->
+    <link href="~/customer/css/font-awesome.css" rel="stylesheet">
+    <!-- Bootstrap -->
+    <link href="~/customer/css/bootstrap.css" rel="stylesheet">
+    <!-- SmartMenus jQuery Bootstrap Addon CSS -->
+    <link href="~/customer/css/jquery.smartmenus.bootstrap.css" rel="stylesheet">
+    <!-- Product view slider -->
+    <link rel="stylesheet" type="text/css" href="~/customer/css/jquery.simpleLens.css">
+    <!-- slick slider -->
+    <link rel="stylesheet" type="text/css" href="~/customer/css/slick.css">
+    <!-- price picker slider -->
+    <link rel="stylesheet" type="text/css" href="~/customer/css/nouislider.css">
+    <!-- Theme color -->
+    <link id="switcher" href="~/customer/css/theme-color/black-theme.css" rel="stylesheet">
+    <!-- <link id="switcher" href="css/theme-color/bridge-theme.css" rel="stylesheet"> -->
+    <!-- Top Slider CSS -->
+    <link href="~/customer/css/sequence-theme.modern-slide-in.css" rel="stylesheet" media="all">
+
+    <!-- Main style sheet -->
+    <link href="~/customer/css/style.css" rel="stylesheet">
+
+    <!-- Google Font -->
+    <link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EWBOK_Rookies_Front_End</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <partial name="_LoginPartial" />
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+    <!-- wpf loader Two -->
+    <div id="wpf-loader-two">
+        <div class="wpf-loader-two-inner">
+            <span>Loading</span>
+        </div>
+    </div>
+    <!-- / wpf loader Two -->
+    <!-- SCROLL TOP BUTTON -->
+    <a class="scrollToTop" href="#"><i class="fa fa-chevron-up"></i></a>
+    <!-- END SCROLL TOP BUTTON -->
+    <!-- Start header section -->
+    <header id="aa-header">
+        <!-- start header top  -->
+        <partial name="_HeaderTop" />
+        <!-- / header top  -->
+        <!-- start header bottom  -->
+        <partial name="_HeaderBottom" />
+        <!-- / header bottom  -->
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <!-- / header section -->
+    <!-- menu -->
+    <partial name="_MainMenu" />
+    <!-- / menu -->
+
+    @RenderBody()
+
+    <!-- footer -->
+    <partial name="_Footer" />
+    <!-- / footer -->
+    <!-- Login Modal -->
+    <div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4>Login or Register</h4>
+                    <form class="aa-login-form" action="">
+                        <label for="">Username or Email address<span>*</span></label>
+                        <input type="text" placeholder="Username or email">
+                        <label for="">Password<span>*</span></label>
+                        <input type="password" placeholder="Password">
+                        <button class="aa-browse-btn" type="submit">Login</button>
+                        <label for="rememberme" class="rememberme"><input type="checkbox" id="rememberme"> Remember me </label>
+                        <p class="aa-lost-password"><a href="#">Lost your password?</a></p>
+                        <div class="aa-register-now">
+                            Don't have an account?<a href="account.html">Register now!</a>
+                        </div>
+                    </form>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - EWBOK_Rookies_Front_End - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="~/customer/js/bootstrap.js"></script>
+    <!-- SmartMenus jQuery plugin -->
+    <script type="text/javascript" src="~/customer/js/jquery.smartmenus.js"></script>
+    <!-- SmartMenus jQuery Bootstrap Addon -->
+    <script type="text/javascript" src="~/customer/js/jquery.smartmenus.bootstrap.js"></script>
+    <!-- To Slider JS -->
+    <script src="~/customer/js/sequence.js"></script>
+    <script src="~/customer/js/sequence-theme.modern-slide-in.js"></script>
+    <!-- Product view slider -->
+    <script type="text/javascript" src="~/customer/js/jquery.simpleGallery.js"></script>
+    <script type="text/javascript" src="~/customer/js/jquery.simpleLens.js"></script>
+    <!-- slick slider -->
+    <script type="text/javascript" src="~/customer/js/slick.js"></script>
+    <!-- Price picker slider -->
+    <script type="text/javascript" src="~/customer/js/nouislider.js"></script>
+    <!-- Custom js -->
+    <script src="~/customer/js/custom.js"></script>
 </body>
 </html>
