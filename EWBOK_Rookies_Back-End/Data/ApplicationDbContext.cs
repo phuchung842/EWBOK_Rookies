@@ -16,7 +16,6 @@ namespace EWBOK_Rookies_Back_End.Data
         }
         public DbSet<Product> Products { get; set; }
         public DbSet<Brand> Brands { get; set; }
-        public DbSet<Color> Colors { get; set; }
         public DbSet<Comment> Comments { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<DiscountDetail> DiscountDetails { get; set; }
@@ -24,9 +23,7 @@ namespace EWBOK_Rookies_Back_End.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<ProductCategory> ProductCategories { get; set; }
-        public DbSet<ProductSize> ProductSizes { get; set; }
         public DbSet<Rating> Ratings { get; set; }
-        public DbSet<Size> Sizes { get; set; }
         public DbSet<Wish> Wishes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -45,8 +42,6 @@ namespace EWBOK_Rookies_Back_End.Data
                .HasKey(o => new { o.DiscountID, o.ProductID });
             modelBuilder.Entity<OrderDetail>()
                .HasKey(o => new { o.OrderID, o.ProductID });
-            modelBuilder.Entity<ProductSize>()
-               .HasKey(o => new { o.SizeID, o.ProductID });
             modelBuilder.Entity<Rating>()
                .HasKey(o => new { o.UserID, o.ProductID });
             modelBuilder.Entity<Wish>()

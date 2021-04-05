@@ -28,9 +28,6 @@ namespace EWBOK_Rookies_Back_End.Models
         [StringLength(250)]
         public string SeoTitle { get; set; }
 
-        [StringLength(15)]
-        public string Color { get; set; }
-
         public DateTime? CreateDate { get; set; }
 
         [StringLength(50)]

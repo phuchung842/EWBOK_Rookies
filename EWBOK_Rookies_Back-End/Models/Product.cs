@@ -13,11 +13,9 @@ namespace EWBOK_Rookies_Back_End.Models
     {
         public Product()
         {
-            Colors = new HashSet<Color>();
             Comments = new HashSet<Comment>();
             Wishes = new HashSet<Wish>();
             Ratings = new HashSet<Rating>();
-            ProductSizes = new HashSet<ProductSize>();
             DiscountDetails = new HashSet<DiscountDetail>();
         }
         [Key]
@@ -118,13 +116,11 @@ namespace EWBOK_Rookies_Back_End.Models
         public ProductCategory ProductCategory { get; set; }
         public Material Material { get; set; }
 
-        public ICollection<Color> Colors { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<DiscountDetail> DiscountDetails { get; set; }
         public ICollection<OrderDetail> OrderDetails { get; set; }
         public ICollection<Rating> Ratings { get; set; }
         public ICollection<Wish> Wishes { get; set; }
-        public ICollection<ProductSize> ProductSizes { get; set; }
 
     }
 }
