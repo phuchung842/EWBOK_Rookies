@@ -8,6 +8,9 @@ using Microsoft.EntityFrameworkCore;
 using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
 using SharedVm;
+using EWBOK_Rookies_Back_End.Service;
+using System.Net.Http.Headers;
+using System.IO;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
@@ -16,17 +19,19 @@ namespace EWBOK_Rookies_Back_End.Controllers
     public class ProductsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IStorageService _storageService;
 
-        public ProductsController(ApplicationDbContext context)
+        public ProductsController(ApplicationDbContext context, IStorageService storageService)
         {
             _context = context;
+            _storageService = storageService;
         }
 
         // GET: api/Products
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ProductVm>>> GetProducts()
         {
-            var product = await _context.Products.Select(x => new ProductVm
+            var product = await _context.Products.Select(x => new
             {
                 ID=x.ID,
                 Name=x.Name,
@@ -54,9 +59,42 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 BrandName=x.Brand.Name,
                 ProductCategoryName=x.ProductCategory.Name,
                 MaterialName=x.Material.Name,
-                Detail=x.Detail,
+                Detail=x.Detail
             }).ToListAsync();
-            return Ok(product);
+
+            var productvms = product.Select(x =>
+              new ProductVm
+              {
+                  ID = x.ID,
+                  Name = x.Name,
+                  Code = x.Code,
+                  Tag = x.Tag,
+                  Decription = x.Decription,
+                  Image1 = _storageService.GetFileUrl(x.Image1),
+                  Image2 = _storageService.GetFileUrl(x.Image2),
+                  Image3 = _storageService.GetFileUrl(x.Image3),
+                  Image4 = _storageService.GetFileUrl(x.Image4),
+                  Image5 = _storageService.GetFileUrl(x.Image5),
+                  Image6 = _storageService.GetFileUrl(x.Image6),
+                  Image7 = _storageService.GetFileUrl(x.Image7),
+                  Image8 = _storageService.GetFileUrl(x.Image8),
+                  Image9 = _storageService.GetFileUrl(x.Image9),
+                  Image10 = _storageService.GetFileUrl(x.Image10),
+                  Price = x.Price,
+                  PromotionPrice = x.PromotionPrice,
+                  Gender = x.Gender,
+                  Weight = x.Weight,
+                  Size = x.Size,
+                  IncludeVAT = x.IncludeVAT,
+                  Quantity = x.Quantity,
+                  PublishYear = x.PublishYear,
+                  BrandName = x.BrandName,
+                  ProductCategoryName = x.ProductCategoryName,
+                  MaterialName = x.MaterialName,
+                  Detail = x.Detail
+              }).ToList();
+
+            return productvms;
         }
 
         // GET: api/Products/5
@@ -107,12 +145,64 @@ namespace EWBOK_Rookies_Back_End.Controllers
         //// POST: api/Products
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Product>> PostProduct(Product product)
+        public async Task<ActionResult> PostProduct([FromForm]ProductCreateRequest productCreateRequest)
         {
+            var product = new Product
+            {
+                Name=productCreateRequest.Name,
+                Decription=productCreateRequest.Decription,
+                Price=productCreateRequest.Price,
+                PromotionPrice=productCreateRequest.PromotionPrice,
+                Gender=productCreateRequest.Gender,
+                Weight=productCreateRequest.Weight,
+                Size=productCreateRequest.Size,
+                IncludeVAT=productCreateRequest.IncludeVAT,
+                Quantity=productCreateRequest.Quantity,
+            };
+            if (productCreateRequest.Image1 != null)
+            {
+                product.Image1 = await SaveFile(productCreateRequest.Image1);
+            }
+            if (productCreateRequest.Image2 != null)
+            {
+                product.Image2 = await SaveFile(productCreateRequest.Image2);
+            }
+            if (productCreateRequest.Image3 != null)
+            {
+                product.Image3 = await SaveFile(productCreateRequest.Image3);
+            }
+            if (productCreateRequest.Image4 != null)
+            {
+                product.Image4 = await SaveFile(productCreateRequest.Image4);
+            }
+            if (productCreateRequest.Image5 != null)
+            {
+                product.Image5 = await SaveFile(productCreateRequest.Image5);
+            }
+            if (productCreateRequest.Image6 != null)
+            {
+                product.Image6 = await SaveFile(productCreateRequest.Image6);
+            }
+            if (productCreateRequest.Image7 != null)
+            {
+                product.Image7 = await SaveFile(productCreateRequest.Image7);
+            }
+            if (productCreateRequest.Image8 != null)
+            {
+                product.Image8 = await SaveFile(productCreateRequest.Image8);
+            }
+            if (productCreateRequest.Image9 != null)
+            {
+                product.Image9 = await SaveFile(productCreateRequest.Image9);
+            }
+            if (productCreateRequest.Image10 != null)
+            {
+                product.Image10 = await SaveFile(productCreateRequest.Image10);
+            }
             _context.Products.Add(product);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetProduct", new { id = product.ID }, product);
+            return CreatedAtAction("GetProduct", new { id = product.ID }, null);
         }
 
         // DELETE: api/Products/5
@@ -134,6 +224,13 @@ namespace EWBOK_Rookies_Back_End.Controllers
         private bool ProductExists(int id)
         {
             return _context.Products.Any(e => e.ID == id);
+        }
+        private async Task<string> SaveFile(IFormFile file)
+        {
+            var originalFileName = ContentDispositionHeaderValue.Parse(file.ContentDisposition).FileName.Trim('"');
+            var fileName = $"{Guid.NewGuid()}{Path.GetExtension(originalFileName)}";
+            await _storageService.SaveFileAsync(file.OpenReadStream(), fileName);
+            return fileName;
         }
     }
 }

@@ -36,7 +36,8 @@ namespace EWBOK_Rookies_Front_End
                 .AddCookie("Cookies")
                 .AddOpenIdConnect("oidc", options =>
                 {
-                    options.Authority = "https://localhost:44363";
+                    options.Authority = Configuration.GetServiceUri("backend").ToString();
+                    //options.Authority = "https://localhost:44363";
                     options.RequireHttpsMetadata = false;
                     options.GetClaimsFromUserInfoEndpoint = true;
 
