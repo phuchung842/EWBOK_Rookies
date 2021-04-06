@@ -22,7 +22,7 @@ namespace EWBOK_Rookies_Back_End.IdentityServer
                   new ApiScope("ewbokrookies.api", "Rookie Shop API")
              };
 
-        public static IEnumerable<Client> Clients =>
+        public static IEnumerable<Client> Clients(Dictionary<string, string> clientUrls) =>
             new List<Client>
             {
                 // machine to machine client
@@ -44,9 +44,9 @@ namespace EWBOK_Rookies_Back_End.IdentityServer
 
                     AllowedGrantTypes = GrantTypes.Code,
 
-                    RedirectUris = { "https://localhost:44369/signin-oidc" },
+                    RedirectUris = { $"{clientUrls["Mvc"]}/signin-oidc" },
 
-                    PostLogoutRedirectUris = { "https://localhost:44369/signout-callback-oidc" },
+                    PostLogoutRedirectUris = { $"{clientUrls["Mvc"]}/signout-callback-oidc" },
 
                     AllowedScopes = new List<string>
                     {
@@ -65,9 +65,9 @@ namespace EWBOK_Rookies_Back_End.IdentityServer
                     RequireConsent = false,
                     RequirePkce = true,
 
-                    RedirectUris =           { $"https://localhost:44363/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = { $"https://localhost:44363/swagger/oauth2-redirect.html" },
-                    AllowedCorsOrigins =     { $"https://localhost:44363" },
+                    RedirectUris =           { $"{clientUrls["Swagger"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{clientUrls["Swagger"]}/swagger/oauth2-redirect.html" },
+                    AllowedCorsOrigins =     { $"{clientUrls["Swagger"]}" },
 
                     AllowedScopes = new List<string>
                     {
