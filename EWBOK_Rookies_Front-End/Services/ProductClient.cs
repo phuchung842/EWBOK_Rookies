@@ -10,16 +10,17 @@ namespace EWBOK_Rookies_Front_End.Services
     public class ProductClient : IProductClient
     {
         private readonly IHttpClientFactory _httpClientFactory;
+        private readonly HttpClient _httpClient;
 
-        public ProductClient(IHttpClientFactory httpClientFactory)
+        public ProductClient(IHttpClientFactory httpClientFactory,HttpClient httpClient)
         {
             _httpClientFactory = httpClientFactory;
+            _httpClient = httpClient;
         }
 
         public async Task<IList<ProductVm>> GetProducts()
         {
-            var client = _httpClientFactory.CreateClient("local");
-            var response = await client.GetAsync("https://localhost:44363/api/Products");
+            var response = await _httpClient.GetAsync("api/Products");
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<ProductVm>>();
         }

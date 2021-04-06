@@ -113,35 +113,83 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         //// PUT: api/Products/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutProduct(int id, Product product)
-        //{
-        //    if (id != product.ID)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpPut("{id}")]
+        public async Task<IActionResult> PutProduct(int id, [FromForm] ProductCreateRequest productCreateRequest)
+        {
+            var product = await _context.Products.FirstOrDefaultAsync(x => x.ID == id);
 
-        //    _context.Entry(product).State = EntityState.Modified;
+            if (product == null)
+            {
+                return NotFound();
+            }
+            product.Name = productCreateRequest.Name;
+            product.Decription = productCreateRequest.Decription;
+            product.Price = productCreateRequest.Price;
+            product.PromotionPrice = productCreateRequest.PromotionPrice;
+            product.Gender = productCreateRequest.Gender;
+            product.Weight = productCreateRequest.Weight;
+            product.Size = productCreateRequest.Size;
+            product.IncludeVAT = productCreateRequest.IncludeVAT;
+            product.Quantity = productCreateRequest.Quantity;
+            product.BrandID = productCreateRequest.BrandID;
+            product.ProductCategoryID = productCreateRequest.ProductCategoryID;
+            product.MaterialID = productCreateRequest.MaterialID;
+            product.Status = productCreateRequest.Status;
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!ProductExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+            if (productCreateRequest.Image1 != null)
+            {
+                await _storageService.DeleteFileAsync(product.Image1);
+                product.Image1 = await SaveFile(productCreateRequest.Image1);
+            }
+            if (productCreateRequest.Image2 != null)
+            {
+                await _storageService.DeleteFileAsync(product.Image2);
+                product.Image2 = await SaveFile(productCreateRequest.Image2);
+            }
+            if (productCreateRequest.Image3 != null)
+            {
+                await _storageService.DeleteFileAsync(product.Image3);
+                product.Image3 = await SaveFile(productCreateRequest.Image3);
+            }
+            if (productCreateRequest.Image4 != null)
+            {
+                await _storageService.DeleteFileAsync(product.Image4);
+                product.Image4 = await SaveFile(productCreateRequest.Image4);
+            }
+            if (productCreateRequest.Image5 != null)
+            {
+                await _storageService.DeleteFileAsync(product.Image5);
+                product.Image5 = await SaveFile(productCreateRequest.Image5);
+            }
+            if (productCreateRequest.Image6 != null)
+            {
+                await _storageService.DeleteFileAsync(product.Image6);
+                product.Image6 = await SaveFile(productCreateRequest.Image6);
+            }
+            if (productCreateRequest.Image7 != null)
+            {
+                await _storageService.DeleteFileAsync(product.Image7);
+                product.Image7 = await SaveFile(productCreateRequest.Image7);
+            }
+            if (productCreateRequest.Image8 != null)
+            {
+                await _storageService.DeleteFileAsync(product.Image8);
+                product.Image8 = await SaveFile(productCreateRequest.Image8);
+            }
+            if (productCreateRequest.Image9 != null)
+            {
+                await _storageService.DeleteFileAsync(product.Image9);
+                product.Image9 = await SaveFile(productCreateRequest.Image9);
+            }
+            if (productCreateRequest.Image10 != null)
+            {
+                await _storageService.DeleteFileAsync(product.Image10);
+                product.Image10 = await SaveFile(productCreateRequest.Image10);
+            }
 
-        //    return NoContent();
-        //}
-
+            await _context.SaveChangesAsync();
+            return Accepted();
+        }
         //// POST: api/Products
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
@@ -158,6 +206,10 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 Size=productCreateRequest.Size,
                 IncludeVAT=productCreateRequest.IncludeVAT,
                 Quantity=productCreateRequest.Quantity,
+                BrandID=productCreateRequest.BrandID,
+                ProductCategoryID=productCreateRequest.ProductCategoryID,
+                MaterialID=productCreateRequest.MaterialID,
+                Status=productCreateRequest.Status
             };
             if (productCreateRequest.Image1 != null)
             {
