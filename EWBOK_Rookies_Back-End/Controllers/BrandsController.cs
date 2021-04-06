@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
+using SharedVm;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
@@ -23,9 +25,13 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Brands
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Brand>>> GetBrands()
+        [AllowAnonymous]
+        public async Task<ActionResult<IEnumerable<BrandVm>>> GetBrands()
         {
-            return await _context.Brands.ToListAsync();
+            var brands = await _context.Brands
+                .Select(x => new BrandVm { ID = x.ID, Name = x.Name, Status = x.Status })
+                .ToListAsync();
+            return brands;
         }
 
         // GET: api/Brands/5

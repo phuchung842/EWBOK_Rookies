@@ -14,5 +14,10 @@ namespace EWBOK_Rookies_Front_End.Components
         {
             _brandClient = brandClient;
         }
+        public async Task<IViewComponentResult> InvokeAsync()
+        {
+            var brands = await _brandClient.GetBrands();
+            return View(brands);
+        }
     }
 }
