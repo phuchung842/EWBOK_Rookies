@@ -114,7 +114,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         //// PUT: api/Products/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, [FromForm] ProductCreateRequest productCreateRequest)
+        public async Task<IActionResult> PutProduct(int id, [FromForm] ProductUpdateRequest productUpdateRequest)
         {
             var product = await _context.Products.FirstOrDefaultAsync(x => x.ID == id);
 
@@ -122,69 +122,69 @@ namespace EWBOK_Rookies_Back_End.Controllers
             {
                 return NotFound();
             }
-            product.Name = productCreateRequest.Name;
-            product.Decription = productCreateRequest.Decription;
-            product.Price = productCreateRequest.Price;
-            product.PromotionPrice = productCreateRequest.PromotionPrice;
-            product.Gender = productCreateRequest.Gender;
-            product.Weight = productCreateRequest.Weight;
-            product.Size = productCreateRequest.Size;
-            product.IncludeVAT = productCreateRequest.IncludeVAT;
-            product.Quantity = productCreateRequest.Quantity;
-            product.BrandID = productCreateRequest.BrandID;
-            product.ProductCategoryID = productCreateRequest.ProductCategoryID;
-            product.MaterialID = productCreateRequest.MaterialID;
-            product.Status = productCreateRequest.Status;
+            product.Name = productUpdateRequest.Name;
+            product.Decription = productUpdateRequest.Decription;
+            product.Price = productUpdateRequest.Price;
+            product.PromotionPrice = productUpdateRequest.PromotionPrice;
+            product.Gender = productUpdateRequest.Gender;
+            product.Weight = productUpdateRequest.Weight;
+            product.Size = productUpdateRequest.Size;
+            product.IncludeVAT = productUpdateRequest.IncludeVAT;
+            product.Quantity = productUpdateRequest.Quantity;
+            product.BrandID = productUpdateRequest.BrandID;
+            product.ProductCategoryID = productUpdateRequest.ProductCategoryID;
+            product.MaterialID = productUpdateRequest.MaterialID;
+            product.Status = productUpdateRequest.Status;
 
-            if (productCreateRequest.Image1 != null)
+            if (productUpdateRequest.Image1 != null)
             {
                 await _storageService.DeleteFileAsync(product.Image1);
-                product.Image1 = await SaveFile(productCreateRequest.Image1);
+                product.Image1 = await SaveFile(productUpdateRequest.Image1);
             }
-            if (productCreateRequest.Image2 != null)
+            if (productUpdateRequest.Image2 != null)
             {
                 await _storageService.DeleteFileAsync(product.Image2);
-                product.Image2 = await SaveFile(productCreateRequest.Image2);
+                product.Image2 = await SaveFile(productUpdateRequest.Image2);
             }
-            if (productCreateRequest.Image3 != null)
+            if (productUpdateRequest.Image3 != null)
             {
                 await _storageService.DeleteFileAsync(product.Image3);
-                product.Image3 = await SaveFile(productCreateRequest.Image3);
+                product.Image3 = await SaveFile(productUpdateRequest.Image3);
             }
-            if (productCreateRequest.Image4 != null)
+            if (productUpdateRequest.Image4 != null)
             {
                 await _storageService.DeleteFileAsync(product.Image4);
-                product.Image4 = await SaveFile(productCreateRequest.Image4);
+                product.Image4 = await SaveFile(productUpdateRequest.Image4);
             }
-            if (productCreateRequest.Image5 != null)
+            if (productUpdateRequest.Image5 != null)
             {
                 await _storageService.DeleteFileAsync(product.Image5);
-                product.Image5 = await SaveFile(productCreateRequest.Image5);
+                product.Image5 = await SaveFile(productUpdateRequest.Image5);
             }
-            if (productCreateRequest.Image6 != null)
+            if (productUpdateRequest.Image6 != null)
             {
                 await _storageService.DeleteFileAsync(product.Image6);
-                product.Image6 = await SaveFile(productCreateRequest.Image6);
+                product.Image6 = await SaveFile(productUpdateRequest.Image6);
             }
-            if (productCreateRequest.Image7 != null)
+            if (productUpdateRequest.Image7 != null)
             {
                 await _storageService.DeleteFileAsync(product.Image7);
-                product.Image7 = await SaveFile(productCreateRequest.Image7);
+                product.Image7 = await SaveFile(productUpdateRequest.Image7);
             }
-            if (productCreateRequest.Image8 != null)
+            if (productUpdateRequest.Image8 != null)
             {
                 await _storageService.DeleteFileAsync(product.Image8);
-                product.Image8 = await SaveFile(productCreateRequest.Image8);
+                product.Image8 = await SaveFile(productUpdateRequest.Image8);
             }
-            if (productCreateRequest.Image9 != null)
+            if (productUpdateRequest.Image9 != null)
             {
                 await _storageService.DeleteFileAsync(product.Image9);
-                product.Image9 = await SaveFile(productCreateRequest.Image9);
+                product.Image9 = await SaveFile(productUpdateRequest.Image9);
             }
-            if (productCreateRequest.Image10 != null)
+            if (productUpdateRequest.Image10 != null)
             {
                 await _storageService.DeleteFileAsync(product.Image10);
-                product.Image10 = await SaveFile(productCreateRequest.Image10);
+                product.Image10 = await SaveFile(productUpdateRequest.Image10);
             }
 
             await _context.SaveChangesAsync();

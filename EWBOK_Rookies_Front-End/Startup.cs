@@ -3,18 +3,14 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading.Tasks;
 
 namespace EWBOK_Rookies_Front_End
 {
@@ -32,6 +28,9 @@ namespace EWBOK_Rookies_Front_End
         {
             services.AddHttpClient();
             services.AddTransient<IProductClient, ProductClient>();
+            services.AddTransient<IBrandClient, BrandClient>();
+            services.AddTransient<IProductCategoryClient, ProductCategoryClient>();
+            services.AddTransient<IMaterialClient, MaterialClient>();
 
             services.AddAuthentication(options =>
             {
@@ -73,6 +72,9 @@ namespace EWBOK_Rookies_Front_End
 
             services.TryAddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddHttpClient<IProductClient, ProductClient>(configureClient);
+            services.AddHttpClient<IBrandClient, BrandClient>(configureClient);
+            services.AddHttpClient<IProductCategoryClient, ProductCategoryClient>(configureClient);
+            services.AddHttpClient<IMaterialClient, MaterialClient>(configureClient);
             services.AddControllersWithViews();
         }
 
