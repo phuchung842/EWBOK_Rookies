@@ -82,8 +82,13 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // POST: api/Brands
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Brand>> PostBrand(Brand brand)
+        public async Task<ActionResult> PostBrand([FromForm]BrandCreateRequest brandCreateRequest)
         {
+            var brand = new Brand
+            {
+                Name = brandCreateRequest.Name,
+                Status = brandCreateRequest.Status
+            };
             _context.Brands.Add(brand);
             await _context.SaveChangesAsync();
 
