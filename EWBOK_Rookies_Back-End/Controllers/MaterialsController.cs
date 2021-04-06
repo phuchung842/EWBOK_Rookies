@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
+using SharedVm;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
@@ -23,9 +24,15 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Materials
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Material>>> GetMaterials()
+        public async Task<ActionResult<IEnumerable<MaterialVm>>> GetMaterials()
         {
-            return await _context.Materials.ToListAsync();
+            var materials = await _context.Materials.Select(x => new MaterialVm
+            {
+                ID = x.ID,
+                Name = x.Name,
+                Status = x.Status
+            }).ToListAsync();
+            return materials;
         }
 
         // GET: api/Materials/5
