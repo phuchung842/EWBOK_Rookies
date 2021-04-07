@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
+using SharedVm;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
@@ -30,16 +31,24 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/ProductCategories/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<ProductCategory>> GetProductCategory(short id)
+        public async Task<ActionResult<ProductCategoryVm>> GetProductCategory(short id)
         {
             var productCategory = await _context.ProductCategories.FindAsync(id);
+            var productcategoryvm = new ProductCategoryVm
+            {
+                Name = productCategory.Name,
+                Status = productCategory.Status,
+                DisplayOrder = productCategory.DisplayOrder,
+                MetaTitle = productCategory.MetaTitle,
+                ShowOnHome = productCategory.ShowOnHome
+            };
 
             if (productCategory == null)
             {
                 return NotFound();
             }
 
-            return productCategory;
+            return productcategoryvm;
         }
 
         // PUT: api/ProductCategories/5

@@ -64,6 +64,8 @@ namespace SharedVm
 
         public string BrandName { get; set; }
 
+        public short? BrandID { get; set; }
+
         public string ProductCategoryName { get; set; }
 
         public string MaterialName { get; set; }

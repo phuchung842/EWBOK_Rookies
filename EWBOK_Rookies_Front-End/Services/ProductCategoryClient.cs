@@ -20,5 +20,11 @@ namespace EWBOK_Rookies_Front_End.Services
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<ProductCategoryVm>>();
         }
+        public async Task<ProductCategoryVm> GetProductCategory(short id)
+        {
+            var response = await _httpClient.GetAsync("api/ProductCategories/" + id.ToString());
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<ProductCategoryVm>();
+        }
     }
 }

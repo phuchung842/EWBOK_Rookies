@@ -36,16 +36,21 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Brands/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Brand>> GetBrand(short id)
+        public async Task<ActionResult<BrandVm>> GetBrand(short id)
         {
             var brand = await _context.Brands.FindAsync(id);
-
+            var brandvm = new BrandVm
+            {
+                ID = brand.ID,
+                Name = brand.Name,
+                Status = brand.Status
+            };
             if (brand == null)
             {
                 return NotFound();
             }
 
-            return brand;
+            return brandvm;
         }
 
         // PUT: api/Brands/5

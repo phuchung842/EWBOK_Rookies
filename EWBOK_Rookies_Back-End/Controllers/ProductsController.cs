@@ -106,7 +106,6 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 .Include(x => x.ProductCategory)
                 .Include(x => x.Material)
                 .FirstOrDefaultAsync(x => x.ID.Equals(id));
-
             var productvm = new ProductVm
             {
                 ID = product.ID,
@@ -133,6 +132,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 Quantity = product.Quantity,
                 PublishYear = product.PublishYear,
                 BrandName = product.Brand.Name,
+                BrandID = product.BrandID,
                 ProductCategoryName = product.ProductCategory.Name,
                 MaterialName = product.Material.Name,
                 Detail = product.Detail

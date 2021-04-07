@@ -6,7 +6,8 @@
     var backendUrl = Configuration.GetServiceUri("backend");
 }
 
-<partial name="_HeaderBanner" />
+<vc:header-banner id="Model.BrandID.Value">
+</vc:header-banner>
 <!-- product category -->
 <section id="aa-product-details">
     <div class="container">
@@ -27,15 +28,66 @@
                                             </div>
                                         </div>
                                         <div class="simpleLens-thumbnails-container">
-                                            <a data-big-image="@backendUrl/@Model.Image1" data-lens-image="@backendUrl/@Model.Image1" class="simpleLens-thumbnail-wrapper" href="#">
-                                                <img src="@backendUrl/@Model.Image1" style="width:45px; height:100%; object-fit: contain">
-                                            </a>
-                                            <a data-big-image="@backendUrl/@Model.Image2" data-lens-image="@backendUrl/@Model.Image2" class="simpleLens-thumbnail-wrapper" href="#">
-                                                <img src="@backendUrl/@Model.Image2" style="width:45px; height:100%; object-fit: contain">
-                                            </a>
-                                            <a data-big-image="@backendUrl/@Model.Image3" data-lens-image="@backendUrl/@Model.Image3" class="simpleLens-thumbnail-wrapper" href="#">
-                                                <img src="@backendUrl/@Model.Image3" style="width:45px; height:100%; object-fit: contain">
-                                            </a>
+                                            @if (Model.Image1 != "/image/")
+                                            {
+                                                <a data-big-image="@backendUrl/@Model.Image1" data-lens-image="@backendUrl/@Model.Image1" class="simpleLens-thumbnail-wrapper" href="#">
+                                                    <img src="@backendUrl/@Model.Image1" style="width:45px; height:100%; object-fit: contain">
+                                                </a>
+                                            }
+                                            @if (Model.Image2 != "/image/")
+                                            {
+                                                <a data-big-image="@backendUrl/@Model.Image2" data-lens-image="@backendUrl/@Model.Image2" class="simpleLens-thumbnail-wrapper" href="#">
+                                                    <img src="@backendUrl/@Model.Image2" style="width:45px; height:100%; object-fit: contain">
+                                                </a>
+                                            }
+                                            @if (Model.Image3 != "/image/")
+                                            {
+                                                <a data-big-image="@backendUrl/@Model.Image3" data-lens-image="@backendUrl/@Model.Image3" class="simpleLens-thumbnail-wrapper" href="#">
+                                                    <img src="@backendUrl/@Model.Image3" style="width:45px; height:100%; object-fit: contain">
+                                                </a>
+                                            }
+                                            @if (Model.Image4 != "/image/")
+                                            {
+                                                <a data-big-image="@backendUrl/@Model.Image4" data-lens-image="@backendUrl/@Model.Image4" class="simpleLens-thumbnail-wrapper" href="#">
+                                                    <img src="@backendUrl/@Model.Image4" style="width:45px; height:100%; object-fit: contain">
+                                                </a>
+                                            }
+                                            @if (Model.Image5 != "/image/")
+                                            {
+                                                <a data-big-image="@backendUrl/@Model.Image5" data-lens-image="@backendUrl/@Model.Image5" class="simpleLens-thumbnail-wrapper" href="#">
+                                                    <img src="@backendUrl/@Model.Image5" style="width:45px; height:100%; object-fit: contain">
+                                                </a>
+                                            }
+                                            @if (Model.Image6 != "/image/")
+                                            {
+                                                <a data-big-image="@backendUrl/@Model.Image6" data-lens-image="@backendUrl/@Model.Image6" class="simpleLens-thumbnail-wrapper" href="#">
+                                                    <img src="@backendUrl/@Model.Image6" style="width:45px; height:100%; object-fit: contain">
+                                                </a>
+                                            }
+                                            @if (Model.Image7 != "/image/")
+                                            {
+                                                <a data-big-image="@backendUrl/@Model.Image7" data-lens-image="@backendUrl/@Model.Image7" class="simpleLens-thumbnail-wrapper" href="#">
+                                                    <img src="@backendUrl/@Model.Image7" style="width:45px; height:100%; object-fit: contain">
+                                                </a>
+                                            }
+                                            @if (Model.Image8 != "/image/")
+                                            {
+                                                <a data-big-image="@backendUrl/@Model.Image8" data-lens-image="@backendUrl/@Model.Image8" class="simpleLens-thumbnail-wrapper" href="#">
+                                                    <img src="@backendUrl/@Model.Image8" style="width:45px; height:100%; object-fit: contain">
+                                                </a>
+                                            }
+                                            @if (Model.Image9 != "/image/")
+                                            {
+                                                <a data-big-image="@backendUrl/@Model.Image9" data-lens-image="@backendUrl/@Model.Image9" class="simpleLens-thumbnail-wrapper" href="#">
+                                                    <img src="@backendUrl/@Model.Image6" style="width:45px; height:100%; object-fit: contain">
+                                                </a>
+                                            }
+                                            @if (Model.Image10 != "/image/")
+                                            {
+                                                <a data-big-image="@backendUrl/@Model.Image10" data-lens-image="@backendUrl/@Model.Image10" class="simpleLens-thumbnail-wrapper" href="#">
+                                                    <img src="@backendUrl/@Model.Image10" style="width:45px; height:100%; object-fit: contain">
+                                                </a>
+                                            }
                                         </div>
                                     </div>
                                 </div>
@@ -45,7 +97,7 @@
                                 <div class="aa-product-view-content">
                                     <h3>T-Shirt</h3>
                                     <div class="aa-price-block">
-                                        <span class="aa-product-view-price">$34.99</span>
+                                        <span class="aa-product-view-price">$@Model.Price</span>
                                         <p class="aa-product-avilability">Avilability: <span>In stock</span></p>
                                     </div>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Officiis animi, veritatis quae repudiandae quod nulla porro quidem, itaque quis quaerat!</p>
@@ -76,7 +128,7 @@
                                             </select>
                                         </form>
                                         <p class="aa-prod-category">
-                                            Category: <a href="#">Polo T-Shirt</a>
+                                            Category: <a href="#">@Model.ProductCategoryName</a>
                                         </p>
                                     </div>
                                     <div class="aa-prod-view-bottom">
