@@ -33,33 +33,33 @@ namespace EWBOK_Rookies_Back_End.Controllers
         {
             var product = await _context.Products.Select(x => new
             {
-                ID=x.ID,
-                Name=x.Name,
-                Code=x.Code,
-                Tag=x.Tag,
-                Decription=x.Decription,
-                Image1=x.Image1,
-                Image2=x.Image2,
-                Image3=x.Image3,
-                Image4=x.Image4,
-                Image5=x.Image5,
-                Image6=x.Image6,
-                Image7=x.Image7,
-                Image8=x.Image8,
-                Image9=x.Image9,
-                Image10=x.Image10,
-                Price=x.Price,
-                PromotionPrice=x.PromotionPrice,
-                Gender=x.Gender,
-                Weight=x.Weight,
-                Size=x.Size,
-                IncludeVAT=x.IncludeVAT,
-                Quantity=x.Quantity,
-                PublishYear=x.PublishYear,
-                BrandName=x.Brand.Name,
-                ProductCategoryName=x.ProductCategory.Name,
-                MaterialName=x.Material.Name,
-                Detail=x.Detail
+                ID = x.ID,
+                Name = x.Name,
+                Code = x.Code,
+                Tag = x.Tag,
+                Decription = x.Decription,
+                Image1 = x.Image1,
+                Image2 = x.Image2,
+                Image3 = x.Image3,
+                Image4 = x.Image4,
+                Image5 = x.Image5,
+                Image6 = x.Image6,
+                Image7 = x.Image7,
+                Image8 = x.Image8,
+                Image9 = x.Image9,
+                Image10 = x.Image10,
+                Price = x.Price,
+                PromotionPrice = x.PromotionPrice,
+                Gender = x.Gender,
+                Weight = x.Weight,
+                Size = x.Size,
+                IncludeVAT = x.IncludeVAT,
+                Quantity = x.Quantity,
+                PublishYear = x.PublishYear,
+                BrandName = x.Brand.Name,
+                ProductCategoryName = x.ProductCategory.Name,
+                MaterialName = x.Material.Name,
+                Detail = x.Detail
             }).ToListAsync();
 
             var productvms = product.Select(x =>
@@ -98,18 +98,51 @@ namespace EWBOK_Rookies_Back_End.Controllers
         }
 
         // GET: api/Products/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Product>> GetProduct(int id)
-        //{
-        //    var product = await _context.Products.FindAsync(id);
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ProductVm>> GetProduct(int id)
+        {
+            var product = await _context.Products
+                .Include(x => x.Brand)
+                .Include(x => x.ProductCategory)
+                .Include(x => x.Material)
+                .FirstOrDefaultAsync(x => x.ID.Equals(id));
 
-        //    if (product == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return product;
-        //}
+            var productvm = new ProductVm
+            {
+                ID = product.ID,
+                Name = product.Name,
+                Code = product.Code,
+                Tag = product.Tag,
+                Decription = product.Decription,
+                Image1 = _storageService.GetFileUrl(product.Image1),
+                Image2 = _storageService.GetFileUrl(product.Image2),
+                Image3 = _storageService.GetFileUrl(product.Image3),
+                Image4 = _storageService.GetFileUrl(product.Image4),
+                Image5 = _storageService.GetFileUrl(product.Image5),
+                Image6 = _storageService.GetFileUrl(product.Image6),
+                Image7 = _storageService.GetFileUrl(product.Image7),
+                Image8 = _storageService.GetFileUrl(product.Image8),
+                Image9 = _storageService.GetFileUrl(product.Image9),
+                Image10 = _storageService.GetFileUrl(product.Image10),
+                Price = product.Price,
+                PromotionPrice = product.PromotionPrice,
+                Gender = product.Gender,
+                Weight = product.Weight,
+                Size = product.Size,
+                IncludeVAT = product.IncludeVAT,
+                Quantity = product.Quantity,
+                PublishYear = product.PublishYear,
+                BrandName = product.Brand.Name,
+                ProductCategoryName = product.ProductCategory.Name,
+                MaterialName = product.Material.Name,
+                Detail = product.Detail
+            };
+            if (product == null)
+            {
+                return NotFound();
+            }
+            return productvm;
+        }
 
         //// PUT: api/Products/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
@@ -193,23 +226,23 @@ namespace EWBOK_Rookies_Back_End.Controllers
         //// POST: api/Products
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult> PostProduct([FromForm]ProductCreateRequest productCreateRequest)
+        public async Task<ActionResult> PostProduct([FromForm] ProductCreateRequest productCreateRequest)
         {
             var product = new Product
             {
-                Name=productCreateRequest.Name,
-                Decription=productCreateRequest.Decription,
-                Price=productCreateRequest.Price,
-                PromotionPrice=productCreateRequest.PromotionPrice,
-                Gender=productCreateRequest.Gender,
-                Weight=productCreateRequest.Weight,
-                Size=productCreateRequest.Size,
-                IncludeVAT=productCreateRequest.IncludeVAT,
-                Quantity=productCreateRequest.Quantity,
-                BrandID=productCreateRequest.BrandID,
-                ProductCategoryID=productCreateRequest.ProductCategoryID,
-                MaterialID=productCreateRequest.MaterialID,
-                Status=productCreateRequest.Status
+                Name = productCreateRequest.Name,
+                Decription = productCreateRequest.Decription,
+                Price = productCreateRequest.Price,
+                PromotionPrice = productCreateRequest.PromotionPrice,
+                Gender = productCreateRequest.Gender,
+                Weight = productCreateRequest.Weight,
+                Size = productCreateRequest.Size,
+                IncludeVAT = productCreateRequest.IncludeVAT,
+                Quantity = productCreateRequest.Quantity,
+                BrandID = productCreateRequest.BrandID,
+                ProductCategoryID = productCreateRequest.ProductCategoryID,
+                MaterialID = productCreateRequest.MaterialID,
+                Status = productCreateRequest.Status
             };
             if (productCreateRequest.Image1 != null)
             {

@@ -7,5 +7,6 @@ namespace EWBOK_Rookies_Front_End.Services
     public interface IProductClient
     {
         Task<IList<ProductVm>> GetProducts();
+        Task<ProductVm> GetProduct(int id);
     }
 }
