@@ -1258,8 +1258,13 @@ img {
 #quick-view-modal .modal-content .aa-product-view-slider .simpleLens-container .simpleLens-big-image-container .simpleLens-lens-image {
   width: 100%;
 }
+.simpleLens-big-image {
+    width: 100%;
+    height: 300px;
+    object-fit: contain
+}
 #quick-view-modal .modal-content .aa-product-view-slider .simpleLens-thumbnails-container {
-  text-align: center;
+    text-align: center;
 }
 #quick-view-modal .modal-content .aa-product-view-content {
   padding-right: 10px;
