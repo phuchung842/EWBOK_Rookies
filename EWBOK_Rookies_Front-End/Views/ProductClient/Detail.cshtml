@@ -1,13 +1,16 @@
 ﻿@using SharedVm
+@using EWBOK_Rookies_Front_End.Common
 @model ProductVm
 @using Microsoft.Extensions.Configuration
 @inject IConfiguration Configuration
 @{
     var backendUrl = Configuration.GetServiceUri("backend");
+    var type = ViewData[Constants.TYPE_BANNER].ToString();
 }
 
-<vc:header-banner id="Model.BrandID.Value">
-</vc:header-banner>
+@*<vc:header-banner id="Model.BrandID.Value">
+</vc:header-banner>*@
+@await Component.InvokeAsync("HeaderBanner", new { id = Model.BrandID.Value, type = type })
 <!-- product category -->
 <section id="aa-product-details">
     <div class="container">
@@ -95,7 +98,7 @@
                             <!-- Modal view content -->
                             <div class="col-md-7 col-sm-7 col-xs-12">
                                 <div class="aa-product-view-content">
-                                    <h3>T-Shirt</h3>
+                                    <h3>@Model.Name</h3>
                                     <div class="aa-price-block">
                                         <span class="aa-product-view-price">$@Model.Price</span>
                                         <p class="aa-product-avilability">Avilability: <span>In stock</span></p>
@@ -162,7 +165,7 @@
                             </div>
                             <div class="tab-pane fade " id="review">
                                 <div class="aa-product-review-area">
-                                    <h4>2 Reviews for T-Shirt</h4>
+                                    <h4>2 Reviews for @Model.Name</h4>
                                     <ul class="aa-review-nav">
                                         <li>
                                             <div class="media">

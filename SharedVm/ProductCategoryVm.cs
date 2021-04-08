@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SharedVm
 {
-    public class ProductCategoryVm
+    public class ProductCategoryVm 
     {
         [StringLength(250)]
         public string Name { get; set; }

@@ -1,4 +1,6 @@
-﻿using EWBOK_Rookies_Front_End.Services;
+﻿
+using EWBOK_Rookies_Front_End.Common;
+using EWBOK_Rookies_Front_End.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,7 +16,7 @@ namespace EWBOK_Rookies_Front_End.Controllers
         {
             _productClient = productClient;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
 
             return View();
@@ -22,6 +24,7 @@ namespace EWBOK_Rookies_Front_End.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             var product = await _productClient.GetProduct(id);
+            ViewData[Constants.TYPE_BANNER] = Constants.TYPE_BANNER_BRAND;
             return View(product);
         }
     }

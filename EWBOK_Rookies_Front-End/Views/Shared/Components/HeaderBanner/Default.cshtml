@@ -1,5 +1,27 @@
 ﻿@using SharedVm
-@model BrandVm
+@using EWBOK_Rookies_Front_End.Common
+@{
+    var type = ViewData[Constants.TYPE_BANNER].ToString();
+    int flag = 0;
+    var brand = new BrandVm();
+    var productcategory = new ProductCategoryVm();
+    var material = new MaterialVm();
+}
+@if (type == Constants.TYPE_BANNER_BRAND.ToString())
+{
+    brand = ViewData[Constants.DATA_BANNER] as BrandVm;
+    flag = 0;
+}
+else if (type == Constants.TYPE_BANNER_MATERIAL.ToString())
+{
+    material = ViewData[Constants.DATA_BANNER] as MaterialVm;
+    flag = 1;
+}
+else
+{
+    productcategory = ViewData[Constants.DATA_BANNER] as ProductCategoryVm;
+    flag = 2;
+}
 
 <!-- catg header banner section -->
 <section id="aa-catg-head-banner">
@@ -7,11 +29,35 @@
     <div class="aa-catg-head-banner-area">
         <div class="container">
             <div class="aa-catg-head-banner-content">
-                <h2>@Model.Name</h2>
+                @if (flag == 0)
+                {
+                    <h2>@brand.Name</h2>
+                }
+                else if (flag == 1)
+                {
+                    <h2>@material.Name</h2>
+                }
+                else
+                {
+                    <h2>@productcategory.Name</h2>
+                }
+
                 <ol class="breadcrumb">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="#">Product</a></li>
-                    <li class="active">@Model.Name</li>
+                    @if (flag == 0)
+                    {
+                        <li class="active">@brand.Name</li>
+                    }
+                    else if (flag == 1)
+                    {
+                        <li class="active">@material.Name</li>
+                    }
+                    else
+                    {
+                        <li class="active">@productcategory.Name</li>
+                    }
+
                 </ol>
             </div>
         </div>
