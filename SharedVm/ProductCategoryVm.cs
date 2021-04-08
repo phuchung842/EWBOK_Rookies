@@ -9,6 +9,8 @@ namespace SharedVm
 {
     public class ProductCategoryVm 
     {
+        public short ID { get; set; }
+
         [StringLength(250)]
         public string Name { get; set; }
 

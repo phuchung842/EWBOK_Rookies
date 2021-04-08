@@ -8,5 +8,6 @@ namespace EWBOK_Rookies_Front_End.Services
     {
         Task<IList<ProductVm>> GetProducts();
         Task<ProductVm> GetProduct(int id);
+        Task<IList<ProductVm>> GetProductByFilter(int id, string type);
     }
 }

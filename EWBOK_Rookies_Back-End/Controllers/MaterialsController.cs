@@ -37,16 +37,22 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Materials/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Material>> GetMaterial(short id)
+        public async Task<ActionResult<MaterialVm>> GetMaterial(short id)
         {
             var material = await _context.Materials.FindAsync(id);
-
             if (material == null)
             {
                 return NotFound();
             }
+            var materialvm = new MaterialVm
+            {
+                ID = material.ID,
+                Name = material.Name,
+                Status = material.Status
+            };
+            
 
-            return material;
+            return materialvm;
         }
 
         // PUT: api/Materials/5

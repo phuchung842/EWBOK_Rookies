@@ -20,5 +20,11 @@ namespace EWBOK_Rookies_Front_End.Services
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<MaterialVm>>();
         }
+        public async Task<MaterialVm> GetMaterial(short id)
+        {
+            var response = await _httpClient.GetAsync("api/Materials/" + id.ToString());
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<MaterialVm>();
+        }
     }
 }

@@ -30,5 +30,12 @@ namespace EWBOK_Rookies_Front_End.Services
             reponse.EnsureSuccessStatusCode();
             return await reponse.Content.ReadAsAsync<ProductVm>();
         }
+
+        public async Task<IList<ProductVm>> GetProductByFilter(int id, string type)
+        {
+            var response = await _httpClient.GetAsync("api/Products/" + id.ToString() + "/" + type);
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<IList<ProductVm>>();
+        }
     }
 }

@@ -11,6 +11,7 @@ using SharedVm;
 using EWBOK_Rookies_Back_End.Service;
 using System.Net.Http.Headers;
 using System.IO;
+using Common;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
@@ -142,6 +143,82 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 return NotFound();
             }
             return productvm;
+        }
+
+        [HttpGet("{id}/{type}")]
+        public async Task<ActionResult<IList<ProductVm>>> GetProductByFilter(short id,string type)
+        {
+            var queryable = _context.Products.AsQueryable();
+            if (type == Constants.TYPE_BANNER_BRAND.ToString())
+                queryable = queryable.Where(x => x.BrandID == id);
+            else if (type == Constants.TYPE_BANNER_MATERIAL.ToString())
+                queryable = queryable.Where(x => x.MaterialID == id);
+            else
+                queryable = queryable.Where(x => x.ProductCategoryID == id);
+            var product = await queryable.Select(x => new
+            {
+                ID = x.ID,
+                Name = x.Name,
+                Code = x.Code,
+                Tag = x.Tag,
+                Decription = x.Decription,
+                Image1 = x.Image1,
+                Image2 = x.Image2,
+                Image3 = x.Image3,
+                Image4 = x.Image4,
+                Image5 = x.Image5,
+                Image6 = x.Image6,
+                Image7 = x.Image7,
+                Image8 = x.Image8,
+                Image9 = x.Image9,
+                Image10 = x.Image10,
+                Price = x.Price,
+                PromotionPrice = x.PromotionPrice,
+                Gender = x.Gender,
+                Weight = x.Weight,
+                Size = x.Size,
+                IncludeVAT = x.IncludeVAT,
+                Quantity = x.Quantity,
+                PublishYear = x.PublishYear,
+                BrandName = x.Brand.Name,
+                ProductCategoryName = x.ProductCategory.Name,
+                MaterialName = x.Material.Name,
+                Detail = x.Detail
+            }).ToListAsync();
+
+            var productvms = product.Select(x =>
+              new ProductVm
+              {
+                  ID = x.ID,
+                  Name = x.Name,
+                  Code = x.Code,
+                  Tag = x.Tag,
+                  Decription = x.Decription,
+                  Image1 = _storageService.GetFileUrl(x.Image1),
+                  Image2 = _storageService.GetFileUrl(x.Image2),
+                  Image3 = _storageService.GetFileUrl(x.Image3),
+                  Image4 = _storageService.GetFileUrl(x.Image4),
+                  Image5 = _storageService.GetFileUrl(x.Image5),
+                  Image6 = _storageService.GetFileUrl(x.Image6),
+                  Image7 = _storageService.GetFileUrl(x.Image7),
+                  Image8 = _storageService.GetFileUrl(x.Image8),
+                  Image9 = _storageService.GetFileUrl(x.Image9),
+                  Image10 = _storageService.GetFileUrl(x.Image10),
+                  Price = x.Price,
+                  PromotionPrice = x.PromotionPrice,
+                  Gender = x.Gender,
+                  Weight = x.Weight,
+                  Size = x.Size,
+                  IncludeVAT = x.IncludeVAT,
+                  Quantity = x.Quantity,
+                  PublishYear = x.PublishYear,
+                  BrandName = x.BrandName,
+                  ProductCategoryName = x.ProductCategoryName,
+                  MaterialName = x.MaterialName,
+                  Detail = x.Detail
+              }).ToList();
+
+            return productvms;
         }
 
         //// PUT: api/Products/5

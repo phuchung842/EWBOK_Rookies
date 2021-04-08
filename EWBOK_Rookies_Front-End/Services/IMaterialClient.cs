@@ -7,5 +7,6 @@ namespace EWBOK_Rookies_Front_End.Services
     public interface IMaterialClient
     {
         Task<IList<MaterialVm>> GetMaterials();
+        Task<MaterialVm> GetMaterial(short id);
     }
 }

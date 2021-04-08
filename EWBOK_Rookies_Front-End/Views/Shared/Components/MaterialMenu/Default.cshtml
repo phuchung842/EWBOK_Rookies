@@ -1,4 +1,5 @@
 ﻿@using SharedVm
+@using Common
 @model IList<MaterialVm>
 
 <li>
@@ -6,7 +7,7 @@
     <ul class="dropdown-menu">
         @foreach (var item in Model)
         {
-            <li><a href="#">@item.Name</a></li>
+            <li><a asp-controller="ProductClient" asp-action="Index" asp-route-id="@item.ID" asp-route-type="@Constants.TYPE_BANNER_MATERIAL.ToString()">@item.Name</a></li>
         }
     </ul>
 </li>

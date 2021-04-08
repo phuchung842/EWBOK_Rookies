@@ -1,11 +1,12 @@
 ﻿@using SharedVm
+@using Common
 @model IList<BrandVm>
 <li>
     <a href="#">Brands <span class="caret"></span></a>
     <ul class="dropdown-menu">
         @foreach (var item in Model)
         {
-            <li><a href="#">@item.Name</a></li>
+            <li><a asp-controller="ProductClient" asp-action="Index" asp-route-id="@item.ID" asp-route-type="@Constants.TYPE_BANNER_BRAND.ToString()">@item.Name</a></li>
         }
     </ul>
 </li>

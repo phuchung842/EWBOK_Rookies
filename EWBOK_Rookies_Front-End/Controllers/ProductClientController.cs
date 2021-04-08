@@ -1,11 +1,10 @@
-﻿
-using EWBOK_Rookies_Front_End.Common;
-using EWBOK_Rookies_Front_End.Services;
+﻿using EWBOK_Rookies_Front_End.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Common;
 
 namespace EWBOK_Rookies_Front_End.Controllers
 {
@@ -16,10 +15,12 @@ namespace EWBOK_Rookies_Front_End.Controllers
         {
             _productClient = productClient;
         }
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(short id, string type)
         {
-
-            return View();
+            var product = await _productClient.GetProductByFilter(id, type);
+            ViewData[Constants.TYPE_BANNER] = type;
+            ViewData[Constants.TYPE_BANNER_ID] = id;
+            return View("Index",product);
         }
         public async Task<IActionResult> Detail(int id)
         {
