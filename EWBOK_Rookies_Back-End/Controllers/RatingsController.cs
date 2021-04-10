@@ -37,7 +37,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
             var rating = await _context.Ratings.FirstOrDefaultAsync(x => x.UserID == userid && x.ProductID == productid);
             if (rating == null)
             {
-                return NotFound();
+                return rating;
             }
             var ratingvm = new RatingVm
             {
@@ -86,7 +86,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // POST: api/Ratings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult> PostRating([FromForm] RatingCreateRequest ratingCreateRequest)
+        public async Task<ActionResult> PostRating(RatingCreateRequest ratingCreateRequest)
         {
             var transaction = _context.Database.BeginTransaction();
             var rating = new Rating
@@ -111,7 +111,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
             catch(Exception)
             { }
 
-            return Ok(rating);
+            return Accepted();
         }
 
         // DELETE: api/Ratings/5
