@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EWBOK_Rookies_Back_End.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210405034654_change-databaseV2")]
-    partial class changedatabaseV2
+    [Migration("20210410113242_recreate_database")]
+    partial class recreate_database
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -63,6 +63,9 @@ namespace EWBOK_Rookies_Back_End.Migrations
 
                     b.Property<string>("Content")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("CreatedDate")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
@@ -278,44 +281,34 @@ namespace EWBOK_Rookies_Back_End.Migrations
                         .HasColumnType("nvarchar(10)");
 
                     b.Property<string>("Image1")
-                        .HasMaxLength(550)
-                        .HasColumnType("nvarchar(550)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image10")
-                        .HasMaxLength(550)
-                        .HasColumnType("nvarchar(550)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image2")
-                        .HasMaxLength(550)
-                        .HasColumnType("nvarchar(550)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image3")
-                        .HasMaxLength(550)
-                        .HasColumnType("nvarchar(550)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image4")
-                        .HasMaxLength(550)
-                        .HasColumnType("nvarchar(550)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image5")
-                        .HasMaxLength(550)
-                        .HasColumnType("nvarchar(550)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image6")
-                        .HasMaxLength(550)
-                        .HasColumnType("nvarchar(550)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image7")
-                        .HasMaxLength(550)
-                        .HasColumnType("nvarchar(550)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image8")
-                        .HasMaxLength(550)
-                        .HasColumnType("nvarchar(550)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Image9")
-                        .HasMaxLength(550)
-                        .HasColumnType("nvarchar(550)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool?>("IncludeVAT")
                         .HasColumnType("bit");
@@ -474,6 +467,9 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     b.Property<DateTime?>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("ModifieDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<short>("Star")
                         .HasColumnType("smallint");
 
@@ -507,6 +503,10 @@ namespace EWBOK_Rookies_Back_End.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")

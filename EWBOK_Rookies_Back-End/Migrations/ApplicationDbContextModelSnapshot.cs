@@ -501,7 +501,8 @@ namespace EWBOK_Rookies_Back_End.Migrations
                         .HasColumnType("bit");
 
                     b.Property<string>("FullName")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("Image")
                         .HasColumnType("nvarchar(max)");

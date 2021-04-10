@@ -47,6 +47,19 @@ namespace EWBOK_Rookies_Back_End.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
+            [StringLength(50)]
+            [Display(Name = "UserName")]
+            public string UserName { get; set; }
+
+            [Required]
+            [Display(Name ="Phone")]
+            public string PhoneNumber { get; set; }
+
+            [Required]
+            [Display(Name ="FullName")]
+            public string Fullname { get; set; }
+
+            [Required]
             [EmailAddress]
             [Display(Name = "Email")]
             public string Email { get; set; }
@@ -75,7 +88,7 @@ namespace EWBOK_Rookies_Back_End.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new User { UserName = Input.Email, Email = Input.Email };
+                var user = new User { UserName = Input.UserName, Email = Input.Email, PhoneNumber = Input.PhoneNumber, FullName = Input.Fullname };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

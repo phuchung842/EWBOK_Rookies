@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EWBOK_Rookies_Back_End.Migrations
 {
-    public partial class update_database_v1 : Migration
+    public partial class recreate_database : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -70,7 +70,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     ParentID = table.Column<long>(type: "bigint", nullable: true),
                     DisplayOrder = table.Column<int>(type: "int", nullable: true),
                     SeoTitle = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
-                    Color = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: true),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     CreatedBy = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -100,25 +99,12 @@ namespace EWBOK_Rookies_Back_End.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Sizes",
-                columns: table => new
-                {
-                    ID = table.Column<short>(type: "smallint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Status = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sizes", x => x.ID);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Users",
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    FullName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    FullName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -150,16 +136,16 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     MetaTitle = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Tag = table.Column<string>(type: "nvarchar(250)", maxLength: 250, nullable: true),
                     Decription = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image1 = table.Column<string>(type: "nvarchar(550)", maxLength: 550, nullable: true),
-                    Image2 = table.Column<string>(type: "nvarchar(550)", maxLength: 550, nullable: true),
-                    Image3 = table.Column<string>(type: "nvarchar(550)", maxLength: 550, nullable: true),
-                    Image4 = table.Column<string>(type: "nvarchar(550)", maxLength: 550, nullable: true),
-                    Image5 = table.Column<string>(type: "nvarchar(550)", maxLength: 550, nullable: true),
-                    Image6 = table.Column<string>(type: "nvarchar(550)", maxLength: 550, nullable: true),
-                    Image7 = table.Column<string>(type: "nvarchar(550)", maxLength: 550, nullable: true),
-                    Image8 = table.Column<string>(type: "nvarchar(550)", maxLength: 550, nullable: true),
-                    Image9 = table.Column<string>(type: "nvarchar(550)", maxLength: 550, nullable: true),
-                    Image10 = table.Column<string>(type: "nvarchar(550)", maxLength: 550, nullable: true),
+                    Image1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image3 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image4 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image5 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image6 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image7 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image8 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image9 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Image10 = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Price = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     PromotionPrice = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     Gender = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: true),
@@ -347,31 +333,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Colors",
-                columns: table => new
-                {
-                    ID = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true),
-                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CreatedBy = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    ModifiedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ModifiedBy = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
-                    Status = table.Column<bool>(type: "bit", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Colors", x => x.ID);
-                    table.ForeignKey(
-                        name: "FK_Colors_Products_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Products",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Comments",
                 columns: table => new
                 {
@@ -381,6 +342,7 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     UserID = table.Column<string>(type: "nvarchar(450)", maxLength: 450, nullable: true),
                     Content = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Image = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<bool>(type: "bit", nullable: true)
                 },
                 constraints: table =>
@@ -426,30 +388,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ProductSizes",
-                columns: table => new
-                {
-                    ProductID = table.Column<int>(type: "int", nullable: false),
-                    SizeID = table.Column<short>(type: "smallint", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ProductSizes", x => new { x.SizeID, x.ProductID });
-                    table.ForeignKey(
-                        name: "FK_ProductSizes_Products_ProductID",
-                        column: x => x.ProductID,
-                        principalTable: "Products",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "FK_ProductSizes_Sizes_SizeID",
-                        column: x => x.SizeID,
-                        principalTable: "Sizes",
-                        principalColumn: "ID",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Ratings",
                 columns: table => new
                 {
@@ -457,6 +395,7 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     ProductID = table.Column<int>(type: "int", nullable: false),
                     Star = table.Column<short>(type: "smallint", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ModifieDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     Status = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
@@ -531,11 +470,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Colors_ProductID",
-                table: "Colors",
-                column: "ProductID");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_Comments_ProductID",
                 table: "Comments",
                 column: "ProductID");
@@ -574,11 +508,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
                 name: "IX_Products_ProductCategoryID",
                 table: "Products",
                 column: "ProductCategoryID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ProductSizes_ProductID",
-                table: "ProductSizes",
-                column: "ProductID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ratings_ProductID",
@@ -633,9 +562,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Colors");
-
-            migrationBuilder.DropTable(
                 name: "Comments");
 
             migrationBuilder.DropTable(
@@ -643,9 +569,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
 
             migrationBuilder.DropTable(
                 name: "OrderDetails");
-
-            migrationBuilder.DropTable(
-                name: "ProductSizes");
 
             migrationBuilder.DropTable(
                 name: "Ratings");
@@ -673,9 +596,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
 
             migrationBuilder.DropTable(
                 name: "Orders");
-
-            migrationBuilder.DropTable(
-                name: "Sizes");
 
             migrationBuilder.DropTable(
                 name: "Roles");
