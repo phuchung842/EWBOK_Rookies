@@ -20,7 +20,7 @@ namespace EWBOK_Rookies_Front_End.Controllers
         {
             return View();
         }
-        public async Task<IActionResult> CreateRating(short id, short star)
+        public async Task<IActionResult> CreateRating(int id, short star)
         {
             var claimIdentity = User.Identity as ClaimsIdentity;
             string userid = claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -34,7 +34,7 @@ namespace EWBOK_Rookies_Front_End.Controllers
             await _ratingClient.CreateRating(ratingCreateRequest);
             return RedirectToAction("Detail", "ProductClient", new { id = id });
         }
-        public async Task<IActionResult> UpdateRating(short id, short star)
+        public async Task<IActionResult> UpdateRating(int id, short star)
         {
             var claimIdentity = User.Identity as ClaimsIdentity;
             string userid = claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
