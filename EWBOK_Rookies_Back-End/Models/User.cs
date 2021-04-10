@@ -21,6 +21,7 @@ namespace EWBOK_Rookies_Back_End.Models
 
         [PersonalData]
         public string FullName { get; set; }
+        public string Image { get; set; }
 
         public ICollection<Rating> Ratings { get; set; }
         public ICollection<Comment> Comments { get; set; }

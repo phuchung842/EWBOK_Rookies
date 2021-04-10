@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
 using SharedVm;
+using EWBOK_Rookies_Back_End.Service;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
@@ -16,10 +17,12 @@ namespace EWBOK_Rookies_Back_End.Controllers
     public class CommentsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IStorageService _storageService;
 
-        public CommentsController(ApplicationDbContext context)
+        public CommentsController(ApplicationDbContext context,IStorageService storageService)
         {
             _context = context;
+            _storageService = storageService;
         }
 
         // GET: api/Comments
@@ -31,9 +34,9 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Comments/5
         [HttpGet("{productid}")]
-        public async Task<ActionResult<IEnumerable<CommentVm>>> GetCommentByProduct(long productid)
+        public async Task<ActionResult<IEnumerable<CommentVm>>> GetCommentsByProduct(long productid)
         {
-            var comment = await _context.Comments.Where(x => x.ProductID == productid).ToListAsync();
+            var comment = await _context.Comments.Include(x => x.User).Where(x => x.ProductID == productid).ToListAsync();
             if (comment == null)
             {
                 return NotFound();
@@ -43,7 +46,10 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 UserID = x.UserID,
                 ProductID = x.ProductID,
                 Content = x.Content,
-                Image = x.Image
+                Image = _storageService.GetFileUrl(x.Image),
+                CreatedDate = x.CreatedDate,
+                UserName = x.User.UserName,
+                UserImage = _storageService.GetFileUrl(x.User.Image)
             }).ToList();
 
             return commentvms;

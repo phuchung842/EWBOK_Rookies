@@ -13,10 +13,12 @@ namespace EWBOK_Rookies_Front_End.Controllers
     {
         private readonly IProductClient _productClient;
         private readonly IRatingClient _ratingClient;
-        public ProductClientController(IProductClient productClient, IRatingClient ratingClient)
+        private readonly ICommentClient _commentClient;
+        public ProductClientController(IProductClient productClient, IRatingClient ratingClient, ICommentClient commentClient)
         {
             _productClient = productClient;
             _ratingClient = ratingClient;
+            _commentClient = commentClient;
 
         }
         public async Task<IActionResult> Index(short id, string type)
@@ -30,6 +32,7 @@ namespace EWBOK_Rookies_Front_End.Controllers
         {
             var product = await _productClient.GetProduct(id);
             ViewData[Constants.TYPE_BANNER] = Constants.TYPE_BANNER_BRAND;
+            ViewData[Constants.DATA_COMMENTS_CLIENT] = await _commentClient.GetCommentsByProduct(id);
             if (User.Identity.IsAuthenticated)
             {
                 var claimIdentity = User.Identity as ClaimsIdentity;

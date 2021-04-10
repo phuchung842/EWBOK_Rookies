@@ -16,5 +16,6 @@ namespace Common
         public static string DATA_BANNER = "DATA_BANNER";
 
         public static string DATA_RATING_CLIENT = "DATA_RATING_CLIENT";
+        public static string DATA_COMMENTS_CLIENT = "DATA_COMMENTS_CLIENT";
     }
 }

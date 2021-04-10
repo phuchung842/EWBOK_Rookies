@@ -19,6 +19,8 @@ namespace EWBOK_Rookies_Back_End.Models
 
         public string Image { get; set; }
 
+        public DateTime? CreatedDate { get; set; }
+
         public bool? Status { get; set; }
         public Product Product { get; set; }
         public User User { get; set; }
