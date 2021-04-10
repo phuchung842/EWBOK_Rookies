@@ -60,6 +60,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 BrandName = x.Brand.Name,
                 ProductCategoryName = x.ProductCategory.Name,
                 MaterialName = x.Material.Name,
+                StarRating = 5,
                 Detail = x.Detail
             }).ToListAsync();
 
@@ -92,6 +93,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
                   BrandName = x.BrandName,
                   ProductCategoryName = x.ProductCategoryName,
                   MaterialName = x.MaterialName,
+                  StarRating=x.StarRating,
                   Detail = x.Detail
               }).ToList();
 
@@ -107,6 +109,10 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 .Include(x => x.ProductCategory)
                 .Include(x => x.Material)
                 .FirstOrDefaultAsync(x => x.ID.Equals(id));
+            if (product == null)
+            {
+                return NotFound();
+            }
             var productvm = new ProductVm
             {
                 ID = product.ID,
@@ -136,17 +142,15 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 BrandID = product.BrandID,
                 ProductCategoryName = product.ProductCategory.Name,
                 MaterialName = product.Material.Name,
+                StarRating = product.StarRating,
                 Detail = product.Detail
             };
-            if (product == null)
-            {
-                return NotFound();
-            }
+            
             return productvm;
         }
 
         [HttpGet("{id}/{type}")]
-        public async Task<ActionResult<IList<ProductVm>>> GetProductByFilter(short id,string type)
+        public async Task<ActionResult<IList<ProductVm>>> GetProductByFilter(short id, string type)
         {
             var queryable = _context.Products.AsQueryable();
             if (type == Constants.TYPE_BANNER_BRAND.ToString())

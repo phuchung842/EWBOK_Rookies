@@ -24,6 +24,8 @@ namespace EWBOK_Rookies_Back_End.Models
 
         public DateTime? CreateDate { get; set; }
 
+        public DateTime? ModifieDate { get; set; }
+
         public int? Status { get; set; }
 
         public User User { get; set; }

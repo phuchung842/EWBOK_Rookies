@@ -31,6 +31,7 @@ namespace EWBOK_Rookies_Front_End
             services.AddTransient<IBrandClient, BrandClient>();
             services.AddTransient<IProductCategoryClient, ProductCategoryClient>();
             services.AddTransient<IMaterialClient, MaterialClient>();
+            services.AddTransient<IRatingClient, RatingClient>();
 
             services.AddAuthentication(options =>
             {
@@ -75,6 +76,7 @@ namespace EWBOK_Rookies_Front_End
             services.AddHttpClient<IBrandClient, BrandClient>(configureClient);
             services.AddHttpClient<IProductCategoryClient, ProductCategoryClient>(configureClient);
             services.AddHttpClient<IMaterialClient, MaterialClient>(configureClient);
+            services.AddHttpClient<IRatingClient, RatingClient>(configureClient);
             services.AddControllersWithViews();
         }
 

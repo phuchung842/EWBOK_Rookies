@@ -14,5 +14,7 @@ namespace Common
         public static string TYPE_BANNER_PRODUCTCATEGORY = "TYPE_BANNER_PRODUCTCATEGORY";
         public static string TYPE_BANNER_MATERIAL = "TYPE_BANNER_MATERIAL";
         public static string DATA_BANNER = "DATA_BANNER";
+
+        public static string DATA_RATING_CLIENT = "DATA_RATING_CLIENT";
     }
 }
