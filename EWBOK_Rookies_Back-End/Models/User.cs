@@ -14,6 +14,7 @@ namespace EWBOK_Rookies_Back_End.Models
             Comments = new HashSet<Comment>();
             Wishes = new HashSet<Wish>();
             Ratings = new HashSet<Rating>();
+            Carts = new HashSet<Cart>();
         }
 
         public User(string userName) : base(userName)
@@ -26,9 +27,9 @@ namespace EWBOK_Rookies_Back_End.Models
 
         public string Image { get; set; }
 
-
         public ICollection<Rating> Ratings { get; set; }
         public ICollection<Comment> Comments { get; set; }
         public ICollection<Wish> Wishes { get; set; }
+        public ICollection<Cart> Carts { get; set; }
     }
 }

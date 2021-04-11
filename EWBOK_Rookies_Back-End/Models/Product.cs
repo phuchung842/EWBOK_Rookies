@@ -17,6 +17,7 @@ namespace EWBOK_Rookies_Back_End.Models
             Wishes = new HashSet<Wish>();
             Ratings = new HashSet<Rating>();
             DiscountDetails = new HashSet<DiscountDetail>();
+            Carts = new HashSet<Cart>();
         }
         [Key]
         public int ID { get; set; }
@@ -121,6 +122,7 @@ namespace EWBOK_Rookies_Back_End.Models
         public ICollection<OrderDetail> OrderDetails { get; set; }
         public ICollection<Rating> Ratings { get; set; }
         public ICollection<Wish> Wishes { get; set; }
+        public ICollection<Cart> Carts { get; set; }
 
     }
 }

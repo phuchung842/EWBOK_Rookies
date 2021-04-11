@@ -25,6 +25,7 @@ namespace EWBOK_Rookies_Back_End.Data
         public DbSet<ProductCategory> ProductCategories { get; set; }
         public DbSet<Rating> Ratings { get; set; }
         public DbSet<Wish> Wishes { get; set; }
+        public DbSet<Cart> Carts { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -46,6 +47,8 @@ namespace EWBOK_Rookies_Back_End.Data
                .HasKey(o => new { o.UserID, o.ProductID });
             modelBuilder.Entity<Wish>()
                .HasKey(o => new { o.UserID, o.ProductID });
+            modelBuilder.Entity<Cart>()
+                .HasKey(o => new { o.UserID, o.ProductID });
         }
     }
 }

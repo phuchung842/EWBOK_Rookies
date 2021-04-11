@@ -4,14 +4,16 @@ using EWBOK_Rookies_Back_End.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace EWBOK_Rookies_Back_End.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210411104151_create_cart")]
+    partial class create_cart
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,25 +52,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Brands");
-                });
-
-            modelBuilder.Entity("EWBOK_Rookies_Back_End.Models.Cart", b =>
-                {
-                    b.Property<string>("UserID")
-                        .HasMaxLength(450)
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("ProductID")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserID", "ProductID");
-
-                    b.HasIndex("ProductID");
-
-                    b.ToTable("Carts");
                 });
 
             modelBuilder.Entity("EWBOK_Rookies_Back_End.Models.Comment", b =>
@@ -729,25 +712,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
                     b.ToTable("UserTokens");
                 });
 
-            modelBuilder.Entity("EWBOK_Rookies_Back_End.Models.Cart", b =>
-                {
-                    b.HasOne("EWBOK_Rookies_Back_End.Models.Product", "Product")
-                        .WithMany("Carts")
-                        .HasForeignKey("ProductID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EWBOK_Rookies_Back_End.Models.User", "User")
-                        .WithMany("Carts")
-                        .HasForeignKey("UserID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Product");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("EWBOK_Rookies_Back_End.Models.Comment", b =>
                 {
                     b.HasOne("EWBOK_Rookies_Back_End.Models.Product", "Product")
@@ -944,8 +908,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
 
             modelBuilder.Entity("EWBOK_Rookies_Back_End.Models.Product", b =>
                 {
-                    b.Navigation("Carts");
-
                     b.Navigation("Comments");
 
                     b.Navigation("DiscountDetails");
@@ -964,8 +926,6 @@ namespace EWBOK_Rookies_Back_End.Migrations
 
             modelBuilder.Entity("EWBOK_Rookies_Back_End.Models.User", b =>
                 {
-                    b.Navigation("Carts");
-
                     b.Navigation("Comments");
 
                     b.Navigation("Ratings");
