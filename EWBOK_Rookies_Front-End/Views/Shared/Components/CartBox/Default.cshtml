@@ -1,0 +1,34 @@
+﻿@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@using SharedVm;
+@model IList<CartVm>
+@{
+    var backendUrl = Configuration.GetServiceUri("backend");
+}
+
+@if (Model != null)
+{
+    <div class="aa-cartbox">
+        <a class="aa-cart-link" href="#">
+            <span class="fa fa-shopping-basket"></span>
+            <span class="aa-cart-title">SHOPPING CART</span>
+            <span class="aa-cart-notify">@Model.Count</span>
+        </a>
+        <div class="aa-cartbox-summary">
+            <ul>
+                @foreach (var item in Model)
+                {
+                    <li>
+                        <a class="aa-cartbox-img" href="/ProductClient/Detail/@item.ProductID"><img src="@backendUrl/@item.ProductImage" alt="img"></a>
+                        <div class="aa-cartbox-info">
+                            <h4><a href="#">@item.ProductName</a></h4>
+                            <p>@item.Quantity x $@item.ProductPrice</p>
+                        </div>
+                        <a class="aa-remove-product" href="#"><span class="fa fa-times"></span></a>
+                    </li>
+                }
+            </ul>
+            <a class="aa-cartbox-checkout aa-primary-btn" href="checkout.html">Checkout</a>
+        </div>
+    </div>
+}

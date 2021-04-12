@@ -33,6 +33,8 @@ namespace EWBOK_Rookies_Front_End
             services.AddTransient<IMaterialClient, MaterialClient>();
             services.AddTransient<IRatingClient, RatingClient>();
             services.AddTransient<ICommentClient, CommentClient>();
+            services.AddTransient<ICartClient,CartClient>();
+
 
             services.AddAuthentication(options =>
             {
@@ -79,6 +81,7 @@ namespace EWBOK_Rookies_Front_End
             services.AddHttpClient<IMaterialClient, MaterialClient>(configureClient);
             services.AddHttpClient<IRatingClient, RatingClient>(configureClient);
             services.AddHttpClient<ICommentClient, CommentClient>(configureClient);
+            services.AddHttpClient<ICartClient, CartClient>(configureClient);
             services.AddControllersWithViews();
         }
 

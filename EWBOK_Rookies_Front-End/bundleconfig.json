@@ -1,0 +1,17 @@
+[
+  {
+    "outputFileName": "wwwroot/customer/js/bundle.js",
+    "inputFiles": [
+      "wwwroot/customer/js/bootstrap.js",
+      "wwwroot/customer/js/jquery.smartmenus.js",
+      "wwwroot/customer/js/jquery.smartmenus.bootstrap.js",
+      "wwwroot/customer/js/sequence.js",
+      "wwwroot/customer/js/sequence-theme.modern-slide-in.js",
+      "wwwroot/customer/js/jquery.simpleGallery.js",
+      "wwwroot/customer/js/jquery.simpleLens.js",
+      "wwwroot/customer/js/slick.js",
+      "wwwroot/customer/js/nouislider.js",
+      "wwwroot/customer/js/custom.js"
+    ]
+  },
+]

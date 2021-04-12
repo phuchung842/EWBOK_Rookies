@@ -22,23 +22,23 @@ namespace EWBOK_Rookies_Front_End.Services
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<RatingVm>();
         }
-        public async Task<RatingVm> CreateRating(RatingCreateRequest ratingCreateRequest)
+        public async Task<RatingCreateRequest> CreateRating(RatingCreateRequest ratingCreateRequest)
         {
             HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(ratingCreateRequest), Encoding.UTF8, "application/json");
             var response = await _httpClient.PostAsync("api/Ratings", httpContent);
 
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsAsync<RatingVm>();
+            return await response.Content.ReadAsAsync<RatingCreateRequest>();
         }
-        public async Task<RatingVm> UpdateRating(RatingUpdateRequest ratingUpdateRequest)
+        public async Task<RatingUpdateRequest> UpdateRating(RatingUpdateRequest ratingUpdateRequest)
         {
             HttpContent httpContent = new StringContent(JsonConvert.SerializeObject(ratingUpdateRequest), Encoding.UTF8, "application/json");
             var response = await _httpClient.PutAsync("api/Ratings", httpContent);
 
             response.EnsureSuccessStatusCode();
 
-            return await response.Content.ReadAsAsync<RatingVm>();
+            return await response.Content.ReadAsAsync<RatingUpdateRequest>();
         }
     }
 }

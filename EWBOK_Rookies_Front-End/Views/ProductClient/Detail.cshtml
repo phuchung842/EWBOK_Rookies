@@ -133,13 +133,29 @@
                                     </div>
                                     <div class="aa-prod-quantity">
                                         <form action="">
-                                            <select id="" name="">
-                                                <option selected="1" value="0">1</option>
-                                                <option value="1">2</option>
-                                                <option value="2">3</option>
-                                                <option value="3">4</option>
-                                                <option value="4">5</option>
-                                                <option value="5">6</option>
+                                            <select id="quantity" name="quantity">
+                                                @if (Model.Quantity > 6)
+                                                {
+                                                    <option value="1" selected>1</option>
+                                                    for (int j = 2; j <= 6; j++)
+                                                    {
+                                                        <option value="@j">@j</option>
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    if (Model.Quantity > 0)
+                                                    {
+                                                        for (int j = 1; j <= Model.Quantity; j++)
+                                                        {
+                                                            <option value="@j">@j</option>
+                                                        }
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="0">0</option>
+                                                    }
+                                                }
                                             </select>
                                         </form>
                                         <p class="aa-prod-category">
@@ -147,7 +163,7 @@
                                         </p>
                                     </div>
                                     <div class="aa-prod-view-bottom">
-                                        <a class="aa-add-to-cart-btn" href="#">Add To Cart</a>
+                                        <a class="aa-add-to-cart-btn" href="/CartClient/AddCart?productid=@Model.ID&quantity=document.getElementById('quantity').value">Add To Cart</a>
                                         <a class="aa-add-to-cart-btn" href="#">Wishlist</a>
                                         <a class="aa-add-to-cart-btn" href="#">Compare</a>
                                     </div>

@@ -176,7 +176,7 @@
                                             <li>
                                                 <figure>
                                                     <a class="aa-product-img" href="/ProductClient/Detail/@item.ID"><img src="@backendUrl/@item.Image1" style="width:100%; height:300px; object-fit: contain" alt="polo shirt img"></a>
-                                                    <a class="aa-add-card-btn" href="#"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
+                                                    <a class="aa-add-card-btn" href="/CartClient/AddCart?productid=@item.ID&quantity=1"><span class="fa fa-shopping-cart"></span>Add To Cart</a>
                                                     <figcaption>
                                                         <h4 class="aa-product-title" style="text-overflow:ellipsis; overflow:hidden;white-space:nowrap"><a href="/ProductClient/Detail/@item.ID" >@item.Name</a></h4>
                                                         <span class="aa-product-price">$@item.Price</span><span class="aa-product-price"><del>$@item.Price</del></span>

@@ -6,6 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="bundleconfig.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="5.0.4" />
     <PackageReference Include="Microsoft.Tye.Extensions.Configuration" Version="0.6.0-alpha.21070.5" />
@@ -18,6 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="bundleconfig.json" />
     <None Include="wwwroot\customer\.sass-cache\3fcd99d0c8b91f50f06b0715ce73ad297a6fc258\_base.scssc" />
     <None Include="wwwroot\customer\.sass-cache\3fcd99d0c8b91f50f06b0715ce73ad297a6fc258\_mixins.scssc" />
     <None Include="wwwroot\customer\.sass-cache\3fcd99d0c8b91f50f06b0715ce73ad297a6fc258\_variables.scssc" />
