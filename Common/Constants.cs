@@ -17,5 +17,10 @@ namespace Common
 
         public static string DATA_RATING_CLIENT = "DATA_RATING_CLIENT";
         public static string DATA_COMMENTS_CLIENT = "DATA_COMMENTS_CLIENT";
+
+        public static string PAGINATION_PAGESIZE = "PAGINATION_PAGESIZE";
+        public static string PAGINATION_PAGE = "PAGINATION_PAGE";
+        public static string PAGINATION_TOTALRECORD = "PAGINATION_TOTALRECORD";
+        public static string PAGINATION_LINK = "PAGINATION_LINK";
     }
 }

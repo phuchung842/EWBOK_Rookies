@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Common;
 using System.Security.Claims;
+using Microsoft.Extensions.Caching.Memory;
+using SharedVm;
 
 namespace EWBOK_Rookies_Front_End.Controllers
 {
@@ -14,19 +16,42 @@ namespace EWBOK_Rookies_Front_End.Controllers
         private readonly IProductClient _productClient;
         private readonly IRatingClient _ratingClient;
         private readonly ICommentClient _commentClient;
-        public ProductClientController(IProductClient productClient, IRatingClient ratingClient, ICommentClient commentClient)
+        private readonly IMemoryCache _memoryCache;
+        public ProductClientController(IProductClient productClient, IRatingClient ratingClient, ICommentClient commentClient, IMemoryCache memoryCache)
         {
             _productClient = productClient;
             _ratingClient = ratingClient;
             _commentClient = commentClient;
-
+            _memoryCache = memoryCache;
         }
-        public async Task<IActionResult> Index(short id, string type)
+        public async Task<IActionResult> Index(short id, string type, int page = 1, int pageSize = 1)
         {
-            var product = await _productClient.GetProductByFilter(id, type);
+            var link = HttpContext.Request.Path.Value;
+            link = link + $"?type={type}&";
+
+            if (!_memoryCache.TryGetValue(type, out IList<ProductVm> products))
+            {
+                products = await _productClient.GetProductByFilter(id, type);
+                var cacheExpiryOptions = new MemoryCacheEntryOptions
+                {
+                    AbsoluteExpiration = DateTime.Now.AddMinutes(5),
+                    Priority = CacheItemPriority.High,
+                    SlidingExpiration = TimeSpan.FromMinutes(2)
+                };
+                _memoryCache.Set(type, products, cacheExpiryOptions);
+            }
+
+            int totalRecord = products.Count();
+            var Products_EachPage = products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+
+            ViewData[Constants.PAGINATION_TOTALRECORD] = totalRecord;
+            ViewData[Constants.PAGINATION_PAGESIZE] = pageSize;
+            ViewData[Constants.PAGINATION_PAGE] = page;
+            ViewData[Constants.PAGINATION_LINK] = link;
+
             ViewData[Constants.TYPE_BANNER] = type;
             ViewData[Constants.TYPE_BANNER_ID] = id;
-            return View("Index", product);
+            return View("Index", Products_EachPage);
         }
         public async Task<IActionResult> Detail(int id)
         {

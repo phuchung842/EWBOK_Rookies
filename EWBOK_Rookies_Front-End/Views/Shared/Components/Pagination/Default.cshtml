@@ -1,0 +1,89 @@
+﻿
+
+@if (ViewBag.TotalPage > 1)
+{
+    int pageDisplay = (int)(ViewBag.MaxPage);
+    int totalPage = (int)(ViewBag.TotalPage);
+    int currentPage = (int)(ViewBag.Page);
+    var link = (string)ViewBag.Link;
+    link = link + "page";
+
+    //start tối thiểu 1, end cao nhất 12
+    var startPageIndex = Math.Max(1, currentPage - (pageDisplay / 2));
+    var endPageIndex = Math.Min(totalPage, currentPage + (pageDisplay / 2));
+
+    //Làm cho đủ 5 <li>
+    if (totalPage >= pageDisplay)
+    {
+        if (currentPage < (pageDisplay - pageDisplay / 2))
+        {
+            endPageIndex = ViewBag.MaxPage;
+        }
+        if (currentPage > totalPage - pageDisplay / 2)
+        {
+            startPageIndex = totalPage - (pageDisplay - 1);
+        }
+    }
+
+    <div class="aa-product-catg-pagination">
+        <nav>
+            <ul class="pagination">
+                @if (currentPage > ViewBag.First)
+                {
+                    <li>
+                        <a href="@link=@ViewBag.Prev" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="#" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+                    </li>
+                }
+                @if (totalPage > pageDisplay)
+                {
+                    if (currentPage - ((pageDisplay - pageDisplay / 2) - 1) > ViewBag.First)
+                    {
+                        <li><a href="@link=@ViewBag.First">@ViewBag.First</a></li>
+                        <li><a>...</a></li>
+                    }
+                }
+                @for (int i = startPageIndex; i <= endPageIndex; i++)
+                {
+                    if (currentPage == i)
+                    {
+                        <li class="active"><a href="@link=@i">@i</a></li>
+                    }
+                    else
+                    {
+                        <li><a href="@link=@i">@i</a></li>
+                    }
+                }
+                @if (totalPage > pageDisplay)
+                {
+                    if (currentPage + ((pageDisplay - pageDisplay / 2) - 1) < ViewBag.Last)
+                    {
+                        <li><a>...</a></li>
+                        <li><a href="@link=@ViewBag.Last">@ViewBag.Last</a></li>
+                    }
+                }
+                @if (currentPage < ViewBag.Last)
+                {
+                    <li>
+                        <a href="@link=@ViewBag.Next" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <a href="#" aria-label="Next">
+                            <span aria-hidden="true">&raquo;</span>
+                        </a>
+                    </li>
+                }
+            </ul>
+        </nav>
+    </div>
+}

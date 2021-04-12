@@ -7,6 +7,10 @@
     var id = Convert.ToInt16(ViewData[Constants.TYPE_BANNER_ID]);
     var type = ViewData[Constants.TYPE_BANNER].ToString();
     var backendUrl = Configuration.GetServiceUri("backend");
+    var totalRecord = Convert.ToInt32(ViewData[Constants.PAGINATION_TOTALRECORD]);
+    var page = Convert.ToInt32(ViewData[Constants.PAGINATION_PAGE]);
+    var pageSize = Convert.ToInt32(ViewData[Constants.PAGINATION_PAGESIZE]);
+    var link = ViewData[Constants.PAGINATION_LINK].ToString();
 }
 
 @await Component.InvokeAsync("HeaderBanner", new { id = id, type = type })
@@ -150,27 +154,7 @@
                         </div>
                         <!-- / quick view modal -->
                     </div>
-                    <div class="aa-product-catg-pagination">
-                        <nav>
-                            <ul class="pagination">
-                                <li>
-                                    <a href="#" aria-label="Previous">
-                                        <span aria-hidden="true">&laquo;</span>
-                                    </a>
-                                </li>
-                                <li><a href="#">1</a></li>
-                                <li><a href="#">2</a></li>
-                                <li><a href="#">3</a></li>
-                                <li><a href="#">4</a></li>
-                                <li><a href="#">5</a></li>
-                                <li>
-                                    <a href="#" aria-label="Next">
-                                        <span aria-hidden="true">&raquo;</span>
-                                    </a>
-                                </li>
-                            </ul>
-                        </nav>
-                    </div>
+                    @await Component.InvokeAsync("Pagination", new { totalRecord = totalRecord, page = page, pageSize = pageSize, link = link })
                 </div>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-4 col-md-pull-9">
