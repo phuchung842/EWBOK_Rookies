@@ -111,18 +111,16 @@ namespace EWBOK_Rookies_Back_End.Controllers
         }
 
         // DELETE: api/Carts/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteCart(string id)
+        [HttpDelete("{userid}/{productid}")]
+        public async Task<IActionResult> DeleteCart(string userid, int productid)
         {
-            var cart = await _context.Carts.FindAsync(id);
+            var cart = await _context.Carts.FirstOrDefaultAsync(x => x.ProductID == productid & x.UserID == userid);
             if (cart == null)
             {
                 return NotFound();
             }
-
             _context.Carts.Remove(cart);
             await _context.SaveChangesAsync();
-
             return NoContent();
         }
 

@@ -30,5 +30,13 @@ namespace EWBOK_Rookies_Front_End.Controllers
             await _cartClient.AddCart(cartitem);
             return Redirect(urlAnterior);
         }
+        public async Task<IActionResult> RemoveCart(int id)
+        {
+            string urlAnterior = Request.Headers["Referer"].ToString();
+            var claimIdentity = User.Identity as ClaimsIdentity;
+            string userid = claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            await _cartClient.RemoveCart(id, userid);
+            return Redirect(urlAnterior);
+        }
     }
 }

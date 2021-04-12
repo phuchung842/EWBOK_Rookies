@@ -8,5 +8,6 @@ namespace EWBOK_Rookies_Front_End.Services
     {
         Task<IList<CartVm>> GetCarts(string userid);
         Task<CartRequest> AddCart(CartRequest cartRequest);
+        Task<CartDeleteRequest> RemoveCart(int productid, string userid);
     }
 }

@@ -29,5 +29,11 @@ namespace EWBOK_Rookies_Front_End.Services
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<CartRequest>();
         }
+        public async Task<CartDeleteRequest> RemoveCart(int productid, string userid)
+        {
+            var response = await _httpClient.DeleteAsync($"api/Carts/{userid}/{productid}");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<CartDeleteRequest>();
+        }
     }
 }
