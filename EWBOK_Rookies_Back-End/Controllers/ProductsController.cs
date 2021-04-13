@@ -149,8 +149,8 @@ namespace EWBOK_Rookies_Back_End.Controllers
             return productvm;
         }
 
-        [HttpGet("{id}/{type}")]
-        public async Task<ActionResult<IList<ProductVm>>> GetProductByFilter(short id, string type)
+        [HttpGet("{id}/{page}/{pageSize}/{type}")]
+        public async Task<ActionResult<PaginationVm>> GetProductByFilter(short id, string type, int page, int pageSize)
         {
             var queryable = _context.Products.AsQueryable();
             if (type == Constants.TYPE_BANNER_BRAND.ToString())
@@ -159,6 +159,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 queryable = queryable.Where(x => x.MaterialID == id);
             else
                 queryable = queryable.Where(x => x.ProductCategoryID == id);
+            var totalRecord = queryable.Count();
             var product = await queryable.Select(x => new
             {
                 ID = x.ID,
@@ -188,7 +189,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 ProductCategoryName = x.ProductCategory.Name,
                 MaterialName = x.Material.Name,
                 Detail = x.Detail
-            }).ToListAsync();
+            }).Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
 
             var productvms = product.Select(x =>
               new ProductVm
@@ -221,8 +222,12 @@ namespace EWBOK_Rookies_Back_End.Controllers
                   MaterialName = x.MaterialName,
                   Detail = x.Detail
               }).ToList();
-
-            return productvms;
+            var pagination = new PaginationVm
+            {
+                productVms = productvms,
+                totalRecord = totalRecord
+            };
+            return pagination;
         }
 
         //// PUT: api/Products/5

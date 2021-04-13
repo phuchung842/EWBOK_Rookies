@@ -31,11 +31,11 @@ namespace EWBOK_Rookies_Front_End.Services
             return await reponse.Content.ReadAsAsync<ProductVm>();
         }
 
-        public async Task<IList<ProductVm>> GetProductByFilter(int id, string type)
+        public async Task<PaginationVm> GetProductByFilter(int id, string type, int page, int pageSize)
         {
-            var response = await _httpClient.GetAsync("api/Products/" + id.ToString() + "/" + type);
+            var response = await _httpClient.GetAsync($"api/Products/{id.ToString()}/{page.ToString()}/{pageSize.ToString()}/{type}");
             response.EnsureSuccessStatusCode();
-            return await response.Content.ReadAsAsync<IList<ProductVm>>();
+            return await response.Content.ReadAsAsync<PaginationVm>();
         }
     }
 }

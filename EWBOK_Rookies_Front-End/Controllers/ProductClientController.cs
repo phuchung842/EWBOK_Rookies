@@ -29,9 +29,9 @@ namespace EWBOK_Rookies_Front_End.Controllers
             var link = HttpContext.Request.Path.Value;
             link = link + $"?type={type}&";
 
-            if (!_memoryCache.TryGetValue(type, out IList<ProductVm> products))
+            if (!_memoryCache.TryGetValue(type + page.ToString(), out PaginationVm products))
             {
-                products = await _productClient.GetProductByFilter(id, type);
+                products = await _productClient.GetProductByFilter(id, type, page, pageSize);
                 var cacheExpiryOptions = new MemoryCacheEntryOptions
                 {
                     AbsoluteExpiration = DateTime.Now.AddMinutes(5),
@@ -41,8 +41,7 @@ namespace EWBOK_Rookies_Front_End.Controllers
                 _memoryCache.Set(type, products, cacheExpiryOptions);
             }
 
-            int totalRecord = products.Count();
-            var Products_EachPage = products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            int totalRecord = products.totalRecord;
 
             ViewData[Constants.PAGINATION_TOTALRECORD] = totalRecord;
             ViewData[Constants.PAGINATION_PAGESIZE] = pageSize;
@@ -51,7 +50,7 @@ namespace EWBOK_Rookies_Front_End.Controllers
 
             ViewData[Constants.TYPE_BANNER] = type;
             ViewData[Constants.TYPE_BANNER_ID] = id;
-            return View("Index", Products_EachPage);
+            return View("Index", products.productVms);
         }
         public async Task<IActionResult> Detail(int id)
         {
