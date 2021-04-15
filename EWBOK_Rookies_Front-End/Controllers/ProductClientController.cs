@@ -29,7 +29,7 @@ namespace EWBOK_Rookies_Front_End.Controllers
             var link = HttpContext.Request.Path.Value;
             link = link + $"?type={type}&";
 
-            if (!_memoryCache.TryGetValue(type + page.ToString(), out PaginationVm products))
+            if (!_memoryCache.TryGetValue(type + id.ToString() + page.ToString(), out PaginationVm products))
             {
                 products = await _productClient.GetProductByFilter(id, type, page, pageSize);
                 var cacheExpiryOptions = new MemoryCacheEntryOptions
