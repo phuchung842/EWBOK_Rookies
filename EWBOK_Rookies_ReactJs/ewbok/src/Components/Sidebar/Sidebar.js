@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Slide from './Slide';
 
 const Sidebar = () => {
-	const [slidebar, setsidebar] = useState([
-		{ name: 'Dashboard', value: 'active', link: '/dashboard', icon: 'dashboard' },
-		{ name: 'Product', value: '', link: '/product', icon: 'library_books' },
-	]);
+	const [slidebar, setsidebar] = useState([]);
+	useEffect(() => {
+		fetch('/dataSlide.json')
+			.then((response) => response.json())
+			.then((response) => {
+				console.log(response);
+				setsidebar(response);
+			});
+	}, []);
 	const changeStatusSlidebar = (name) => {
 		setsidebar([
 			...slidebar.map((slide) => {
@@ -20,11 +25,6 @@ const Sidebar = () => {
 				return slide;
 			}),
 		]);
-		// setsidebar([
-		// 	...slidebar.map((slide) => {
-		// 		return slide;
-		// 	}),
-		// ]);
 	};
 
 	return (

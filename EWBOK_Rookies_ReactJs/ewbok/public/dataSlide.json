@@ -1,0 +1,14 @@
+[
+    { 
+        "name": "Dashboard", 
+        "value": "active", "link": 
+        "/dashboard", 
+        "icon": "dashboard" 
+    },
+	{ 
+        "name": "Product", 
+        "value": "", 
+        "link": "/product", 
+        "icon": "library_books" 
+    }
+]
