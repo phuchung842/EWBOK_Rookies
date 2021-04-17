@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EWBOK_Rookies_Back-End", "E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "Common\Common.csproj", "{96E06138-FE60-48B4-A068-FA49190A9BDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EWBOK_Rookies_Back-End.Test", "EWBOK_Rookies_Back-End.Test\EWBOK_Rookies_Back-End.Test.csproj", "{89CC2251-B8A3-48F8-802F-65EF0412754C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EWBOK_Rookies_Back-End.Test", "EWBOK_Rookies_Back-End.Test\EWBOK_Rookies_Back-End.Test.csproj", "{89CC2251-B8A3-48F8-802F-65EF0412754C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
