@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from '../Components/Table/Table';
 
-const Product = () => {
+const Products = () => {
 	return <Table />;
 };
-export default Product;
+export default Products;

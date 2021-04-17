@@ -1,7 +1,7 @@
 import React from 'react';
 import Table from '../Components/Table/Table.js';
 
-const Materials = () => {
+const ProductCategories = () => {
 	return <Table />;
 };
-export default Materials;
+export default ProductCategories;

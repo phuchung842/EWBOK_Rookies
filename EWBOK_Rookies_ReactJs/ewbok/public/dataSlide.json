@@ -1,14 +1,44 @@
 [
     { 
         "name": "Dashboard", 
-        "value": "active", "link": 
-        "/dashboard", 
+        "value": "active", 
+        "link": "/dashboard", 
         "icon": "dashboard" 
     },
 	{ 
-        "name": "Product", 
+        "name": "Products", 
         "value": "", 
-        "link": "/product", 
-        "icon": "library_books" 
+        "link": "/products", 
+        "icon": "inventory2" 
+    },
+    { 
+        "name": "ProductCategories", 
+        "value": "", 
+        "link": "/productcategories", 
+        "icon": "category" 
+    },
+    { 
+        "name": "Brands", 
+        "value": "", 
+        "link": "/brands", 
+        "icon": "ballot" 
+    },
+    { 
+        "name": "Materials", 
+        "value": "", 
+        "link": "/materials", 
+        "icon": "extension" 
+    },
+    { 
+        "name": "Comments", 
+        "value": "", 
+        "link": "/comments", 
+        "icon": "comment" 
+    },
+    { 
+        "name": "Ratings", 
+        "value": "", 
+        "link": "/ratings", 
+        "icon": "starhalf" 
     }
 ]
