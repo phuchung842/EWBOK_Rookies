@@ -12,20 +12,20 @@ const Sidebar = () => {
 				setsidebar(response);
 			});
 	}, []);
-	const changeStatusSlidebar = (name) => {
-		setsidebar([
-			...slidebar.map((slide) => {
-				slide.value = '';
-				return slide;
-			}),
-		]);
-		setsidebar([
-			...slidebar.map((slide) => {
-				if (slide.name === name) slide.value = 'active';
-				return slide;
-			}),
-		]);
-	};
+	// const changeStatusSlidebar = (name) => {
+	// 	setsidebar([
+	// 		...slidebar.map((slide) => {
+	// 			slide.value = '';
+	// 			return slide;
+	// 		}),
+	// 	]);
+	// 	setsidebar([
+	// 		...slidebar.map((slide) => {
+	// 			if (slide.name === name) slide.value = 'active';
+	// 			return slide;
+	// 		}),
+	// 	]);
+	// };
 
 	return (
 		<div
@@ -41,11 +41,11 @@ const Sidebar = () => {
 			</div>
 			<div className="sidebar-wrapper">
 				<ul className="nav">
-					<Slide slidebar={slidebar} changestatusslide={changeStatusSlidebar} />
+					<Slide slidebar={slidebar} />
 				</ul>
 			</div>
 		</div>
 	);
 };
-
+// changestatusslide = { changeStatusSlidebar };
 export default Sidebar;

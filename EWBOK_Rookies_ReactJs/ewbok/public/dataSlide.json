@@ -1,43 +1,43 @@
 [
     { 
         "name": "Dashboard", 
-        "value": "active", 
-        "link": "/dashboard", 
+        "value": "true", 
+        "link": "/", 
         "icon": "dashboard" 
     },
 	{ 
         "name": "Products", 
-        "value": "", 
+        "value": "false", 
         "link": "/products", 
         "icon": "inventory2" 
     },
     { 
         "name": "ProductCategories", 
-        "value": "", 
+        "value": "false", 
         "link": "/productcategories", 
         "icon": "category" 
     },
     { 
         "name": "Brands", 
-        "value": "", 
+        "value": "false", 
         "link": "/brands", 
         "icon": "ballot" 
     },
     { 
         "name": "Materials", 
-        "value": "", 
+        "value": "false", 
         "link": "/materials", 
         "icon": "extension" 
     },
     { 
         "name": "Comments", 
-        "value": "", 
+        "value": "false", 
         "link": "/comments", 
         "icon": "comment" 
     },
     { 
         "name": "Ratings", 
-        "value": "", 
+        "value": "false", 
         "link": "/ratings", 
         "icon": "starhalf" 
     }
