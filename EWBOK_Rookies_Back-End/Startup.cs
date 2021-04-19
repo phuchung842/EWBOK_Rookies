@@ -21,6 +21,8 @@ namespace EWBOK_Rookies_Back_End
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -34,7 +36,8 @@ namespace EWBOK_Rookies_Back_End
             var clientUrls = new Dictionary<string, string>
             {
                 ["Mvc"] = Configuration["ClientUrl:Mvc"],
-                ["Swagger"] = Configuration["ClientUrl:Swagger"]
+                ["Swagger"] = Configuration["ClientUrl:Swagger"],
+                ["React"] = Configuration["ClientUrl:React"]
             };
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -76,6 +79,16 @@ namespace EWBOK_Rookies_Back_End
                 });
             });
 
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins(clientUrls["React"])
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
             services.AddControllersWithViews();
 
             services.AddSwaggerGen(c =>
@@ -129,7 +142,7 @@ namespace EWBOK_Rookies_Back_End
             app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
-
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {

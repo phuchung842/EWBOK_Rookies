@@ -24,9 +24,18 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/ProductCategories
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ProductCategory>>> GetProductCategories()
+        public async Task<ActionResult<IEnumerable<ProductCategoryVm>>> GetProductCategories()
         {
-            return await _context.ProductCategories.ToListAsync();
+            var productcategoryvm = await _context.ProductCategories.Select(x => new ProductCategoryVm
+            {
+                ID = x.ID,
+                Name = x.Name,
+                MetaTitle = x.MetaTitle,
+                DisplayOrder = x.DisplayOrder,
+                Status = x.Status,
+                ShowOnHome = x.ShowOnHome
+            }).ToListAsync();
+            return productcategoryvm;
         }
 
         // GET: api/ProductCategories/5
