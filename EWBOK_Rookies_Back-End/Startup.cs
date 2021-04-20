@@ -89,7 +89,7 @@ namespace EWBOK_Rookies_Back_End
                     .AllowAnyMethod();
                 });
             });
-            services.AddControllersWithViews();
+            services.AddControllersWithViews().AddNewtonsoftJson();
 
             services.AddSwaggerGen(c =>
             {
