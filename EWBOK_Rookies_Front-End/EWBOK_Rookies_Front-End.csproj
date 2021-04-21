@@ -3,11 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <RootNamespace>EWBOK_Rookies_Front_End</RootNamespace>
+    <UserSecretsId>f7d30711-da05-49db-8f5a-463f97ce9e68</UserSecretsId>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Content Remove="bundleconfig.json" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="BuildBundlerMinifier" Version="3.2.449" />
@@ -23,7 +20,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="bundleconfig.json" />
     <None Include="wwwroot\customer\.sass-cache\3fcd99d0c8b91f50f06b0715ce73ad297a6fc258\_base.scssc" />
     <None Include="wwwroot\customer\.sass-cache\3fcd99d0c8b91f50f06b0715ce73ad297a6fc258\_mixins.scssc" />
     <None Include="wwwroot\customer\.sass-cache\3fcd99d0c8b91f50f06b0715ce73ad297a6fc258\_variables.scssc" />

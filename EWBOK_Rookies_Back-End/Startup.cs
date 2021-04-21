@@ -47,6 +47,18 @@ namespace EWBOK_Rookies_Back_End
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(MyAllowSpecificOrigins,
+                builder =>
+                {
+                    builder.WithOrigins(clientUrls["Mvc"], clientUrls["React"], clientUrls["Swagger"])
+                        .AllowAnyHeader()
+                        .AllowAnyMethod();
+                });
+            });
+
             services.AddControllersWithViews();
 
             services.AddIdentityServer(options =>

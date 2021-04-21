@@ -12,11 +12,13 @@ using EWBOK_Rookies_Back_End.Service;
 using System.Net.Http.Headers;
 using System.IO;
 using Common;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class ProductsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

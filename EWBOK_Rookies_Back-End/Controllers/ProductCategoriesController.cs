@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
 using SharedVm;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class ProductCategoriesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;

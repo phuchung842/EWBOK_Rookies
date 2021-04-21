@@ -14,6 +14,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class BrandsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
