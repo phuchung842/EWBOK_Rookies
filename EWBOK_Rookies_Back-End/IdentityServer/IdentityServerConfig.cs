@@ -65,13 +65,13 @@ namespace EWBOK_Rookies_Back_End.IdentityServer
                     RequireConsent = false,
                     RequirePkce = true,
 
-                    //RedirectUris =           { $"{clientUrls["Swagger"]}/swagger/oauth2-redirect.html" },
-                    //PostLogoutRedirectUris = { $"{clientUrls["Swagger"]}/swagger/oauth2-redirect.html" },
-                    //AllowedCorsOrigins =     { $"{clientUrls["Swagger"]}" },
+                    RedirectUris =           { $"{clientUrls["Swagger"]}/swagger/oauth2-redirect.html" },
+                    PostLogoutRedirectUris = { $"{clientUrls["Swagger"]}/swagger/oauth2-redirect.html" },
+                    AllowedCorsOrigins =     { $"{clientUrls["Swagger"]}" },
                     
-                    RedirectUris =           { $"https://ewbok-rookies.azurewebsites.net/swagger/oauth2-redirect.html" },
-                    PostLogoutRedirectUris = {$"https://ewbok-rookies.azurewebsites.net/swagger/oauth2-redirect.html" },
-                    AllowedCorsOrigins =     { $"https://ewbok-rookies.azurewebsites.net" },
+                    //RedirectUris =           { $"https://ewbok-rookies.azurewebsites.net/swagger/oauth2-redirect.html" },
+                    //PostLogoutRedirectUris = {$"https://ewbok-rookies.azurewebsites.net/swagger/oauth2-redirect.html" },
+                    //AllowedCorsOrigins =     { $"https://ewbok-rookies.azurewebsites.net" },
 
                     AllowedScopes = new List<string>
                     {

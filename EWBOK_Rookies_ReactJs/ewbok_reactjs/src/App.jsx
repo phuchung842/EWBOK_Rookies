@@ -1,10 +1,10 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import SlidebarMennu from './Components/SlidebarMenu';
-import Header from './Components/Header';
-import Contain from './Containers/Contain';
-import Footer from './Components/Footer';
+import SlidebarMennu from './Components/SlidebaeMenu/SlidebarMenu';
+import Header from './Components/Header/Header';
+import Content from './Containers/Content';
+import Footer from './Components/Footer/Footer';
 
 const App = () => {
 	return (
@@ -12,7 +12,7 @@ const App = () => {
 			<section>
 				<SlidebarMennu />
 				<Header />
-				<Contain />
+				<Content />
 				<Footer />
 			</section>
 		</BrowserRouter>
