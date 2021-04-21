@@ -1,0 +1,44 @@
+[
+    { 
+        "name": "Dashboard", 
+        "value": "true", 
+        "link": "/", 
+        "icon": "fa fa-tachometer" 
+    },
+	{ 
+        "name": "Products", 
+        "value": "false", 
+        "link": "/products", 
+        "icon": "fa fa-archive" 
+    },
+    { 
+        "name": "ProductCategories", 
+        "value": "false", 
+        "link": "/productcategories", 
+        "icon": "fa fa-th-large" 
+    },
+    { 
+        "name": "Brands", 
+        "value": "false", 
+        "link": "/brands", 
+        "icon": "fa fa-sitemap" 
+    },
+    { 
+        "name": "Materials", 
+        "value": "false", 
+        "link": "/materials", 
+        "icon": "fa fa-cubes" 
+    },
+    { 
+        "name": "Comments", 
+        "value": "false", 
+        "link": "/comments", 
+        "icon": "fa fa-comment" 
+    },
+    { 
+        "name": "Ratings", 
+        "value": "false", 
+        "link": "/ratings", 
+        "icon": "fa fa-star" 
+    }
+]
