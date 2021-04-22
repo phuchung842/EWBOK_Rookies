@@ -53,7 +53,7 @@ const SlidebarMennu = () => {
 
 			<div className="logo-icon text-center">
 				<a href="index.html" title="logo">
-					<img src="assets/images/logo.png" alt="logo-icon" />{' '}
+					<img src="../assets/images/logo.png" alt="logo-icon" />{' '}
 				</a>
 			</div>
 

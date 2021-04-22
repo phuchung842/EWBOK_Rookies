@@ -1,15 +1,22 @@
+import { Route, Link } from 'react-router-dom';
+
 const ProductTable = (props) => {
 	return (
 		<div class="main-content">
 			<div class="container-fluid content-top-gap">
 				<div class="welcome-msg pt-3 pb-4">
 					<h1>
-						<span class="text-primary">Products</span>
+						<span class="text-primary ">Products </span>
+						<br />
+						<br />
+						<Link to="/products/add" type="submit" class="btn btn-primary btn-style ">
+							Create
+						</Link>
 					</h1>
 				</div>
 				<div class="card shadow mb-4">
 					<div class="card-header py-3 bg-xingcheng-dark border-bottom-xingcheng-light">
-						<h6 class="m-0 font-weight-bold text-xingcheng-light">Users Information</h6>
+						<h6 class="m-0 font-weight-bold text-xingcheng-light">Products Information</h6>
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">

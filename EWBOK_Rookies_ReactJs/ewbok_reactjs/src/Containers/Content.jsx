@@ -6,6 +6,7 @@ import Materials from './Materials';
 import Comments from './Comments';
 import Ratings from './Ratings';
 import Products from './Products';
+import ProductForm from '../Components/Forms/ProductForm';
 
 const Content = () => {
 	return (
@@ -17,6 +18,7 @@ const Content = () => {
 			<Route exact path="/materials" component={Materials} />
 			<Route exact path="/comments" component={Comments} />
 			<Route exact path="/ratings" component={Ratings} />
+			<Route exact path="/products/add" component={ProductForm} />
 		</Switch>
 	);
 };
