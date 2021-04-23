@@ -59,7 +59,17 @@ const ProductTable = (props) => {
 												<td>{product.quantity}</td>
 												<td className="text-primary">{product.price}</td>
 												<td className="text-primary">{product.promotionPrice}</td>
-												<td>test</td>
+												<td>
+													<Link class="link-property" to="/product/edit/:id">
+														<i class="fa fa-edit" style="font-size:20px; "></i>
+													</Link>
+													<Link class="link-property" href="/Admin/Product/Detail/@item.ID">
+														<i class="fa fa-newspaper-o" style="font-size:20px;"></i>
+													</Link>
+													<Link class="link-property" href="/Admin/Product/Delete/@item.ID">
+														<i class="fa fa-close" style="font-size:20px"></i>
+													</Link>
+												</td>
 											</tr>
 										);
 									})}

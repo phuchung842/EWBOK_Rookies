@@ -8,7 +8,21 @@ import Ratings from './Ratings';
 import Products from './Products';
 import ProductForm from '../Components/Forms/ProductForm';
 
+import routes from '../Constants/routes';
+
 const Content = () => {
+	const showContent = (routes) => {
+		var result = null;
+		console.log(routes.length);
+		if (routes.length > 0) {
+			result = routes.map((route, index) => {
+				return <Route key={index} path={route.path} exact={route.ezact} component={route.main} />;
+			});
+		}
+		console.log(result);
+		return <Switch>{result}</Switch>;
+	};
+	console.log(routes);
 	return (
 		<Switch>
 			<Route exact path="/" component={Dashboard} />
@@ -19,7 +33,11 @@ const Content = () => {
 			<Route exact path="/comments" component={Comments} />
 			<Route exact path="/ratings" component={Ratings} />
 			<Route exact path="/products/add" component={ProductForm} />
+			<Route exact path="/products/edit/:id">
+				<ProductForm />
+			</Route>
 		</Switch>
+		// <>{showContent(routes)}</>
 	);
 };
 export default Content;
