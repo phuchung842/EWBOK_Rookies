@@ -142,12 +142,14 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 PublishYear = product.PublishYear,
                 BrandName = product.Brand.Name,
                 BrandID = product.BrandID,
+                ProductCategoryID = product.ProductCategoryID,
+                MaterialID = product.MaterialID,
                 ProductCategoryName = product.ProductCategory.Name,
                 MaterialName = product.Material.Name,
                 StarRating = product.StarRating,
                 Detail = product.Detail
             };
-            
+
             return productvm;
         }
 
@@ -235,7 +237,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         //// PUT: api/Products/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, [FromForm] ProductUpdateRequest productUpdateRequest)
+        public async Task<IActionResult> PutProduct(int id, ProductUpdateRequest productUpdateRequest)
         {
             var product = await _context.Products.FirstOrDefaultAsync(x => x.ID == id);
 

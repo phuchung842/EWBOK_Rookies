@@ -16,7 +16,7 @@ const Content = () => {
 		console.log(routes.length);
 		if (routes.length > 0) {
 			result = routes.map((route, index) => {
-				return <Route key={index} path={route.path} exact={route.ezact} component={route.main} />;
+				return <Route key={index} path={route.path} exact={route.exact} component={route.main} />;
 			});
 		}
 		console.log(result);
@@ -24,20 +24,20 @@ const Content = () => {
 	};
 	console.log(routes);
 	return (
-		<Switch>
-			<Route exact path="/" component={Dashboard} />
-			<Route exact path="/products" component={Products} />
-			<Route exact path="/productcategories" component={ProductCategories} />
-			<Route exact path="/brands" component={Brands} />
-			<Route exact path="/materials" component={Materials} />
-			<Route exact path="/comments" component={Comments} />
-			<Route exact path="/ratings" component={Ratings} />
-			<Route exact path="/products/add" component={ProductForm} />
-			<Route exact path="/products/edit/:id">
-				<ProductForm />
-			</Route>
-		</Switch>
-		// <>{showContent(routes)}</>
+		// <Switch>
+		// 	<Route exact path="/" component={Dashboard} />
+		// 	<Route exact path="/products" component={Products} />
+		// 	<Route exact path="/productcategories" component={ProductCategories} />
+		// 	<Route exact path="/brands" component={Brands} />
+		// 	<Route exact path="/materials" component={Materials} />
+		// 	<Route exact path="/comments" component={Comments} />
+		// 	<Route exact path="/ratings" component={Ratings} />
+		// 	<Route exact path="/products/add" component={ProductForm} />
+		// 	<Route exact path="/products/edit/:id">
+		// 		<ProductForm />
+		// 	</Route>
+		// </Switch>
+		<>{showContent(routes)}</>
 	);
 };
 export default Content;

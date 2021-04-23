@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Redirect, useHistory } from 'react-router-dom';
+import { Redirect, useHistory, useParams } from 'react-router-dom';
 import callApi from '../../utils/apiCaller';
 
-const ProductForm = () => {
+const ProductForm = (props) => {
+	// const { id } = useParams();
 	const [product, setproduct] = useState({
 		name: '',
 		quantity: '',
@@ -24,17 +25,29 @@ const ProductForm = () => {
 		callApi('brands', 'GET', null).then((res) => {
 			setbrands(res.data);
 		});
-	}, []);
+	}, [callApi, setbrands]);
 	useEffect(() => {
 		callApi('materials', 'GET', null).then((res) => {
 			setmaterials(res.data);
 		});
-	}, []);
+	}, [callApi, setmaterials]);
 	useEffect(() => {
 		callApi('productcategories', 'GET', null).then((res) => {
 			setproductcategories(res.data);
 		});
-	}, []);
+	}, [callApi, setproductcategories]);
+	useEffect(() => {
+		// console.log(id);
+		var { match } = props;
+		if (match) {
+			var id = match.params.id;
+			callApi(`products/${id}`, 'GET', null).then((res) => {
+				var data = res.data;
+				setproduct(data);
+				console.log(product);
+			});
+		}
+	}, [callApi, setproduct]);
 	const onChange = (e) => {
 		var target = e.target;
 		var name = target.name;
@@ -119,12 +132,14 @@ const ProductForm = () => {
 										<select
 											name="brandid"
 											onChange={onChange}
-											value={product.brandid}
+											value={product.brandID}
 											id="inputBrand"
 											class="form-control input-style"
 										>
 											{brands.map((brand) => {
-												if (product.brandid === brand.id) {
+												if (product.brandID == brand.id) {
+													console.log(brand);
+													console.log(product.brandID, brand.id);
 													return (
 														<option selected value={brand.id}>
 															{brand.name}
@@ -143,17 +158,13 @@ const ProductForm = () => {
 										<select
 											name="materialid"
 											onChange={onChange}
-											value={product.materialid}
+											value={product.materialID}
 											id="inputMaterial"
 											class="form-control input-style"
 										>
 											{materials.map((material) => {
-												if (product.materialid === material.id) {
-													return (
-														<option selected value={material.id}>
-															{material.name}
-														</option>
-													);
+												if (product.materialID === material.id) {
+													return <option defaultValue={material.id}>{material.name}</option>;
 												} else {
 													return <option value={material.id}>{material.name}</option>;
 												}
@@ -166,18 +177,15 @@ const ProductForm = () => {
 										</label>
 										<select
 											name="productcategoryid"
-											value={product.productcategoryid}
+											value={product.productcategoryID}
 											onChange={onChange}
 											id="inputProductCategory"
 											class="form-control input-style"
 										>
 											{productcategories.map((procate) => {
-												if (product.productcategoryid == procate.id) {
-													return (
-														<option value={procate.id} selected>
-															{procate.name}
-														</option>
-													);
+												if (product.productcategoryID == procate.id) {
+													// alert(procate.name);
+													return <option defaultValue={procate.id}>{procate.name}</option>;
 												} else {
 													return <option value={procate.id}>{procate.name}</option>;
 												}

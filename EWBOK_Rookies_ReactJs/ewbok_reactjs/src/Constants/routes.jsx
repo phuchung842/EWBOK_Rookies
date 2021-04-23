@@ -49,5 +49,10 @@ const routes = [
 		exact: true,
 		main: () => <ProductForm />,
 	},
+	{
+		path: '/products/edit/:id',
+		exact: true,
+		main: ({ match }) => <ProductForm match={match} />,
+	},
 ];
 export default routes;

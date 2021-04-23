@@ -1,6 +1,18 @@
-import { Route, Link } from 'react-router-dom';
+import { useEffect } from 'react';
+import { Route, Link, useParams } from 'react-router-dom';
+import callApi from '../../utils/apiCaller';
 
 const ProductTable = (props) => {
+	const styleicon = {
+		fontSize: '20px',
+		margin: '3px',
+	};
+
+	const onDelete = (id) => {
+		if (window.confirm('Are you sure delete this item ?')) {
+			props.onDelete(id);
+		}
+	};
 	return (
 		<div class="main-content">
 			<div class="container-fluid content-top-gap">
@@ -60,15 +72,19 @@ const ProductTable = (props) => {
 												<td className="text-primary">{product.price}</td>
 												<td className="text-primary">{product.promotionPrice}</td>
 												<td>
-													<Link class="link-property" to="/product/edit/:id">
-														<i class="fa fa-edit" style="font-size:20px; "></i>
+													<Link to={`/products/edit/${product.id}`} class="link-property">
+														<i class="fa fa-edit" style={styleicon}></i>
 													</Link>
-													<Link class="link-property" href="/Admin/Product/Detail/@item.ID">
-														<i class="fa fa-newspaper-o" style="font-size:20px;"></i>
-													</Link>
-													<Link class="link-property" href="/Admin/Product/Delete/@item.ID">
-														<i class="fa fa-close" style="font-size:20px"></i>
-													</Link>
+													<a href="#" class="link-property" to="/product/detail/:id">
+														<i class="fa fa-newspaper-o" style={styleicon}></i>
+													</a>
+													<a
+														href="#"
+														class="link-property"
+														onClick={() => onDelete(product.id)}
+													>
+														<i class="fa fa-close" style={styleicon}></i>
+													</a>
 												</td>
 											</tr>
 										);
