@@ -9,7 +9,6 @@ const Products = () => {
 			setproduct(res.data);
 		});
 	}, []);
-	console.log(products);
 	return <ProductTable products={products} />;
 };
 export default Products;

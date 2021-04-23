@@ -314,7 +314,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         //// POST: api/Products
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult> PostProduct([FromForm] ProductCreateRequest productCreateRequest)
+        public async Task<ActionResult> PostProduct(ProductCreateRequest productCreateRequest)
         {
             var product = new Product
             {
