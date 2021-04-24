@@ -1,12 +1,4 @@
 import { Route, Switch } from 'react-router-dom';
-import Dashboard from './Dashboard';
-import ProductCategories from './ProductCategories';
-import Brands from './Brands';
-import Materials from './Materials';
-import Comments from './Comments';
-import Ratings from './Ratings';
-import Products from './Products';
-import ProductForm from '../Components/Forms/ProductForm';
 
 import routes from '../Constants/routes';
 

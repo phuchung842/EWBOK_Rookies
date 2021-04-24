@@ -1,4 +1,3 @@
-import react from 'react';
 import Dashboard from '../Containers/Dashboard';
 import ProductCategories from '../Containers/ProductCategories';
 import Brands from '../Containers/Brands';
@@ -7,12 +6,18 @@ import Comments from '../Containers/Comments';
 import Ratings from '../Containers/Ratings';
 import Products from '../Containers/Products';
 import ProductForm from '../Components/Forms/ProductForm';
+import Users from '../Containers/Users';
 
 const routes = [
 	{
 		path: '/',
 		exact: true,
 		main: () => <Dashboard />,
+	},
+	{
+		path: '/users',
+		exact: true,
+		main: () => <Users />,
 	},
 	{
 		path: '/productcategories',

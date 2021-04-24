@@ -27,9 +27,23 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Comments
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
+        public async Task<ActionResult<IEnumerable<CommentVm>>> GetComments()
         {
-            return await _context.Comments.ToListAsync();
+            var comments=await _context.Comments
+                .Include(x=>x.Product)
+                .Include(x=>x.User)
+                .ToListAsync();
+            var commentvm = comments.Select(x =>
+              new CommentVm
+              {
+                  UserName = x.User.UserName,
+                  UserID=x.UserID,
+                  ProductName = x.Product.Name,
+                  ProductID=x.ProductID,
+                  Content = x.Content,
+                  CreatedDate = x.CreatedDate
+              }).ToList();
+            return commentvm;
         }
 
         // GET: api/Comments/5

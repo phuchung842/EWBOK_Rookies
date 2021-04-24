@@ -5,6 +5,12 @@
         "link": "/", 
         "icon": "fa fa-tachometer" 
     },
+    { 
+        "name": "Users", 
+        "value": "false", 
+        "link": "/users", 
+        "icon": "fa fa-users" 
+    },
 	{ 
         "name": "Products", 
         "value": "false", 

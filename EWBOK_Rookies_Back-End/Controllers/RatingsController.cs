@@ -25,9 +25,23 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Ratings
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Rating>>> GetRatings()
+        public async Task<ActionResult<IEnumerable<RatingVm>>> GetRatings()
         {
-            return await _context.Ratings.ToListAsync();
+            var ratings = await _context.Ratings
+                .Include(x => x.Product)
+                .Include(x => x.User)
+                .ToListAsync();
+            var ratingvm = ratings.Select(x =>
+              new RatingVm
+              {
+                  ProductID = x.ProductID,
+                  UserID = x.UserID,
+                  ProductName = x.Product.Name,
+                  Username = x.User.UserName,
+                  Star = x.Star,
+                  Status = x.Status
+              }).ToList();
+            return ratingvm;
         }
 
         // GET: api/Ratings/5
@@ -115,10 +129,10 @@ namespace EWBOK_Rookies_Back_End.Controllers
         }
 
         // DELETE: api/Ratings/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteRating(string id)
+        [HttpDelete("{userid}/{productid}")]
+        public async Task<IActionResult> DeleteRating(string userid, int productid)
         {
-            var rating = await _context.Ratings.FindAsync(id);
+            var rating = await _context.Ratings.FirstOrDefaultAsync(x => x.UserID == userid && x.ProductID == productid);
             if (rating == null)
             {
                 return NotFound();

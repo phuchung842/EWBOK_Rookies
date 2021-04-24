@@ -10,6 +10,17 @@ const ProductCategories = () => {
 		});
 	}, []);
 	console.log(productcategories);
-	return <ProductCategoryTable productcategories={productcategories} />;
+	const removeViewItem = (productcategories, itemid) => {
+		return productcategories.filter((item) => item.id !== itemid);
+	};
+	const onDelete = (id) => {
+		callApi(`productcategories/${id}`, 'DELETE', null).then((res) => {
+			console.log(res);
+			if (res.status >= 200 && res.status < 300) {
+				setproductcategories(removeViewItem(productcategories, id));
+			}
+		});
+	};
+	return <ProductCategoryTable productcategories={productcategories} onDelete={onDelete} />;
 };
 export default ProductCategories;

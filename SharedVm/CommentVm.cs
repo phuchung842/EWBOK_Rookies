@@ -20,6 +20,8 @@ namespace SharedVm
 
         public string UserName { get; set; }
 
+        public string ProductName { get; set; }
+
         public string UserImage { get; set; }
     }
 }

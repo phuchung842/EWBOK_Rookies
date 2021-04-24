@@ -1,4 +1,4 @@
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import * as Config from '../Constants/Config';
 
 export default function callApi(endpoint, method = 'GET', body, header = null) {
