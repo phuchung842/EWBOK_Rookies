@@ -28,7 +28,7 @@ const Header = () => {
 										<li>
 											<a href="#" class="grid">
 												<div class="user_img">
-													<img src="../assets/images/avatar1.jpg" alt="" />
+													<img src="/assets/images/avatar1.jpg" alt="" />
 												</div>
 												<div class="notification_desc">
 													<p>Johnson purchased template</p>
@@ -39,7 +39,7 @@ const Header = () => {
 										<li class="odd">
 											<a href="#" class="grid">
 												<div class="user_img">
-													<img src="../assets/images/avatar2.jpg" alt="" />
+													<img src="/assets/images/avatar2.jpg" alt="" />
 												</div>
 												<div class="notification_desc">
 													<p>New customer registered </p>
@@ -50,7 +50,7 @@ const Header = () => {
 										<li>
 											<a href="#" class="grid">
 												<div class="user_img">
-													<img src="../assets/images/avatar3.jpg" alt="" />
+													<img src="/assets/images/avatar3.jpg" alt="" />
 												</div>
 												<div class="notification_desc">
 													<p>Lorem ipsum dolor sit amet </p>
@@ -81,7 +81,7 @@ const Header = () => {
 										<li>
 											<a href="#" class="grid">
 												<div class="user_img">
-													<img src="../assets/images/avatar1.jpg" alt="" />
+													<img src="/assets/images/avatar1.jpg" alt="" />
 												</div>
 												<div class="notification_desc">
 													<p>Johnson purchased template</p>
@@ -92,7 +92,7 @@ const Header = () => {
 										<li class="odd">
 											<a href="#" class="grid">
 												<div class="user_img">
-													<img src="../assets/images/avatar2.jpg" alt="" />
+													<img src="/assets/images/avatar2.jpg" alt="" />
 												</div>
 												<div class="notification_desc">
 													<p>New customer registered </p>
@@ -103,7 +103,7 @@ const Header = () => {
 										<li>
 											<a href="#" class="grid">
 												<div class="user_img">
-													<img src="../assets/images/avatar3.jpg" alt="" />
+													<img src="/assets/images/avatar3.jpg" alt="" />
 												</div>
 												<div class="notification_desc">
 													<p>Lorem ipsum dolor sit amet </p>
@@ -114,7 +114,7 @@ const Header = () => {
 										<li>
 											<a href="#" class="grid">
 												<div class="user_img">
-													<img src="../assets/images/avatar1.jpg" alt="" />
+													<img src="/assets/images/avatar1.jpg" alt="" />
 												</div>
 												<div class="notification_desc">
 													<p>Johnson purchased template</p>
@@ -145,7 +145,7 @@ const Header = () => {
 										aria-expanded="false"
 									>
 										<div class="profile_img">
-											<img src="../assets/images/profileimg.jpg" class="rounded-circle" alt="" />
+											<img src="/assets/images/profileimg.jpg" class="rounded-circle" alt="" />
 											<div class="user-active">
 												<span></span>
 											</div>

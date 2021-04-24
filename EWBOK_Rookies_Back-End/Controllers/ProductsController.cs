@@ -32,6 +32,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Products
         [HttpGet]
+        //[AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ProductVm>>> GetProducts()
         {
             var product = await _context.Products.Select(x => new
@@ -104,6 +105,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
+        //[AllowAnonymous]
         public async Task<ActionResult<ProductVm>> GetProduct(int id)
         {
             var product = await _context.Products
@@ -154,6 +156,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         }
 
         [HttpGet("{id}/{page}/{pageSize}/{type}")]
+        //[AllowAnonymous]
         public async Task<ActionResult<PaginationVm>> GetProductByFilter(short id, string type, int page, int pageSize)
         {
             var queryable = _context.Products.AsQueryable();
@@ -236,8 +239,10 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         //// PUT: api/Products/5
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
+        
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutProduct(int id, ProductUpdateRequest productUpdateRequest)
+        //[AllowAnonymous]
+        public async Task<IActionResult> PutProduct(int id,[FromForm] ProductUpdateRequest productUpdateRequest)
         {
             var product = await _context.Products.FirstOrDefaultAsync(x => x.ID == id);
 
@@ -257,6 +262,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
             product.BrandID = productUpdateRequest.BrandID;
             product.ProductCategoryID = productUpdateRequest.ProductCategoryID;
             product.MaterialID = productUpdateRequest.MaterialID;
+            product.PublishYear = productUpdateRequest.PublishYear;
             product.Status = productUpdateRequest.Status;
 
             if (productUpdateRequest.Image1 != null)
@@ -316,6 +322,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         //// POST: api/Products
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        //[AllowAnonymous]
         public async Task<ActionResult> PostProduct(ProductCreateRequest productCreateRequest)
         {
             var product = new Product
@@ -332,6 +339,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
                 BrandID = productCreateRequest.BrandID,
                 ProductCategoryID = productCreateRequest.ProductCategoryID,
                 MaterialID = productCreateRequest.MaterialID,
+                PublishYear = productCreateRequest.PublishYear,
                 Status = productCreateRequest.Status
             };
             if (productCreateRequest.Image1 != null)
@@ -382,6 +390,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
+        //[AllowAnonymous]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);

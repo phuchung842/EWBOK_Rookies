@@ -5,14 +5,15 @@ import callApi from '../../utils/apiCaller';
 const ProductForm = (props) => {
 	// const { id } = useParams();
 	const [product, setproduct] = useState({
+		id: '',
 		name: '',
 		quantity: '',
-		publishyear: '',
-		brandid: '1',
-		materialid: '1',
-		productcategoryid: '1',
+		publishYear: '',
+		brandID: '1',
+		materialID: '1',
+		productCategoryID: '1',
 		price: '',
-		promotionprice: '',
+		promotionPrice: '',
 		gender: 'unisex',
 		weight: '',
 		size: '',
@@ -21,6 +22,21 @@ const ProductForm = (props) => {
 	const [brands, setbrands] = useState([]);
 	const [materials, setmaterials] = useState([]);
 	const [productcategories, setproductcategories] = useState([]);
+	const genders = [
+		{
+			value: 'unisex',
+			name: 'Unisex',
+		},
+		{
+			value: 'male',
+			name: 'Male',
+		},
+		{
+			value: 'female',
+			name: 'Female',
+		},
+	];
+	const [typeform, settypeform] = useState({});
 	useEffect(() => {
 		callApi('brands', 'GET', null).then((res) => {
 			setbrands(res.data);
@@ -40,40 +56,75 @@ const ProductForm = (props) => {
 		// console.log(id);
 		var { match } = props;
 		if (match) {
+			settypeform({ title: 'Edit Product', button: 'Update' });
 			var id = match.params.id;
 			callApi(`products/${id}`, 'GET', null).then((res) => {
 				var data = res.data;
 				setproduct(data);
+				console.log(data);
 				console.log(product);
 			});
+		} else {
+			settypeform({ title: 'Add Product', button: 'Create' });
 		}
 	}, [callApi, setproduct]);
 	const onChange = (e) => {
 		var target = e.target;
 		var name = target.name;
 		var value = target.type == 'checkbox' ? target.checked : target.value;
+		console.log(name, value);
 		setproduct({ ...product, [name]: value });
+		console.log(product);
 	};
 	let history = useHistory();
+	const ProductFormData = (product) => {
+		let myFormData = new FormData();
+		myFormData.append('name', product.name);
+		myFormData.append('brandID', product.brandID);
+		myFormData.append('materialID', product.materialID);
+		myFormData.append('productCategoryID', product.productCategoryID);
+		myFormData.append('gender', product.gender);
+		myFormData.append('id', product.id);
+		myFormData.append('quantity', product.quantity);
+		myFormData.append('price', product.price);
+		myFormData.append('promotionPrice', product.promotionPrice);
+		myFormData.append('size', product.size);
+		myFormData.append('weight', product.weight);
+		myFormData.append('publishYear', product.publishYear);
+		myFormData.append('decription', product.decription);
+		return myFormData;
+	};
+	const requestConfig = {
+		headers: {
+			'Content-Type': 'multipart/form-data',
+		},
+	};
 	const onSave = (e) => {
 		e.preventDefault();
-		console.log(product);
-
-		callApi('products', 'POST', product).then((res) => {
-			console.log(res);
-			if (res.config.data) {
-				history.push('/products');
-			} else {
-				history.push('/products/add');
-			}
-		});
+		if (product.id) {
+			console.log(product);
+			var data = ProductFormData(product);
+			callApi(`products/${product.id}`, 'PUT', data, requestConfig).then((res) => {
+				console.log(res);
+				history.goBack();
+			});
+		} else {
+			callApi('products', 'POST', product).then((res) => {
+				console.log(res);
+				if (res.config.data) {
+					history.goBack();
+				} else {
+					history.push('/products/add');
+				}
+			});
+		}
 	};
 	return (
 		<div class="main-content">
 			<div class="container-fluid content-top-gap">
 				<div class="welcome-msg pt-3 pb-4">
 					<h1>
-						<span class="text-primary ">Add Product</span>
+						<span class="text-primary ">{typeform.title}</span>
 					</h1>
 				</div>
 				<section class="forms">
@@ -118,8 +169,8 @@ const ProductForm = (props) => {
 											class="form-control input-style"
 											id="inputPublishYear"
 											placeholder="Publish Year"
-											name="publishyear"
-											value={product.publishyear}
+											name="publishYear"
+											value={product.publishYear}
 											onChange={onChange}
 										/>
 									</div>
@@ -130,7 +181,7 @@ const ProductForm = (props) => {
 											Brand
 										</label>
 										<select
-											name="brandid"
+											name="brandID"
 											onChange={onChange}
 											value={product.brandID}
 											id="inputBrand"
@@ -138,8 +189,8 @@ const ProductForm = (props) => {
 										>
 											{brands.map((brand) => {
 												if (product.brandID == brand.id) {
-													console.log(brand);
-													console.log(product.brandID, brand.id);
+													// console.log(brand);
+													// console.log(product.brandID, brand.id);
 													return (
 														<option selected value={brand.id}>
 															{brand.name}
@@ -156,7 +207,7 @@ const ProductForm = (props) => {
 											Material
 										</label>
 										<select
-											name="materialid"
+											name="materialID"
 											onChange={onChange}
 											value={product.materialID}
 											id="inputMaterial"
@@ -164,7 +215,11 @@ const ProductForm = (props) => {
 										>
 											{materials.map((material) => {
 												if (product.materialID === material.id) {
-													return <option defaultValue={material.id}>{material.name}</option>;
+													return (
+														<option selected value={material.id}>
+															{material.name}
+														</option>
+													);
 												} else {
 													return <option value={material.id}>{material.name}</option>;
 												}
@@ -176,16 +231,19 @@ const ProductForm = (props) => {
 											ProductCategory
 										</label>
 										<select
-											name="productcategoryid"
-											value={product.productcategoryID}
+											name="productCategoryID"
+											value={product.productCategoryID}
 											onChange={onChange}
 											id="inputProductCategory"
 											class="form-control input-style"
 										>
 											{productcategories.map((procate) => {
-												if (product.productcategoryID == procate.id) {
-													// alert(procate.name);
-													return <option defaultValue={procate.id}>{procate.name}</option>;
+												if (product.productCategoryID == procate.id) {
+													return (
+														<option selected value={procate.id}>
+															{procate.name}
+														</option>
+													);
 												} else {
 													return <option value={procate.id}>{procate.name}</option>;
 												}
@@ -212,8 +270,8 @@ const ProductForm = (props) => {
 											Promotion Price
 										</label>
 										<input
-											name="promotionprice"
-											value={product.promotionprice}
+											name="promotionPrice"
+											value={product.promotionPrice}
 											onChange={onChange}
 											type="number"
 											class="form-control input-style"
@@ -233,11 +291,17 @@ const ProductForm = (props) => {
 											id="inputGender"
 											class="form-control input-style"
 										>
-											<option selected value="unisex">
-												Unisex
-											</option>
-											<option value="male">Male</option>
-											<option value="female">Female</option>
+											{genders.map((gender) => {
+												if (product.gender == gender.value) {
+													return (
+														<option selected value={gender.value}>
+															{gender.name}
+														</option>
+													);
+												} else {
+													return <option value={gender.value}>{gender.name}</option>;
+												}
+											})}
 										</select>
 									</div>
 									<div className="form-group col-md-4">
@@ -283,7 +347,7 @@ const ProductForm = (props) => {
 									</div>
 								</div>
 								<button type="submit" class="btn btn-primary btn-style mt-4">
-									Create
+									{typeform.button}
 								</button>
 							</form>
 						</div>
