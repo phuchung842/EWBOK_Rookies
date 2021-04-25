@@ -13,6 +13,11 @@ const CommentTable = (props) => {
 	return (
 		<div class="main-content">
 			<div class="container-fluid content-top-gap">
+				<div class="welcome-msg pt-3 pb-4">
+					<h1>
+						<span class="text-primary ">Comments </span>
+					</h1>
+				</div>
 				<div class="card shadow mb-4">
 					<div class="card-header py-3 bg-xingcheng-dark border-bottom-xingcheng-light">
 						<h6 class="m-0 font-weight-bold text-xingcheng-light">Comments Information</h6>

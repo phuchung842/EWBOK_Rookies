@@ -7,11 +7,6 @@ const UserTable = (props) => {
 				<div class="welcome-msg pt-3 pb-4">
 					<h1>
 						<span class="text-primary ">Users </span>
-						<br />
-						<br />
-						<Link to="/users/add" type="submit" class="btn btn-primary btn-style ">
-							Create
-						</Link>
 					</h1>
 				</div>
 				<div class="card shadow mb-4">
