@@ -10,14 +10,14 @@ const Ratings = () => {
 		});
 	}, []);
 	console.log(ratings);
-	const removeViewItem = (ratings, itemid) => {
-		return ratings.filter((item) => item.id !== itemid);
+	const removeViewItem = (ratings, userid, productid) => {
+		return ratings.filter((item) => item.userID !== userid && item.productID !== productid);
 	};
-	const onDelete = (id) => {
-		callApi(`ratings/${id}`, 'DELETE', null).then((res) => {
+	const onDelete = (userid, productid) => {
+		callApi(`ratings/${userid}/${productid}`, 'DELETE', null).then((res) => {
 			console.log(res);
 			if (res.status >= 200 && res.status < 300) {
-				setratings(removeViewItem(ratings, id));
+				setratings(removeViewItem(ratings, userid, productid));
 			}
 		});
 	};

@@ -3,9 +3,9 @@ const RatingTable = (props) => {
 		fontSize: '20px',
 		margin: '3px',
 	};
-	const onDelete = (id) => {
+	const onDelete = (userid, productid) => {
 		if (window.confirm('Are you sure delete this item ?')) {
-			props.onDelete(id);
+			props.onDelete(userid, productid);
 		}
 	};
 	return (
@@ -48,7 +48,7 @@ const RatingTable = (props) => {
 													<a
 														href="#"
 														class="link-property"
-														onClick={() => onDelete(rating.id)}
+														onClick={() => onDelete(rating.userID, rating.productID)}
 													>
 														<i class="fa fa-close" style={styleicon}></i>
 													</a>
