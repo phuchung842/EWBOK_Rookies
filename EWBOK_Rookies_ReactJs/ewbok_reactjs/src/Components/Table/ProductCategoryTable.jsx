@@ -10,6 +10,13 @@ const ProductCategoryTable = (props) => {
 			props.onDelete(id);
 		}
 	};
+	const showStatus = (status) => {
+		if (status === true) {
+			return <i class="fa fa-check"></i>;
+		} else {
+			return <i class="fa fa-lock"></i>;
+		}
+	};
 	return (
 		<div class="main-content">
 			<div class="container-fluid content-top-gap">
@@ -58,10 +65,10 @@ const ProductCategoryTable = (props) => {
 											<tr>
 												<td>{productcategory.id}</td>
 												<td>{productcategory.name}</td>
-												<td>{productcategory.metatitle}</td>
-												<td>{productcategory.displayorder}</td>
-												<td>{productcategory.status}</td>
-												<td>{productcategory.showonhome}</td>
+												<td>{productcategory.metaTitle}</td>
+												<td>{productcategory.displayOrder}</td>
+												<td>{showStatus(productcategory.status)}</td>
+												<td>{showStatus(productcategory.showOnHome)}</td>
 												<td>
 													<Link
 														to={`/productcategories/edit/${productcategory.id}`}

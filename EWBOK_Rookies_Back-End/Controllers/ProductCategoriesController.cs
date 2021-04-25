@@ -47,6 +47,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
             var productCategory = await _context.ProductCategories.FindAsync(id);
             var productcategoryvm = new ProductCategoryVm
             {
+                ID = productCategory.ID,
                 Name = productCategory.Name,
                 Status = productCategory.Status,
                 DisplayOrder = productCategory.DisplayOrder,
@@ -96,8 +97,16 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // POST: api/ProductCategories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<ProductCategory>> PostProductCategory(ProductCategory productCategory)
+        public async Task<ActionResult<ProductCategory>> PostProductCategory(ProductCategoryCreateRequest productCategoryCreateRequest)
         {
+            var productCategory = new ProductCategory
+            {
+                Name = productCategoryCreateRequest.Name,
+                MetaTitle = productCategoryCreateRequest.MetaTitle,
+                DisplayOrder = productCategoryCreateRequest.DisplayOrder,
+                Status = productCategoryCreateRequest.Status,
+                ShowOnHome = productCategoryCreateRequest.ShowOnHome
+            };
             _context.ProductCategories.Add(productCategory);
             await _context.SaveChangesAsync();
 
