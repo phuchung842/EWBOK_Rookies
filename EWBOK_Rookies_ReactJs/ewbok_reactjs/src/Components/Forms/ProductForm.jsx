@@ -18,6 +18,16 @@ const ProductForm = (props) => {
 		weight: '',
 		size: '',
 		decription: '',
+		image1: '',
+		image2: '',
+		image3: '',
+		image4: '',
+		image5: '',
+		image6: '',
+		image7: '',
+		image8: '',
+		image9: '',
+		image10: '',
 	});
 	const [brands, setbrands] = useState([]);
 	const [materials, setmaterials] = useState([]);
@@ -76,7 +86,7 @@ const ProductForm = (props) => {
 		setproduct({ ...product, [name]: value });
 		console.log(product);
 	};
-	
+
 	const ProductFormData = (product) => {
 		let myFormData = new FormData();
 		myFormData.append('name', product.name);
@@ -345,6 +355,106 @@ const ProductForm = (props) => {
 											id="inputDecription"
 											class="form-control input-style"
 										></textarea>
+									</div>
+								</div>
+								<div className="form-row">
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 1 : {product.image1}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 2 : {product.image2}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+								</div>
+								<div className="form-row">
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 3 : {product.image3}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 4 : {product.image4}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+								</div>
+								<div className="form-row">
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 5 : {product.image5}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 6 : {product.image6}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+								</div>
+								<div className="form-row">
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 7 : {product.image7}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 8 : {product.image8}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+								</div>
+								<div className="form-row">
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 9 : {product.image9}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 10 : {product.image10}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
 									</div>
 								</div>
 								<button type="submit" class="btn btn-primary btn-style mt-4">
