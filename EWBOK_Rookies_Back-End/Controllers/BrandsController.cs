@@ -88,7 +88,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // POST: api/Brands
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<BrandVm>> PostBrand([FromForm]BrandCreateRequest brandCreateRequest)
+        public async Task<ActionResult<BrandVm>> PostBrand(BrandCreateRequest brandCreateRequest)
         {
             var brand = new Brand
             {

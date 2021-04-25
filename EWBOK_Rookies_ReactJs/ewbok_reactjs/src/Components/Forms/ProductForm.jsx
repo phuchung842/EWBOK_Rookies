@@ -76,7 +76,7 @@ const ProductForm = (props) => {
 		setproduct({ ...product, [name]: value });
 		console.log(product);
 	};
-	let history = useHistory();
+	
 	const ProductFormData = (product) => {
 		let myFormData = new FormData();
 		myFormData.append('name', product.name);
@@ -99,6 +99,7 @@ const ProductForm = (props) => {
 			'Content-Type': 'multipart/form-data',
 		},
 	};
+	let history = useHistory();
 	const onSave = (e) => {
 		e.preventDefault();
 		if (product.id) {

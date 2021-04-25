@@ -10,6 +10,13 @@ const MaterialTable = (props) => {
 			props.onDelete(id);
 		}
 	};
+	const showStatus = (status) => {
+		if (status === true) {
+			return <i class="fa fa-check"></i>;
+		} else {
+			return <i class="fa fa-lock"></i>;
+		}
+	};
 	return (
 		<div class="main-content">
 			<div class="container-fluid content-top-gap">
@@ -52,7 +59,7 @@ const MaterialTable = (props) => {
 											<tr>
 												<td>{material.id}</td>
 												<td>{material.name}</td>
-												<td>{material.status}</td>
+												<td>{showStatus(material.status)}</td>
 												<td>
 													<Link to={`/materials/edit/${material.id}`} class="link-property">
 														<i class="fa fa-edit" style={styleicon}></i>

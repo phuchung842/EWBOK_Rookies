@@ -1,7 +1,10 @@
 import Dashboard from '../Containers/Dashboard';
 import ProductCategories from '../Containers/ProductCategories';
+import ProductCategoryForm from '../Components/Forms/ProductCategoryForm';
 import Brands from '../Containers/Brands';
+import BrandForm from '../Components/Forms/BrandForm';
 import Materials from '../Containers/Materials';
+import MaterialForm from '../Components/Forms/MaterialForm';
 import Comments from '../Containers/Comments';
 import Ratings from '../Containers/Ratings';
 import Products from '../Containers/Products';
@@ -25,14 +28,44 @@ const routes = [
 		main: () => <ProductCategories />,
 	},
 	{
+		path: '/productcategories/add',
+		exact: true,
+		main: () => <ProductCategoryForm />,
+	},
+	{
+		path: '/productcategories/edit/:id',
+		exact: true,
+		main: ({ match }) => <ProductCategoryForm match={match} />,
+	},
+	{
 		path: '/brands',
 		exact: true,
 		main: () => <Brands />,
 	},
 	{
+		path: '/brands/add',
+		exact: true,
+		main: () => <BrandForm />,
+	},
+	{
+		path: '/brands/edit/:id',
+		exact: true,
+		main: ({ match }) => <BrandForm match={match} />,
+	},
+	{
 		path: '/materials',
 		exact: true,
 		main: () => <Materials />,
+	},
+	{
+		path: '/materials/add',
+		exact: true,
+		main: () => <MaterialForm />,
+	},
+	{
+		path: '/materials/edit/:id',
+		exact: true,
+		main: ({ match }) => <MaterialForm match={match} />,
 	},
 	{
 		path: '/comments',

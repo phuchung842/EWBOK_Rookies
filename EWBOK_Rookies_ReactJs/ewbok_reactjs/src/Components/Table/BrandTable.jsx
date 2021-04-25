@@ -10,6 +10,13 @@ const BrandTable = (props) => {
 			props.onDelete(id);
 		}
 	};
+	const showStatus = (status) => {
+		if (status === true) {
+			return <i class="fa fa-check"></i>;
+		} else {
+			return <i class="fa fa-lock"></i>;
+		}
+	};
 	return (
 		<div class="main-content">
 			<div class="container-fluid content-top-gap">
@@ -52,7 +59,7 @@ const BrandTable = (props) => {
 											<tr>
 												<td>{brand.id}</td>
 												<td>{brand.name}</td>
-												<td>{brand.status}</td>
+												<td>{showStatus(brand.status)}</td>
 												<td>
 													<Link to={`/brands/edit/${brand.id}`} class="link-property">
 														<i class="fa fa-edit" style={styleicon}></i>
