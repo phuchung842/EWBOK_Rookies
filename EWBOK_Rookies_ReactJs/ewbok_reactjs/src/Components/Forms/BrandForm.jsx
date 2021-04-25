@@ -1,6 +1,6 @@
 import callApi from '../../utils/apiCaller';
 import { useEffect, useState } from 'react';
-import { Redirect, useHistory, useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 const BrandForm = (props) => {
 	const [brand, setbrand] = useState({

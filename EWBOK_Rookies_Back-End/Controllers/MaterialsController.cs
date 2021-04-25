@@ -91,8 +91,13 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // POST: api/Materials
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Material>> PostMaterial(Material material)
+        public async Task<ActionResult<Material>> PostMaterial(MaterialCreateRequest materialCreateRequest)
         {
+            var material = new Material
+            {
+                Name = materialCreateRequest.Name,
+                Status = materialCreateRequest.Status
+            };
             _context.Materials.Add(material);
             await _context.SaveChangesAsync();
 
