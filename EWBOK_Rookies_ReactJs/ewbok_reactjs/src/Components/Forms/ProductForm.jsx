@@ -18,17 +18,20 @@ const ProductForm = (props) => {
 		weight: '',
 		size: '',
 		decription: '',
-		image1: '',
-		image2: '',
-		image3: '',
-		image4: '',
-		image5: '',
-		image6: '',
-		image7: '',
-		image8: '',
-		image9: '',
-		image10: '',
+		image1: null,
+		image2: null,
+		image3: null,
+		image4: null,
+		image5: null,
+		image6: null,
+		image7: null,
+		image8: null,
+		image9: null,
+		image10: null,
 	});
+	useEffect(() => {
+		console.log(product);
+	}, [product]);
 	const [brands, setbrands] = useState([]);
 	const [materials, setmaterials] = useState([]);
 	const [productcategories, setproductcategories] = useState([]);
@@ -81,12 +84,35 @@ const ProductForm = (props) => {
 	const onChange = (e) => {
 		var target = e.target;
 		var name = target.name;
-		var value = target.type == 'checkbox' ? target.checked : target.value;
+		var value = null;
+		if (target.type == 'file') {
+			value = target.files[0];
+		} else if (target.type == 'checkbox') {
+			value = target.checked;
+		} else {
+			value = target.value;
+		}
+		// var value = target.type == 'checkbox' ? target.checked : target.value;
 		console.log(name, value);
 		setproduct({ ...product, [name]: value });
-		console.log(product);
+		// console.log(product);
 	};
-
+	const ShowFileImage = (image) => {
+		console.log(image);
+		if (image) {
+			console.log(image);
+			if (image.type == 'image/jpeg') {
+				console.log(image.name);
+				return image.name;
+			} else {
+				var filename = null;
+				if (image.includes('/image/')) {
+					filename = image.replace('/image/', '');
+				}
+				return filename;
+			}
+		}
+	};
 	const ProductFormData = (product) => {
 		let myFormData = new FormData();
 		myFormData.append('name', product.name);
@@ -102,6 +128,16 @@ const ProductForm = (props) => {
 		myFormData.append('weight', product.weight);
 		myFormData.append('publishYear', product.publishYear);
 		myFormData.append('decription', product.decription);
+		myFormData.append('image1', product.image1);
+		myFormData.append('image2', product.image2);
+		myFormData.append('image3', product.image3);
+		myFormData.append('image4', product.image4);
+		myFormData.append('image5', product.image5);
+		myFormData.append('image6', product.image6);
+		myFormData.append('image7', product.image7);
+		myFormData.append('image8', product.image8);
+		myFormData.append('image9', product.image9);
+		myFormData.append('image10', product.image10);
 		return myFormData;
 	};
 	const requestConfig = {
@@ -115,12 +151,15 @@ const ProductForm = (props) => {
 		if (product.id) {
 			console.log(product);
 			var data = ProductFormData(product);
+			console.log(data);
 			callApi(`products/${product.id}`, 'PUT', data, requestConfig).then((res) => {
 				console.log(res);
 				history.goBack();
 			});
 		} else {
-			callApi('products', 'POST', product).then((res) => {
+			var data = ProductFormData(product);
+			console.log(data);
+			callApi('products', 'POST', data, requestConfig).then((res) => {
 				console.log(res);
 				if (res.config.data) {
 					history.goBack();
@@ -360,38 +399,30 @@ const ProductForm = (props) => {
 								<div className="form-row">
 									<div class="form-group col-md-6">
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<input
+												name="image1"
+												onChange={onChange}
+												type="file"
+												class="custom-file-input"
+												id="validatedCustomFile"
+											/>
 											<label class="custom-file-label" for="validatedCustomFile">
-												Image 1 : {product.image1}
+												Image 1 : {ShowFileImage(product.image1)}
 											</label>
 											<div class="invalid-feedback">Example invalid custom file feedback</div>
 										</div>
 									</div>
 									<div class="form-group col-md-6">
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<input
+												name="image2"
+												onChange={onChange}
+												type="file"
+												class="custom-file-input"
+												id="validatedCustomFile"
+											/>
 											<label class="custom-file-label" for="validatedCustomFile">
-												Image 2 : {product.image2}
-											</label>
-											<div class="invalid-feedback">Example invalid custom file feedback</div>
-										</div>
-									</div>
-								</div>
-								<div className="form-row">
-									<div class="form-group col-md-6">
-										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" />
-											<label class="custom-file-label" for="validatedCustomFile">
-												Image 3 : {product.image3}
-											</label>
-											<div class="invalid-feedback">Example invalid custom file feedback</div>
-										</div>
-									</div>
-									<div class="form-group col-md-6">
-										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" />
-											<label class="custom-file-label" for="validatedCustomFile">
-												Image 4 : {product.image4}
+												Image 2 : {ShowFileImage(product.image2)}
 											</label>
 											<div class="invalid-feedback">Example invalid custom file feedback</div>
 										</div>
@@ -400,38 +431,30 @@ const ProductForm = (props) => {
 								<div className="form-row">
 									<div class="form-group col-md-6">
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<input
+												name="image3"
+												onChange={onChange}
+												type="file"
+												class="custom-file-input"
+												id="validatedCustomFile"
+											/>
 											<label class="custom-file-label" for="validatedCustomFile">
-												Image 5 : {product.image5}
+												Image 3 : {ShowFileImage(product.image3)}
 											</label>
 											<div class="invalid-feedback">Example invalid custom file feedback</div>
 										</div>
 									</div>
 									<div class="form-group col-md-6">
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<input
+												name="image4"
+												onChange={onChange}
+												type="file"
+												class="custom-file-input"
+												id="validatedCustomFile"
+											/>
 											<label class="custom-file-label" for="validatedCustomFile">
-												Image 6 : {product.image6}
-											</label>
-											<div class="invalid-feedback">Example invalid custom file feedback</div>
-										</div>
-									</div>
-								</div>
-								<div className="form-row">
-									<div class="form-group col-md-6">
-										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" />
-											<label class="custom-file-label" for="validatedCustomFile">
-												Image 7 : {product.image7}
-											</label>
-											<div class="invalid-feedback">Example invalid custom file feedback</div>
-										</div>
-									</div>
-									<div class="form-group col-md-6">
-										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" />
-											<label class="custom-file-label" for="validatedCustomFile">
-												Image 8 : {product.image8}
+												Image 4 : {ShowFileImage(product.image4)}
 											</label>
 											<div class="invalid-feedback">Example invalid custom file feedback</div>
 										</div>
@@ -440,18 +463,94 @@ const ProductForm = (props) => {
 								<div className="form-row">
 									<div class="form-group col-md-6">
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<input
+												name="image5"
+												onChange={onChange}
+												type="file"
+												class="custom-file-input"
+												id="validatedCustomFile"
+											/>
 											<label class="custom-file-label" for="validatedCustomFile">
-												Image 9 : {product.image9}
+												Image 5 : {ShowFileImage(product.image5)}
 											</label>
 											<div class="invalid-feedback">Example invalid custom file feedback</div>
 										</div>
 									</div>
 									<div class="form-group col-md-6">
 										<div class="custom-file">
-											<input type="file" class="custom-file-input" id="validatedCustomFile" />
+											<input
+												name="image6"
+												onChange={onChange}
+												type="file"
+												class="custom-file-input"
+												id="validatedCustomFile"
+											/>
 											<label class="custom-file-label" for="validatedCustomFile">
-												Image 10 : {product.image10}
+												Image 6 : {ShowFileImage(product.image6)}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+								</div>
+								<div className="form-row">
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input
+												name="image7"
+												onChange={onChange}
+												type="file"
+												class="custom-file-input"
+												id="validatedCustomFile"
+											/>
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 7 : {ShowFileImage(product.image7)}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input
+												name="image8"
+												onChange={onChange}
+												type="file"
+												class="custom-file-input"
+												id="validatedCustomFile"
+											/>
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 8 : {ShowFileImage(product.image8)}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+								</div>
+								<div className="form-row">
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input
+												name="image9"
+												onChange={onChange}
+												type="file"
+												class="custom-file-input"
+												id="validatedCustomFile"
+											/>
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 9 : {ShowFileImage(product.image9)}
+											</label>
+											<div class="invalid-feedback">Example invalid custom file feedback</div>
+										</div>
+									</div>
+									<div class="form-group col-md-6">
+										<div class="custom-file">
+											<input
+												name="image10"
+												onChange={onChange}
+												type="file"
+												class="custom-file-input"
+												id="validatedCustomFile"
+											/>
+											<label class="custom-file-label" for="validatedCustomFile">
+												Image 10 : {ShowFileImage(product.image10)}
 											</label>
 											<div class="invalid-feedback">Example invalid custom file feedback</div>
 										</div>
