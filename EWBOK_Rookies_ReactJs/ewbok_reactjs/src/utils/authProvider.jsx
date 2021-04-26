@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { storeUser } from '../actions/authAction';
+import { storeUser } from '../actions/authActions';
 import { setAuthHeader } from './axiosHeaders';
 
 export default function AuthProvider({ userManager: manager, store, children }) {

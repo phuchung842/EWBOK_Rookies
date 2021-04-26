@@ -16,6 +16,17 @@ namespace EWBOK_Rookies_Front_End.Controllers
         {
             _cartClient = cartClient;
         }
+        public async Task<IActionResult> Index()
+        {
+            IList<CartVm> cart = null;
+            var claimIdentity = User.Identity as ClaimsIdentity;
+            string userid = claimIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+            if (userid != null)
+            {
+                cart = await _cartClient.GetCarts(userid);
+            }
+            return View(cart);
+        }
         public async Task<IActionResult> AddCart(int productid, int quantity)
         {
             string urlAnterior = Request.Headers["Referer"].ToString();

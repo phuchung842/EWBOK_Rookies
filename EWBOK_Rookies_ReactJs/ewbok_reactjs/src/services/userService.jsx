@@ -1,12 +1,12 @@
 import { UserManager } from 'oidc-client';
-import { storeUserError, storeUser } from '../actions/authAction';
+import { storeUserError, storeUser } from '../actions/authActions';
 
 const config = {
 	authority: 'https://localhost:5001',
-	client_id: 'spa',
+	client_id: 'wewantdoughnuts',
 	redirect_uri: 'http://localhost:3000/signin-oidc',
 	response_type: 'id_token token',
-	scope: 'openid profile customer',
+	scope: 'openid profile doughnutapi',
 	post_logout_redirect_uri: 'http://localhost:3000/signout-oidc',
 };
 
