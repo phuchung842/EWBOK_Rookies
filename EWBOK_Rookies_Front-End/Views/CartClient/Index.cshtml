@@ -1,5 +1,9 @@
-﻿@{ 
-
+﻿@using SharedVm
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+@model IList<CartVm>
+@{
+    var backendUrl = Configuration.GetServiceUri("backend");
 }
 
 <!-- catg header banner section -->
@@ -34,44 +38,32 @@
                                             <th></th>
                                             <th>Product</th>
                                             <th>Price</th>
+                                            <th>Promotion Price</th>
                                             <th>Quantity</th>
                                             <th>Total</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                                            <td><a href="#"><img src="img/man/polo-shirt-1.png" alt="img"></a></td>
-                                            <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                                            <td>$250</td>
-                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                                            <td>$250</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                                            <td><a href="#"><img src="img/man/polo-shirt-2.png" alt="img"></a></td>
-                                            <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                                            <td>$150</td>
-                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                                            <td>$150</td>
-                                        </tr>
-                                        <tr>
-                                            <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
-                                            <td><a href="#"><img src="img/man/polo-shirt-3.png" alt="img"></a></td>
-                                            <td><a class="aa-cart-title" href="#">Polo T-Shirt</a></td>
-                                            <td>$50</td>
-                                            <td><input class="aa-cart-quantity" type="number" value="1"></td>
-                                            <td>$50</td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="6" class="aa-cart-view-bottom">
-                                                <div class="aa-cart-coupon">
-                                                    <input class="aa-coupon-code" type="text" placeholder="Coupon">
-                                                    <input class="aa-cart-view-btn" type="submit" value="Apply Coupon">
-                                                </div>
-                                                <input class="aa-cart-view-btn" type="submit" value="Update Cart">
-                                            </td>
-                                        </tr>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr>
+                                                <td><a class="remove" href="#"><fa class="fa fa-close"></fa></a></td>
+                                                <td><a href="#"><img src="@backendUrl/@item.ProductImage" alt="img"></a></td>
+                                                <td><a class="aa-cart-title" href="#">@item.ProductName</a></td>
+                                                <td>@item.ProductPrice</td>
+                                                <td>@item.ProductPromotionPrice</td>
+                                                <td><input class="aa-cart-quantity" type="number" value="@item.Quantity"></td>
+                                                @if (item.ProductPromotionPrice.HasValue)
+                                                {
+                                                    <td>@{var total = item.ProductPromotionPrice * item.Quantity;} @total</td>
+                                                }
+                                                else
+                                                {
+                                            <td>@{var total = item.ProductPrice * item.Quantity;} @total</td>
+                                                }
+
+                                            </tr>
+                                        }
                                     </tbody>
                                 </table>
                             </div>

@@ -1,7 +1,7 @@
 import './App.css';
 import React from 'react';
 import { BrowserRouter } from 'react-router-dom';
-import SlidebarMennu from './Components/SlidebaeMenu/SlidebarMenu';
+import SlidebarMennu from './Components/SlidebarMenu/SlidebarMenu';
 import Header from './Components/Header/Header';
 import Content from './Containers/Content';
 import Footer from './Components/Footer/Footer';

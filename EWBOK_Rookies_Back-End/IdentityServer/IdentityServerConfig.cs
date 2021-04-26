@@ -80,6 +80,41 @@ namespace EWBOK_Rookies_Back_End.IdentityServer
                         "ewbokrookies.api"
                     }
                 },
+                new Client
+                {
+                    ClientName = "react_code_client",
+                    ClientId = "react_code_client",
+                    AccessTokenType = AccessTokenType.Reference,
+                    AllowedGrantTypes = GrantTypes.Code,
+                    AllowAccessTokensViaBrowser = true,
+
+                    RequireClientSecret = false,
+                    RequireConsent = false,
+                    RequirePkce = true,
+
+                    RedirectUris = new List<string>
+                    {
+                        $"{clientUrls["React"]}/signin-oidc",
+                        $"{clientUrls["React"]}/silent-renew.html",
+                        $"{clientUrls["React"]}"
+                    },
+                    PostLogoutRedirectUris = new List<string>
+                    {
+                        $"{clientUrls["React"]}/unauthorized",
+                        $"{clientUrls["React"]}/signout-oidc",
+                        $"{clientUrls["React"]}"
+                    },
+                    AllowedCorsOrigins = new List<string>
+                    {
+                        $"{clientUrls["React"]}"
+                    },
+                    AllowedScopes = new List<string>
+                    {
+                        IdentityServerConstants.StandardScopes.OpenId,
+                        IdentityServerConstants.StandardScopes.Profile,
+                        "api.myshop"
+                    }
+                }
             };
     }
 }
