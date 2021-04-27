@@ -18,7 +18,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize("Bearer")]
+    [Authorize("Bearer")]
     public class ProductsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -32,7 +32,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Products
         [HttpGet]
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ProductVm>>> GetProducts()
         {
             var product = await _context.Products.Select(x => new
@@ -105,7 +105,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Products/5
         [HttpGet("{id}")]
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public async Task<ActionResult<ProductVm>> GetProduct(int id)
         {
             var product = await _context.Products
@@ -156,7 +156,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         }
 
         [HttpGet("{id}/{page}/{pageSize}/{type}")]
-        //[AllowAnonymous]
+        [AllowAnonymous]
         public async Task<ActionResult<PaginationVm>> GetProductByFilter(short id, string type, int page, int pageSize)
         {
             var queryable = _context.Products.AsQueryable();
@@ -241,7 +241,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         
         [HttpPut("{id}")]
-        //[AllowAnonymous]
+        [Authorize(Roles ="admin")]
         public async Task<IActionResult> PutProduct(int id,[FromForm] ProductUpdateRequest productUpdateRequest)
         {
             var product = await _context.Products.FirstOrDefaultAsync(x => x.ID == id);
@@ -322,7 +322,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         //// POST: api/Products
         //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        //[AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult> PostProduct([FromForm] ProductCreateRequest productCreateRequest)
         {
             var product = new Product
@@ -390,7 +390,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // DELETE: api/Products/5
         [HttpDelete("{id}")]
-        //[AllowAnonymous]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteProduct(int id)
         {
             var product = await _context.Products.FindAsync(id);

@@ -47,14 +47,7 @@ namespace EWBOK_Rookies_Back_End
             services.AddDefaultIdentity<User>(options => options.SignIn.RequireConfirmedAccount = false)
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
-            services.AddAuthorization(options =>
-            {
-                options.AddPolicy("Bearer", policy =>
-                {
-                    policy.AddAuthenticationSchemes("Bearer");
-                    policy.RequireAuthenticatedUser();
-                });
-            });
+            
             services.AddCors(options =>
             {
                 options.AddPolicy(MyAllowSpecificOrigins,
@@ -83,12 +76,19 @@ namespace EWBOK_Rookies_Back_End
                .AddProfileService<CustomProfileService>()
                .AddDeveloperSigningCredential(); // not recommended for production - you need to store your key material somewhere secure
 
-            //services.AddAuthentication()
-            //    .AddLocalApi("Bearer", option =>
-            //    {
-            //        option.ExpectedScope = "ewbokrookies.api";
-            //    });
-
+            services.AddAuthentication()
+                .AddLocalApi("Bearer", option =>
+                {
+                    option.ExpectedScope = "ewbokrookies.api";
+                });
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("Bearer", policy =>
+                {
+                    policy.AddAuthenticationSchemes("Bearer");
+                    policy.RequireAuthenticatedUser();
+                });
+            });
 
             services.AddSwaggerGen(c =>
             {
