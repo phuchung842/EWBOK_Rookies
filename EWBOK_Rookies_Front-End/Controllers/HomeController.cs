@@ -2,6 +2,7 @@
 using EWBOK_Rookies_Front_End.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using SharedVm;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -24,6 +25,7 @@ namespace EWBOK_Rookies_Front_End.Controllers
         public async Task<IActionResult> Index()
         {
             var products = await _productClient.GetProducts();
+            products = (IList<ProductVm>)products.Take(8);
             return View(products);
         }
 
