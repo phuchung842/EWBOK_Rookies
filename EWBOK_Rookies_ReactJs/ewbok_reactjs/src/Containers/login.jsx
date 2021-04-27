@@ -13,25 +13,17 @@ function Login() {
 	return user ? (
 		<Redirect to={'/'} />
 	) : (
-		<div>
-			<h1>Hello!</h1>
-			<p>Welcome to We Want Doughnuts.</p>
-			<p>
-				A demo of using React and Identity Server 4 to authenticate a user via OpenID Connect to gain access to
-				a web API (and some lovely doughnuts).
-			</p>
-			<p>Start by signing in.</p>
-			<p>
-				💡 <strong>Tip: </strong>
-				<em>User: 'alice', Pass: 'alice'</em>
-			</p>
-
-			<button onClick={() => login()}>Login</button>
-			<p>
-				<a target="_blank" rel="noopener noreferrer" href="https://github.com/tappyy/react-IS4-auth-demo">
-					Github Repo
-				</a>
-			</p>
+		<div class="main-content">
+			<div class="container-fluid content-top-gap">
+				<h1>Hello!</h1>
+				<h1>Welcome to EWBOK.</h1>
+				<h6>Please login before play with us.</h6>
+				<h6>Start by signing in.</h6>
+				<br />
+				<button class="btn btn-primary btn-style " onClick={() => login()}>
+					Login
+				</button>
+			</div>
 		</div>
 	);
 }

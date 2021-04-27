@@ -1,5 +1,5 @@
-import { STORE_USER, USER_SIGNED_OUT, USER_EXPIRED, STORE_USER_ERROR, LOADING_USER } from './types';
-import { setAuthHeader } from '../utils/axiosHeaders';
+import { STORE_USER, USER_SIGNED_OUT, USER_EXPIRED, STORE_USER_ERROR, LOADING_USER } from './type';
+import { setAuthHeader } from '../utils/axiosHeader';
 
 export function storeUser(user) {
 	setAuthHeader(user.access_token);

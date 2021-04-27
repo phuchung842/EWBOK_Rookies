@@ -1,6 +1,5 @@
-import { useEffect } from 'react';
 import { Route, Link, useParams } from 'react-router-dom';
-import callApi from '../../utils/apiCaller';
+import * as Config from '../../Constants/Config.js';
 
 const ProductTable = (props) => {
 	const styleicon = {
@@ -12,6 +11,11 @@ const ProductTable = (props) => {
 		if (window.confirm('Are you sure delete this item ?')) {
 			props.onDelete(id);
 		}
+	};
+
+	const setImageUrl = (image) => {
+		console.log(`${Config.API_URL}${image}`);
+		return `${Config.API_URL}${image}`;
 	};
 	return (
 		<div class="main-content">
@@ -35,7 +39,7 @@ const ProductTable = (props) => {
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 									<tr>
-										<th>ID</th>
+										<th>Image</th>
 										<th>Name</th>
 										<th>Brand</th>
 										<th>Material</th>
@@ -48,7 +52,7 @@ const ProductTable = (props) => {
 								</thead>
 								<tfoot>
 									<tr>
-										<th>ID</th>
+										<th>Image</th>
 										<th>Name</th>
 										<th>Brand</th>
 										<th>Material</th>
@@ -63,15 +67,17 @@ const ProductTable = (props) => {
 									{props.products.map((product) => {
 										return (
 											<tr>
-												<td>{product.id}</td>
-												<td>{product.name}</td>
-												<td>{product.brandName}</td>
-												<td>{product.materialName}</td>
-												<td>{product.productCategoryName}</td>
-												<td>{product.quantity}</td>
-												<td className="text-primary">{product.price}</td>
-												<td className="text-primary">{product.promotionPrice}</td>
 												<td>
+													<img src={setImageUrl(product.image1)} width="50" />
+												</td>
+												<td className="align-middle">{product.name}</td>
+												<td className="align-middle">{product.brandName}</td>
+												<td className="align-middle">{product.materialName}</td>
+												<td className="align-middle">{product.productCategoryName}</td>
+												<td className="align-middle">{product.quantity}</td>
+												<td className="text-primary align-middle">{product.price}</td>
+												<td className="text-primary align-middle">{product.promotionPrice}</td>
+												<td className="align-middle text-center">
 													<Link to={`/products/edit/${product.id}`} class="link-property">
 														<i class="fa fa-edit" style={styleicon}></i>
 													</Link>

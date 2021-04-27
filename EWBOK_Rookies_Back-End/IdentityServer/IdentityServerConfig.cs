@@ -112,7 +112,7 @@ namespace EWBOK_Rookies_Back_End.IdentityServer
                     {
                         IdentityServerConstants.StandardScopes.OpenId,
                         IdentityServerConstants.StandardScopes.Profile,
-                        "api.myshop"
+                        "ewbokrookies.api"
                     }
                 }
             };

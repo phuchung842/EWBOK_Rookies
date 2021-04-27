@@ -1,4 +1,9 @@
+import { signoutRedirect } from '../../services/userService';
+
 const Header = () => {
+	const logout = () => {
+		signoutRedirect();
+	};
 	return (
 		<div class="header sticky-header">
 			<div class="menu-right">
@@ -182,7 +187,7 @@ const Header = () => {
 										</li>
 										<li class="logout">
 											{' '}
-											<a href="#sign-up.html">
+											<a onClick={() => logout()}>
 												<i class="fa fa-power-off"></i> Logout
 											</a>{' '}
 										</li>

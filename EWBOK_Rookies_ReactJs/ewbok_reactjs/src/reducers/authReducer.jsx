@@ -1,4 +1,4 @@
-import { USER_SIGNED_OUT, STORE_USER_ERROR, USER_EXPIRED, STORE_USER, LOADING_USER } from '../actions/types';
+import { USER_SIGNED_OUT, STORE_USER_ERROR, USER_EXPIRED, STORE_USER, LOADING_USER } from '../actions/type';
 
 const initialState = {
 	user: null,

@@ -23,7 +23,7 @@ function callApi(endpoint) {
   var header = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
   return (0, _axios["default"])({
     method: method,
-    url: "".concat(Config.API_URL, "/").concat(endpoint),
+    url: "".concat(Config.API_URL, "/api/").concat(endpoint),
     data: body,
     header: header
   });

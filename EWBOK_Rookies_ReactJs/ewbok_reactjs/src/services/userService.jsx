@@ -1,13 +1,14 @@
 import { UserManager } from 'oidc-client';
-import { storeUserError, storeUser } from '../actions/authActions';
+import { storeUserError, storeUser } from '../actions/authAction';
+import * as Config from '../Constants/Config';
 
 const config = {
-	authority: 'https://localhost:44363',
+	authority: `${Config.API_URL}`,
 	client_id: 'react_code_client',
-	redirect_uri: 'http://localhost:3000/signin-oidc',
+	redirect_uri: `${Config.REACR_URL}/signin-oidc`,
 	response_type: 'code',
 	scope: 'ewbokrookies.api openid profile',
-	post_logout_redirect_uri: 'http://localhost:3000/signout-oidc',
+	post_logout_redirect_uri: `${Config.REACR_URL}/signout-oidc`,
 };
 
 const userManager = new UserManager(config);

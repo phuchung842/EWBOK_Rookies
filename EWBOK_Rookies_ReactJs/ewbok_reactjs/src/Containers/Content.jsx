@@ -1,5 +1,5 @@
 import { Route, Switch } from 'react-router-dom';
-
+import PrivateRoute from '../utils/protectedRoute';
 import routes from '../Constants/routes';
 
 const Content = () => {
@@ -8,7 +8,11 @@ const Content = () => {
 		console.log(routes.length);
 		if (routes.length > 0) {
 			result = routes.map((route, index) => {
-				return <Route key={index} path={route.path} exact={route.exact} component={route.main} />;
+				if (route.route == 'privateroute') {
+					return <PrivateRoute key={index} path={route.path} exact={route.exact} component={route.main} />;
+				} else {
+					return <Route key={index} path={route.path} exact={route.exact} component={route.main} />;
+				}
 			});
 		}
 		console.log(result);

@@ -33,6 +33,7 @@ namespace EWBOK_Rookies_Back_End.Areas.Identity.Pages.Account
 
         public async Task<IActionResult> OnPost(string returnUrl = null)
         {
+            var requestHeader = HttpContext.Request.Headers["Referer"].ToString();
             await _signInManager.SignOutAsync();
             _logger.LogInformation("User logged out.");
 
@@ -51,9 +52,13 @@ namespace EWBOK_Rookies_Back_End.Areas.Identity.Pages.Account
                 {
                     return this.Redirect(returnUrl);
                 }
+                else if(logoutContext.ClientIds.ElementAt(0) == "react")
+                {
+                    return Redirect($"{requestHeader}signout-oidc");
+                }
                 else
                 {
-                    return Page();
+                    return Redirect(requestHeader);
                 }
             }
             else

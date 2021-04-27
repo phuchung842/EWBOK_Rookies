@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
-import { storeUser } from '../actions/authActions';
-import { setAuthHeader } from './axiosHeaders';
+import { storeUser } from '../actions/authAction';
+import { setAuthHeader } from './axiosHeader';
 
 export default function AuthProvider({ userManager: manager, store, children }) {
 	let userManager = useRef();
