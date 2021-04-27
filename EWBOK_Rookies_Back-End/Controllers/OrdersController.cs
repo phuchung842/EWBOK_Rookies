@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
+using SharedVm;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
@@ -76,12 +77,48 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // POST: api/Orders
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
-        public async Task<ActionResult<Order>> PostOrder(Order order)
+        public async Task<ActionResult<Order>> PostOrder(OrderCreaterequest orderCreaterequest)
         {
-            _context.Orders.Add(order);
-            await _context.SaveChangesAsync();
+            var order = new Order
+            {
+                CustomerID = orderCreaterequest.UserID,
+                CreateDate = DateTime.Now,
+                ShipAddress = orderCreaterequest.ShipAddress,
+                ShipEmail = orderCreaterequest.ShipEmail,
+                ShipMobile = orderCreaterequest.ShipMobile,
+                ShipName = orderCreaterequest.ShipName
+            };
+            var transaction = _context.Database.BeginTransaction();
+            try
+            {
+                _context.Orders.Add(order);
+                await _context.SaveChangesAsync();
+                var orderid = order.ID;
+                for (int i = 0; i < orderCreaterequest.OrderItems.Count; i++)
+                {
+                    var orderdetail = new OrderDetail
+                    {
+                        OrderID = orderid,
+                        ProductID = orderCreaterequest.OrderItems[i].ProductID,
+                        Quantity = orderCreaterequest.OrderItems[i].Quantity,
+                        Price = orderCreaterequest.OrderItems[i].ProductPrice,
+                        PromotionPrice = orderCreaterequest.OrderItems[i].ProductPromotionPrice
+                    };
 
-            return CreatedAtAction("GetOrder", new { id = order.ID }, order);
+                    var product = _context.Products.Find(orderdetail.ProductID);
+                    product.Quantity = product.Quantity - orderdetail.Quantity.Value;
+                    await _context.SaveChangesAsync();
+                    _context.OrderDetails.Add(orderdetail);
+                    await _context.SaveChangesAsync();
+                }
+                await _context.SaveChangesAsync();
+                transaction.Commit();
+            }
+            catch
+            {
+
+            }
+            return Accepted();
         }
 
         // DELETE: api/Orders/5
