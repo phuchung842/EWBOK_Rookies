@@ -14,7 +14,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize("Bearer")]
+    [Authorize("Bearer")]
     public class ProductCategoriesController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -26,6 +26,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/ProductCategories
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<ProductCategoryVm>>> GetProductCategories()
         {
             var productcategoryvm = await _context.ProductCategories.Select(x => new ProductCategoryVm
@@ -42,6 +43,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/ProductCategories/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<ProductCategoryVm>> GetProductCategory(short id)
         {
             var productCategory = await _context.ProductCategories.FindAsync(id);
@@ -66,6 +68,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // PUT: api/ProductCategories/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> PutProductCategory(short id, ProductCategory productCategory)
         {
             if (id != productCategory.ID)
@@ -97,6 +100,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // POST: api/ProductCategories
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<ProductCategory>> PostProductCategory(ProductCategoryCreateRequest productCategoryCreateRequest)
         {
             var productCategory = new ProductCategory
@@ -115,6 +119,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // DELETE: api/ProductCategories/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteProductCategory(short id)
         {
             var productCategory = await _context.ProductCategories.FindAsync(id);

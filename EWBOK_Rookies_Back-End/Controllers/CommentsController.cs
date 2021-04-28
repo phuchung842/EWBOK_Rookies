@@ -9,11 +9,13 @@ using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
 using SharedVm;
 using EWBOK_Rookies_Back_End.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class CommentsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -27,6 +29,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Comments
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CommentVm>>> GetComments()
         {
             var comments=await _context.Comments
@@ -48,6 +51,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Comments/5
         [HttpGet("{productid}")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CommentVm>>> GetCommentsByProduct(long productid)
         {
             var comment = await _context.Comments.Include(x => x.User).Where(x => x.ProductID == productid).ToListAsync();
@@ -72,6 +76,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // PUT: api/Comments/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> PutComment(long id, Comment comment)
         {
             if (id != comment.ID)
@@ -120,6 +125,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // DELETE: api/Comments/5
         [HttpDelete("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> DeleteComment(long id)
         {
             var comment = await _context.Comments.FindAsync(id);

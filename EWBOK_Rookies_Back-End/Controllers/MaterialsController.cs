@@ -14,7 +14,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    //[Authorize("Bearer")]
+    [Authorize("Bearer")]
     public class MaterialsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -26,6 +26,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Materials
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<MaterialVm>>> GetMaterials()
         {
             var materials = await _context.Materials.Select(x => new MaterialVm
@@ -39,6 +40,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Materials/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<MaterialVm>> GetMaterial(short id)
         {
             var material = await _context.Materials.FindAsync(id);
@@ -60,6 +62,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // PUT: api/Materials/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> PutMaterial(short id, Material material)
         {
             if (id != material.ID)
@@ -91,6 +94,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // POST: api/Materials
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<Material>> PostMaterial(MaterialCreateRequest materialCreateRequest)
         {
             var material = new Material
@@ -106,6 +110,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // DELETE: api/Materials/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> DeleteMaterial(short id)
         {
             var material = await _context.Materials.FindAsync(id);

@@ -9,11 +9,13 @@ using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
 using SharedVm;
 using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class RatingsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -25,6 +27,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Ratings
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<RatingVm>>> GetRatings()
         {
             var ratings = await _context.Ratings
@@ -46,6 +49,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Ratings/5
         [HttpGet("{userid}/{productid}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Rating>> GetRating(string userid, int productid)
         {
             var rating = await _context.Ratings.FirstOrDefaultAsync(x => x.UserID == userid && x.ProductID == productid);
@@ -68,6 +72,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // PUT: api/Ratings/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut]
+        [AllowAnonymous]
         public async Task<IActionResult> PutRating(RatingUpdateRequest ratingUpdateRequest)
         {
             var transaction = _context.Database.BeginTransaction();
@@ -100,6 +105,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // POST: api/Ratings
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult> PostRating(RatingCreateRequest ratingCreateRequest)
         {
             var transaction = _context.Database.BeginTransaction();
@@ -130,6 +136,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // DELETE: api/Ratings/5
         [HttpDelete("{userid}/{productid}")]
+        [AllowAnonymous]
         public async Task<IActionResult> DeleteRating(string userid, int productid)
         {
             var rating = await _context.Ratings.FirstOrDefaultAsync(x => x.UserID == userid && x.ProductID == productid);

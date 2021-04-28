@@ -24,8 +24,7 @@ namespace EWBOK_Rookies_Front_End.Controllers
 
         public async Task<IActionResult> Index()
         {
-            var products = await _productClient.GetProducts();
-            //products = (IList<ProductVm>)products.Take(8);
+            var products = await _productClient.GetProductsTake(8);
             return View(products);
         }
 

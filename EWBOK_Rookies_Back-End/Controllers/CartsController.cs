@@ -9,11 +9,13 @@ using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
 using SharedVm;
 using EWBOK_Rookies_Back_End.Service;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class CartsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -26,6 +28,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Carts
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Cart>>> GetCarts()
         {
             return await _context.Carts.ToListAsync();
@@ -33,6 +36,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Carts/5
         [HttpGet("{userid}")]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<CartVm>>> GetCarts(string userid)
         {
             var cart = await _context.Carts.Include(x => x.Product).Where(x => x.UserID == userid).ToListAsync();
@@ -57,6 +61,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // PUT: api/Carts/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> PutCart(string id, Cart cart)
         {
             if (id != cart.UserID)
@@ -112,6 +117,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // DELETE: api/Carts/5
         [HttpDelete("{userid}/{productid}")]
+        [AllowAnonymous]
         public async Task<IActionResult> DeleteCart(string userid, int productid)
         {
             var cart = await _context.Carts.FirstOrDefaultAsync(x => x.ProductID == productid & x.UserID == userid);

@@ -8,11 +8,13 @@ using Microsoft.EntityFrameworkCore;
 using EWBOK_Rookies_Back_End.Data;
 using EWBOK_Rookies_Back_End.Models;
 using SharedVm;
+using Microsoft.AspNetCore.Authorization;
 
 namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class OrdersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -24,6 +26,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Orders
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<Order>>> GetOrders()
         {
             return await _context.Orders.ToListAsync();
@@ -31,6 +34,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // GET: api/Orders/5
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public async Task<ActionResult<Order>> GetOrder(long id)
         {
             var order = await _context.Orders.FindAsync(id);
@@ -46,6 +50,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // PUT: api/Orders/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> PutOrder(long id, Order order)
         {
             if (id != order.ID)
@@ -77,6 +82,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // POST: api/Orders
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPost]
+        [AllowAnonymous]
         public async Task<ActionResult<Order>> PostOrder(OrderCreaterequest orderCreaterequest)
         {
             var order = new Order
@@ -123,6 +129,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // DELETE: api/Orders/5
         [HttpDelete("{id}")]
+        [AllowAnonymous]
         public async Task<IActionResult> DeleteOrder(long id)
         {
             var order = await _context.Orders.FindAsync(id);

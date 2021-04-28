@@ -1,4 +1,5 @@
 ﻿using EWBOK_Rookies_Back_End.Data;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize("Bearer")]
     public class UsersController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
@@ -20,6 +22,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
             _context = context;
         }
         [HttpGet]
+        [AllowAnonymous]
         public async Task<ActionResult<IEnumerable<UserVm>>> GetUsers()
         {
             var users = await _context.Users.Select(x => new

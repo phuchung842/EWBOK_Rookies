@@ -24,6 +24,12 @@ namespace EWBOK_Rookies_Front_End.Services
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsAsync<IList<ProductVm>>();
         }
+        public async Task<IList<ProductVm>> GetProductsTake(int take)
+        {
+            var response = await _httpClient.GetAsync($"api/Products/take/{take}");
+            response.EnsureSuccessStatusCode();
+            return await response.Content.ReadAsAsync<IList<ProductVm>>();
+        }
         public async Task<ProductVm> GetProduct(int id)
         {
             var reponse = await _httpClient.GetAsync("api/Products/" + id.ToString());
