@@ -57,8 +57,12 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // PUT: api/Brands/5
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutBrand(short id, Brand brand)
+        public async Task<ActionResult<BrandVm>> PutBrand(short id, BrandUpdateRequest brandUpdateRequest)
         {
+            var brand = await _context.Brands.FirstOrDefaultAsync(x => x.ID == id);
+            brand.Name = brandUpdateRequest.Name;
+            brand.Status = brandUpdateRequest.Status;
+            brand.ModifiedDate = DateTime.Now;
             if (id != brand.ID)
             {
                 return BadRequest();
@@ -103,7 +107,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
 
         // DELETE: api/Brands/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBrand(short id)
+        public async Task<ActionResult<BrandVm>> DeleteBrand(short id)
         {
             var brand = await _context.Brands.FindAsync(id);
             if (brand == null)

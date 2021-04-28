@@ -69,8 +69,12 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> PutProductCategory(short id, ProductCategory productCategory)
+        public async Task<ActionResult<ProductCategoryVm>> PutProductCategory(short id, ProductCategoryUpdateRequest productCategoryUpdateRequest)
         {
+            var productCategory = await _context.ProductCategories.FirstOrDefaultAsync(x => x.ID == id);
+            productCategory.Name = productCategoryUpdateRequest.Name;
+            productCategory.ModifiedDate = DateTime.Now;
+            productCategory.Status = productCategoryUpdateRequest.Status;
             if (id != productCategory.ID)
             {
                 return BadRequest();
@@ -120,7 +124,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // DELETE: api/ProductCategories/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> DeleteProductCategory(short id)
+        public async Task<ActionResult<ProductCategoryVm>> DeleteProductCategory(short id)
         {
             var productCategory = await _context.ProductCategories.FindAsync(id);
             if (productCategory == null)

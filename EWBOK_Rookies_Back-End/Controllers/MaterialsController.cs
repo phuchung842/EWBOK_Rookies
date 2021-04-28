@@ -63,8 +63,13 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
         [HttpPut("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> PutMaterial(short id, Material material)
+        public async Task<ActionResult<MaterialVm>> PutMaterial(short id, MaterialUpdateRequest materialUpdateRequest)
         {
+            var material = await _context.Materials.FirstOrDefaultAsync(x => x.ID == id);
+
+            material.Name = materialUpdateRequest.Name;
+            material.Status = materialUpdateRequest.Status;
+            
             if (id != material.ID)
             {
                 return BadRequest();
@@ -111,7 +116,7 @@ namespace EWBOK_Rookies_Back_End.Controllers
         // DELETE: api/Materials/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "admin")]
-        public async Task<IActionResult> DeleteMaterial(short id)
+        public async Task<ActionResult<MaterialVm>> DeleteMaterial(short id)
         {
             var material = await _context.Materials.FindAsync(id);
             if (material == null)
