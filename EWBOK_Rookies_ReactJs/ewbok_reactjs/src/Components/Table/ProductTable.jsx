@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { Route, Link, useParams } from 'react-router-dom';
 import * as Config from '../../Constants/Config.js';
 
@@ -14,21 +15,76 @@ const ProductTable = (props) => {
 	};
 
 	const setImageUrl = (image) => {
-		console.log(`${Config.API_URL}${image}`);
+		// console.log(`${Config.API_URL}${image}`);
 		return `${Config.API_URL}${image}`;
 	};
+	const [filterproduct, setfilterproduct] = useState([]);
+	useEffect(() => {
+		if (props.products != null) {
+			// console.log(filterproduct);
+			// console.log(props.products);
+			setfilterproduct(props.products);
+		}
+		// console.log(filterproduct);
+	}, [setfilterproduct]);
+	const filter = (list, searchkey) => {
+		if (searchkey.length > 0) {
+			console.log('have search key');
+			console.log(list);
+			return list.filter(
+				(item) =>
+					item.name.toLowerCase().includes(searchkey.toLowerCase()) ||
+					item.brandName.toLowerCase().includes(searchkey.toLowerCase()) ||
+					item.materialName.toLowerCase().includes(searchkey.toLowerCase()) ||
+					item.productCategoryName.toLowerCase().includes(searchkey.toLowerCase())
+			);
+		} else {
+			console.log('no search key');
+			console.log(list);
+			return list;
+		}
+	};
+	const filterbysearchkey = (e) => {
+		var target = e.target;
+		var value = null;
+		value = target.value;
+		console.log(value);
+		setfilterproduct(filter(props.products, value));
+		console.log(filterproduct);
+		console.log(props.products);
+	};
+
 	return (
 		<div class="main-content">
 			<div class="container-fluid content-top-gap">
 				<div class="welcome-msg pt-3 pb-4">
-					<h1>
-						<span class="text-primary ">Products </span>
-						<br />
-						<br />
-						<Link to="/products/add" type="submit" class="btn btn-primary btn-style ">
-							Create
-						</Link>
-					</h1>
+					<div class="form-row">
+						<div class="form-group col-md-122">
+							<h1>
+								<span class="text-primary ">Products </span>
+							</h1>
+						</div>
+					</div>
+
+					<div class="form-row">
+						<div class="form-group col-md-8">
+							<h1>
+								<Link to="/products/add" type="submit" class="btn btn-primary btn-style ">
+									Create
+								</Link>
+							</h1>
+						</div>
+						<div class="form-group col-md-4">
+							<input
+								onChange={filterbysearchkey}
+								type="text"
+								class="form-control input-style"
+								name="searchkey"
+								id="inputSearch"
+								placeholder="Search"
+							/>
+						</div>
+					</div>
 				</div>
 				<div class="card shadow mb-4">
 					<div class="card-header py-3 bg-xingcheng-dark border-bottom-xingcheng-light">
@@ -64,7 +120,7 @@ const ProductTable = (props) => {
 									</tr>
 								</tfoot>
 								<tbody>
-									{props.products.map((product) => {
+									{filterproduct.map((product) => {
 										return (
 											<tr>
 												<td>

@@ -1,8 +1,14 @@
 import { Route, Switch } from 'react-router-dom';
 import PrivateRoute from '../utils/protectedRoute';
 import routes from '../Constants/routes';
+import { useState } from 'react';
 
 const Content = () => {
+	const [notify, setnotify] = useState({ message: '' });
+	const reciept = (msg) => {
+		setnotify({ message: msg });
+		console(msg);
+	};
 	const showContent = (routes) => {
 		var result = null;
 		console.log(routes.length);

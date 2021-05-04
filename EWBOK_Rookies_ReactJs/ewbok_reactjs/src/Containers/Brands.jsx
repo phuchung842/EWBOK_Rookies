@@ -2,7 +2,7 @@ import BrandTable from '../Components/Table/BrandTable';
 import { useEffect, useState } from 'react';
 import callApi from '../utils/apiCaller.js';
 
-const Brands = () => {
+const Brands = (props) => {
 	const [brands, setbrands] = useState([]);
 	useEffect(() => {
 		callApi('brands', 'GET', null).then((res) => {

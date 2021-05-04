@@ -1,4 +1,7 @@
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BrandTable = (props) => {
 	const styleicon = {
@@ -17,6 +20,12 @@ const BrandTable = (props) => {
 			return <i class="fa fa-lock"></i>;
 		}
 	};
+	const [notify, setnotify] = useState({ name: '' });
+
+	const shownotify = () => {
+		// toast.success('test', { position: toast.POSITION.TOP_RIGHT });
+	};
+
 	return (
 		<div class="main-content">
 			<div class="container-fluid content-top-gap">

@@ -4,11 +4,15 @@ import callApi from '../utils/apiCaller.js';
 
 const Products = () => {
 	const [products, setproduct] = useState([]);
+	const [loading, setLoading] = useState(true);
 	useEffect(() => {
-		callApi('products', 'GET', null).then((res) => {
-			setproduct(res.data);
-		});
-	}, []);
+		if (products.length <= 0) {
+			callApi('products', 'GET', null).then((res) => {
+				setproduct(res.data);
+				setLoading(false);
+			});
+		}
+	}, [callApi]);
 	const removeViewItem = (products, itemid) => {
 		return products.filter((item) => item.id !== itemid);
 	};
@@ -20,6 +24,7 @@ const Products = () => {
 			}
 		});
 	};
+	if (loading) return null;
 	return <ProductTable products={products} onDelete={onDelete} />;
 };
 export default Products;

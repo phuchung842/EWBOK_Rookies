@@ -1,6 +1,8 @@
 import callApi from '../../utils/apiCaller';
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const BrandForm = (props) => {
 	const [brand, setbrand] = useState({
@@ -99,6 +101,7 @@ const BrandForm = (props) => {
 								<button type="submit" class="btn btn-primary btn-style mt-4">
 									{typeform.button}
 								</button>
+								<ToastContainer />
 							</form>
 						</div>
 					</div>

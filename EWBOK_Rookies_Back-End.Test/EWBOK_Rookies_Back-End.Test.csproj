@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\EWBOK_Rookies_Back-End\EWBOK_Rookies_Back-End.csproj" />
+    <ProjectReference Include="..\EWBOK_Rookies_Front-End\EWBOK_Rookies_Front-End.csproj" />
   </ItemGroup>
 
 </Project>
